@@ -1,4 +1,4 @@
 ## OWL
 
-Oral worl learning.
+Oral word learning.
 
