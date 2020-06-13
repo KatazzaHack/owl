@@ -3,12 +3,16 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 
+import 'package:owl/Speaker.dart';
+
 class StopPage extends StatefulWidget {
   @override
   _StopPage createState() => _StopPage();
 }
 
 class _StopPage extends State<StopPage> {
+
+  final Speaker _speaker = Speaker();
 
   final StreamController<int> _streamController = StreamController<int>(
       onCancel: () {
@@ -19,10 +23,11 @@ class _StopPage extends State<StopPage> {
   @override
   void initState() {
     _streamController.addStream((() async* {
-      await Future<void>.delayed(Duration(seconds: 3));
+      await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
+        _speaker.say("dog");
         yield i;
-        await Future<void>.delayed(Duration(seconds: 3));
+        await Future<void>.delayed(Duration(seconds: 1));
       }
     })());
     super.initState();
