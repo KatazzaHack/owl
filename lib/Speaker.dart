@@ -35,7 +35,7 @@ class SpeakerState extends State<Speaker> {
     });
   }
 
-  Future say(String word) {
+  Future say(String word) async {
     print("Inside say");
     assert(playing == false);
     flutterTts.speak(word).then((resp) {

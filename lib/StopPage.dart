@@ -23,28 +23,30 @@ class _StopPage extends State<StopPage> {
   );
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     initTts();
     initStream();
   }
 
-  void initTts() {
+  void initTts() async {
     flutterTts  = FlutterTts();
-    bool playing = false;
+
+    await flutterTts.isLanguageAvailable("en-US");
+    playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
         print('start saying');
         assert(playing == false);
         playing = true;
-        completer = Completer();
       });
     });
     flutterTts.setCompletionHandler(() {
       setState(() {
+        print('saying complete');
         assert(playing == true);
         playing = false;
-        print('saying complete');
+        print('completer.complete');
         completer.complete();
       });
     });
@@ -55,6 +57,8 @@ class _StopPage extends State<StopPage> {
       await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
         await say("dog");
+        print("continue");
+        await say("cat");
         yield i;
         await Future<void>.delayed(Duration(seconds: 1));
       }
@@ -63,8 +67,10 @@ class _StopPage extends State<StopPage> {
   }
 
   Future say(String word) {
+    completer = Completer();
     print("Inside say");
     assert(playing == false);
+    print("Inside say after assert");
     flutterTts.speak(word).then((resp) {
       print("Inside success");
       print(resp);
