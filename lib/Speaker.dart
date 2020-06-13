@@ -15,7 +15,7 @@ class SpeakerState extends State<Speaker> {
   @override
   initState() {
     super.initState();
-    bool playing = false;
+    playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
         print('start saying');
