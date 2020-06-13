@@ -10,13 +10,30 @@ class StopPage extends StatefulWidget {
 
 class _StopPage extends State<StopPage> {
 
-  static Stream<int> _bids = (() async* {
-    await Future<void>.delayed(Duration(seconds: 3));
-    for (var i = 0;; i++) {
-      yield i;
+  final StreamController<int> _streamController = StreamController<int>(
+      onCancel: () {
+        print("Cancel Handler");
+      }
+  );
+
+  @override
+  void initState() {
+    _streamController.addStream((() async* {
       await Future<void>.delayed(Duration(seconds: 3));
-    }
-  })();
+      for (var i = 0;; i++) {
+        yield i;
+        await Future<void>.delayed(Duration(seconds: 3));
+      }
+    })());
+    super.initState();
+  }
+
+  @override
+  void dispose(){
+    print("here");
+    _streamController.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +50,7 @@ class _StopPage extends State<StopPage> {
                     Navigator.pop(context);
                   },
                   child: new StreamBuilder<int>(
-                      stream: _bids,
+                      stream: _streamController.stream,
                       builder:
                           (BuildContext context, AsyncSnapshot<int> snapshot) {
                         if (snapshot.hasData) {
