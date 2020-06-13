@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 
 import 'package:flutter_tts/flutter_tts.dart';
+import 'Words.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -14,35 +15,34 @@ class _StopPage extends State<StopPage> {
   FlutterTts flutterTts;
   bool playing;
   Completer completer;
+  WordList wl = WordList.instance;
 
   final StreamController<int> _streamController =
       StreamController<int>(onCancel: () {
-    print("Cancel Handler");
   });
 
   @override
-  void initState() {
+  void initState()  {
     super.initState();
     initTts();
     initStream();
   }
 
-  void initTts() {
-    flutterTts = FlutterTts();
+  void initTts() async {
+    flutterTts  = FlutterTts();
+
+    await flutterTts.isLanguageAvailable("en-US");
     playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
-        print('start saying');
         assert(playing == false);
         playing = true;
-        completer = Completer();
       });
     });
     flutterTts.setCompletionHandler(() {
       setState(() {
         assert(playing == true);
         playing = false;
-        print('saying complete');
         completer.complete();
       });
     });
@@ -52,22 +52,20 @@ class _StopPage extends State<StopPage> {
     _streamController.addStream((() async* {
       await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
-        say("dog");
-        yield i;
+        String word = await wl.getRandomWord();
+        await say(word);
         await Future<void>.delayed(Duration(seconds: 1));
       }
     })());
   }
 
   Future say(String word) {
-    print("Inside say");
+    completer = Completer();
     assert(playing == false);
     flutterTts.speak(word).then((resp) {
-      print("Inside success");
       print(resp);
       return resp;
     }, onError: (obj, st) {
-      print("Inside error");
       print(obj);
       print(st.toString());
     });
@@ -76,7 +74,6 @@ class _StopPage extends State<StopPage> {
 
   @override
   void dispose() {
-    print("here");
     _streamController.close();
     super.dispose();
   }
