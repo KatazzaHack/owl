@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:owl/tts.dart';
+
+import 'package:speech_to_text/speech_to_text.dart';
 
 import 'dart:async';
 
@@ -10,6 +13,8 @@ class StopPage extends StatefulWidget {
 
 class _StopPage extends State<StopPage> {
 
+  final SpeechToText _speech = SpeechToText();
+
   final StreamController<int> _streamController = StreamController<int>(
       onCancel: () {
         print("Cancel Handler");
@@ -17,9 +22,11 @@ class _StopPage extends State<StopPage> {
   );
 
   @override
-  void initState() {
+  void initState() async {
+    await _speech.initialize();
+    String dog = "dog";
     _streamController.addStream((() async* {
-      await Future<void>.delayed(Duration(seconds: 3));
+      await Future<void>.delayed(Duration(seconds: 2));
       for (var i = 0;; i++) {
         yield i;
         await Future<void>.delayed(Duration(seconds: 3));
