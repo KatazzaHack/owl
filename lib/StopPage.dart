@@ -17,19 +17,17 @@ class _StopPage extends State<StopPage> {
   Completer completer;
   WordList wl = WordList.instance;
 
-  final StreamController<int> _streamController =
-      StreamController<int>(onCancel: () {
-  });
+  final StreamController<String> _streamController = StreamController<String>();
 
   @override
-  void initState()  {
+  void initState() {
     super.initState();
     initTts();
     initStream();
   }
 
   void initTts() async {
-    flutterTts  = FlutterTts();
+    flutterTts = FlutterTts();
 
     await flutterTts.isLanguageAvailable("en-US");
     playing = false;
@@ -50,9 +48,10 @@ class _StopPage extends State<StopPage> {
 
   void initStream() {
     _streamController.addStream((() async* {
-      await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
         String word = await wl.getRandomWord();
+        yield word;
+        await Future<void>.delayed(Duration(seconds: 1));
         await say(word);
         await Future<void>.delayed(Duration(seconds: 1));
       }
@@ -80,29 +79,33 @@ class _StopPage extends State<StopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
-            alignment: Alignment.center,
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.5,
-              height: MediaQuery.of(context).size.height * 0.5,
-              child: RaisedButton(
-                  shape: CircleBorder(),
-                  color: Colors.red,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: new StreamBuilder<int>(
-                      stream: _streamController.stream,
-                      builder:
-                          (BuildContext context, AsyncSnapshot<int> snapshot) {
-                        if (snapshot.hasData) {
-                          return Text("STOP ${snapshot.data}",
-                              style: TextStyle(fontSize: 40));
-                        } else {
-                          return CircularProgressIndicator();
-                        }
-                      })),
-            )));
+    return StreamBuilder<String>(
+        stream: _streamController.stream,
+        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+          if (snapshot.hasData) {
+            return Scaffold(
+                body: Container(
+                    alignment: Alignment.center,
+                    child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Text("${snapshot.data}",
+                              style: TextStyle(fontSize: 100)),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: RaisedButton(
+                                  shape: CircleBorder(),
+                                  color: Colors.red,
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: Text("STOP",
+                                      style: TextStyle(fontSize: 30)))),
+                        ])));
+          } else {
+            return CircularProgressIndicator();
+          }
+        });
   }
 }
