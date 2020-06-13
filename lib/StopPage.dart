@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 import 'dart:async';
 
@@ -89,8 +90,8 @@ class _StopPage extends State<StopPage> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          Text("${snapshot.data}",
-                              style: TextStyle(fontSize: 100)),
+                          AutoSizeText("${snapshot.data}",
+                              style: TextStyle(fontSize: 100), maxLines: 1),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.2,
@@ -100,8 +101,11 @@ class _StopPage extends State<StopPage> {
                                   onPressed: () {
                                     Navigator.pop(context);
                                   },
-                                  child: Text("STOP",
-                                      style: TextStyle(fontSize: 30)))),
+                                  child: AutoSizeText(
+                                    "STOP",
+                                    style: TextStyle(fontSize: 20),
+                                    maxLines: 1,
+                                  ))),
                         ])));
           } else {
             return CircularProgressIndicator();
