@@ -25,7 +25,7 @@ class _StopPage extends State<StopPage> {
     _streamController.addStream((() async* {
       await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
-        _speaker.say("dog");
+        await _speaker.say("dog");
         yield i;
         await Future<void>.delayed(Duration(seconds: 1));
       }

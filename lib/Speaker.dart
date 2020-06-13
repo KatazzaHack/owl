@@ -8,14 +8,13 @@ import 'package:flutter/material.dart';
 
 class SpeakerState extends State<Speaker> {
 
-  FlutterTts flutterTts;
+  FlutterTts flutterTts = FlutterTts();
   bool playing;
   Completer completer;
 
   @override
   initState() {
     super.initState();
-    flutterTts  = FlutterTts();
     bool playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
@@ -33,7 +32,7 @@ class SpeakerState extends State<Speaker> {
     });
   }
 
-  Future say(String word) {
+  Future say(String word) async {
     print("Inside say");
     assert(playing == false);
     flutterTts.speak(word).then((resp) {
