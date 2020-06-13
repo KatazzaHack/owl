@@ -19,6 +19,7 @@ class SpeakerState extends State<Speaker> {
     bool playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
+        print('start saying');
         assert(playing == false);
         playing = true;
         completer = Completer();
@@ -28,6 +29,7 @@ class SpeakerState extends State<Speaker> {
       setState(() {
         assert(playing == true);
         playing = false;
+        print('saying complete');
         completer.complete();
       });
     });
@@ -37,9 +39,11 @@ class SpeakerState extends State<Speaker> {
     print("Inside say");
     assert(playing == false);
     flutterTts.speak(word).then((resp) {
+      print("Inside success");
       print(resp);
       return resp;
     }, onError: (obj, st) {
+      print("Inside error");
       print(obj);
       print(st.toString());
     });

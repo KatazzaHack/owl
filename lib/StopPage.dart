@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'dart:async';
 
-import 'package:owl/Speaker.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -12,7 +12,9 @@ class StopPage extends StatefulWidget {
 
 class _StopPage extends State<StopPage> {
 
-  final Speaker _speaker = Speaker();
+  FlutterTts flutterTts;
+  bool playing;
+  Completer completer;
 
   final StreamController<int> _streamController = StreamController<int>(
       onCancel: () {
@@ -22,15 +24,57 @@ class _StopPage extends State<StopPage> {
 
   @override
   void initState() {
+    super.initState();
+    initTts();
+    initStream();
+  }
+
+  void initTts() {
+    flutterTts  = FlutterTts();
+    bool playing = false;
+    flutterTts.setStartHandler(() {
+      setState(() {
+        print('start saying');
+        assert(playing == false);
+        playing = true;
+        completer = Completer();
+      });
+    });
+    flutterTts.setCompletionHandler(() {
+      setState(() {
+        assert(playing == true);
+        playing = false;
+        print('saying complete');
+        completer.complete();
+      });
+    });
+  }
+
+  void initStream() {
     _streamController.addStream((() async* {
       await Future<void>.delayed(Duration(seconds: 1));
       for (var i = 0;; i++) {
-        _speaker.say("dog");
+        await say("dog");
         yield i;
         await Future<void>.delayed(Duration(seconds: 1));
       }
     })());
-    super.initState();
+
+  }
+
+  Future say(String word) {
+    print("Inside say");
+    assert(playing == false);
+    flutterTts.speak(word).then((resp) {
+      print("Inside success");
+      print(resp);
+      return resp;
+    }, onError: (obj, st) {
+      print("Inside error");
+      print(obj);
+      print(st.toString());
+    });
+    return completer.future;
   }
 
   @override
