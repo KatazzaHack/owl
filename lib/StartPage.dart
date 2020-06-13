@@ -7,14 +7,18 @@ class StartPage extends StatelessWidget {
     return Scaffold(
         body: Container(
             alignment: Alignment.center,
-            child: ClipOval(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.5,
+              height: MediaQuery.of(context).size.height * 0.5,
               child: RaisedButton(
+                shape: CircleBorder(),
+                color: Colors.green,
                 onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (_) {
                     return StopPage();
                   }));
                 },
-                child: Text("Start"),
+                child: Text("START", style: TextStyle(fontSize: 40)),
               ),
             )
         )
