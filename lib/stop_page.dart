@@ -4,8 +4,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'dart:async';
 
-import 'package:flutter_tts/flutter_tts.dart';
 import 'words.dart';
+import 'tts/tts_helper.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -13,9 +13,6 @@ class StopPage extends StatefulWidget {
 }
 
 class _StopPage extends State<StopPage> {
-  FlutterTts flutterTts;
-  bool playing;
-  Completer completer;
   WordList wl = WordList.instance;
 
   final StreamController<String> _streamController = StreamController<String>();
@@ -23,28 +20,7 @@ class _StopPage extends State<StopPage> {
   @override
   void initState() {
     super.initState();
-    initTts();
     initStream();
-  }
-
-  void initTts() async {
-    flutterTts = FlutterTts();
-    await flutterTts.setLanguage("de-DE");
-    await flutterTts.isLanguageAvailable("de-DE");
-    playing = false;
-    flutterTts.setStartHandler(() {
-      setState(() {
-        assert(playing == false);
-        playing = true;
-      });
-    });
-    flutterTts.setCompletionHandler(() {
-      setState(() {
-        assert(playing == true);
-        playing = false;
-        completer.complete();
-      });
-    });
   }
 
   void initStream() {
@@ -53,23 +29,10 @@ class _StopPage extends State<StopPage> {
         String word = await wl.getNextWord();
         yield word;
         await Future<void>.delayed(Duration(seconds: 1));
-        await say(word);
+        await TtsHelper().say(word);
         await Future<void>.delayed(Duration(seconds: 1));
       }
     })());
-  }
-
-  Future say(String word) {
-    completer = Completer();
-    assert(playing == false);
-    flutterTts.speak(word).then((resp) {
-      print(resp);
-      return resp;
-    }, onError: (obj, st) {
-      print(obj);
-      print(st.toString());
-    });
-    return completer.future;
   }
 
   @override
