@@ -30,6 +30,7 @@ class _StopPage extends State<StopPage> {
   void initTts() async {
     flutterTts = FlutterTts();
 
+    await flutterTts.setLanguage("en-US");
     await flutterTts.isLanguageAvailable("en-US");
     playing = false;
     flutterTts.setStartHandler(() {
