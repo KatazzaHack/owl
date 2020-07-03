@@ -1,6 +1,5 @@
 import 'dart:math';
-
-import 'package:flutter/services.dart' show rootBundle;
+import 'database/words_helper.dart';
 
 class WordList {
   WordList._privateConstructor();
@@ -41,9 +40,9 @@ class WordList {
     }
   }
   Future _fillWords() async {
-    String words = await rootBundle.loadString('assets/words.txt');
-    _words = words.split("\n");
-    // _words.sort([compare])
+    WordsHelper wordsHelper = WordsHelper();
+    List<Map<String, dynamic>> allWords = await wordsHelper.queryAllRows();
+    _words = List.generate(allWords.length, (index) => allWords[index]['word']);
   }
 }
 

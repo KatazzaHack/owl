@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
-  static final _databaseName = "owl_database.db";
-  static final _databaseVersion = 1;
+  static final _databaseName = "owl_database6.db";
+  static final _databaseVersion = 6;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -55,5 +55,6 @@ class DatabaseHelper {
       batch.insert("Words", {"word": word, "wid": id});
       batch.insert("WordsAndLists", {"lid": 1, "wid": id});
     });
+    await batch.commit(noResult: true);
   }
 }
