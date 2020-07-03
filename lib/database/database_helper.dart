@@ -48,7 +48,7 @@ class DatabaseHelper {
             "repetitions INTEGER,"
             "next_date INTEGER)");
     await db.execute(
-        "CREATE TABLE WordsAndLists (lid INTEGER, wid INTEGER, PRIMARY KEY (lid, wid))");
+        "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
      await _addDefault(db);
    // await _addGerman(db);
   }
@@ -80,12 +80,12 @@ class DatabaseHelper {
   }
 
   Future _addGerman(db) async {
-    String words = await rootBundle.loadString('assets/deckB1.txt');
+    String words = await rootBundle.loadString('assets/deckb1.txt');
     List wordsList = words.split("\n");
     Batch batch = db.batch();
 
     batch.execute("begin");
-    batch.insert("Lists", {"name": "deutsch", "lid": 2});
+    batch.insert("Lists", {"name": "deutsch", "did": 2});
     int id = 0;
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
@@ -98,7 +98,7 @@ class DatabaseHelper {
             "next_date": timeToInt(DateTime.now()),
             "repetitions": 0,
           });
-      batch.insert("WordsAndLists", {"lid": 2, "wid": id});
+      batch.insert("WordsAndLists", {"did": 2, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);

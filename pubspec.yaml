@@ -27,6 +27,7 @@ dependencies:
   path_provider: ^1.5.1
   auto_size_text: ^2.1.0
   sqflite:
+  edit_distance: ^0.4.1
   path:
   shared_preferences:
 
