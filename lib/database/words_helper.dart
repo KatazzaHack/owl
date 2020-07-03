@@ -9,7 +9,5 @@ class WordsHelper {
     Database db = await _instance.database;
     return await db.query(tableName);
   }
-
-  Future<List<Map<String, dynamic>>> getWordsFromDictionary() async {
-    }
+  
 }
