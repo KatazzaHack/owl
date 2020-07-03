@@ -52,9 +52,13 @@ class _StopPage extends State<StopPage> {
       for (var i = 0;; i++) {
         String word = await wl.getRandomWord();
         yield word;
-        await Future<void>.delayed(Duration(seconds: 1));
-        await say(word);
-        await Future<void>.delayed(Duration(seconds: 1));
+        await Future<void>.delayed(Duration(seconds: 4),
+          () => print('Waited for 4 sec'));
+        say(word);
+        Future<void> future = say(word);
+        future.then((value) => print("Future returned"))
+          .catchError((error) => print("Error happend"));
+        await Future<void>.delayed(Duration(seconds: 4), () => print('Waited for 4 sec'));
       }
     })());
   }
