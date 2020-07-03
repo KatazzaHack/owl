@@ -20,7 +20,7 @@ class WordsHelper {
       did = 0;
       prefs.setInt(ConstVariables.current_dictionary_id, did);
     }
-    return await db.rawQuery('SELECT Words.* FROM Words inner join WordsAndLists on (WordsAndLists.wid = Words.wid) WHERE name=?', [did]);
+    return await db.rawQuery('select Words.* from Words inner join WordsAndLists on (WordsAndLists.wid = Words.wid) where WordsAndLists.did=?', [did]);
   }
 
 }

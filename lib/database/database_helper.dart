@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_database17.db";
-  static final _databaseVersion = 14;
+  static final _databaseName = "owl_databasea3.db";
+  static final _databaseVersion = 117;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -39,18 +39,17 @@ class DatabaseHelper {
   Future _onCreate(Database db, int version) async {
     await db.execute(
         "CREATE TABLE Dictionaries ( did INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
-    await db.execute(
-        "CREATE TABLE Words ("
-            "wid INTEGER PRIMARY KEY,"
-            "word TEXT NOT NULL UNIQUE,"
-            "translation TEXT,"
-            "ef REAL,"
-            "repetitions INTEGER,"
-            "next_date INTEGER)");
+    await db.execute("CREATE TABLE Words ("
+        "wid INTEGER PRIMARY KEY,"
+        "word TEXT NOT NULL UNIQUE,"
+        "translation TEXT,"
+        "ef REAL,"
+        "repetitions INTEGER,"
+        "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-     await _addDefault(db);
-   // await _addGerman(db);
+    await _addDefault(db);
+    await _addGerman(db);
   }
 
   Future _addDefault(db) async {
@@ -64,49 +63,72 @@ class DatabaseHelper {
     int id = 0;
     wordsList.forEach((word) {
       id = id + 1;
-      batch.insert("Words", {"word": word, "wid": id});
+      batch.insert("Words", {
+        "word": word,
+        "wid": id,
+        "translation": word,
+        "ef": 2.5,
+        "next_date": timeToInt(DateTime.now()),
+        "repetitions": 0
+      });
       batch.insert("WordsAndLists", {"did": 1, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);
+    print("end1");
     Batch batch2 = db.batch();
     batch2.execute("begin");
-    batch2.insert("Dictionaries", {"name": "football", "did": 2});
+    batch2.insert("Dictionaries", {"name": "football", "did": 3});
     id = id + 1;
-    batch2.insert("Words", {"word": "hulikau", "wid": id});
-    batch2.insert("WordsAndLists", {"did": 2, "wid": id});
+    batch2.insert("Words", {
+      "word": "hulikau",
+      "wid": id,
+      "translation": "hulikau",
+      "ef": 2.5,
+      "next_date": timeToInt(DateTime.now()),
+      "repetitions": 0
+    });
+    batch2.insert("WordsAndLists", {"did": 3, "wid": id});
     batch2.execute("end");
+    print("end2");
     await batch2.commit(noResult: true);
+  }
+
+  Future<int> getCount(db) async {
+    var x = await db.rawQuery('SELECT COUNT (*) from Words');
+    int count = Sqflite.firstIntValue(x);
+    return count;
   }
 
   Future _addGerman(db) async {
     String words = await rootBundle.loadString('assets/deckb1.txt');
     List wordsList = words.split("\n");
+    int id = await getCount(db);
     Batch batch = db.batch();
 
     batch.execute("begin");
-    batch.insert("Lists", {"name": "deutsch", "did": 2});
-    int id = 0;
+    batch.insert("Dictionaries", {"name": "deutsch", "did": 2});
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
       id = id + 1;
-      batch.insert("Words",
-          {
-            "word": wordTranslation[0], "wid": id,
-            "translation": wordTranslation[1].split(",")[0],
-            "ef": 2.5,
-            "next_date": timeToInt(DateTime.now()),
-            "repetitions": 0,
-          });
+      batch.insert("Words", {
+        "word": wordTranslation[0],
+        "wid": id,
+        "translation": wordTranslation[1].split(",")[0],
+        "ef": 2.5,
+        "next_date": timeToInt(DateTime.now()),
+        "repetitions": 0,
+      });
       batch.insert("WordsAndLists", {"did": 2, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);
+    print("end3");
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(ConstVariables.current_dictionary_id, 3);
   }
 
   int timeToInt(DateTime dateTime) {
     return (dateTime.millisecondsSinceEpoch / 1000000).round();
   }
 }
-
-
