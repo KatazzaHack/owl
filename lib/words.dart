@@ -2,6 +2,8 @@ import 'dart:math';
 import 'database/words_helper.dart';
 import 'package:edit_distance/edit_distance.dart';
 import 'package:owl/database/words_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:owl/const_variables.dart';
 
 class WordList {
   WordList._privateConstructor();
@@ -9,6 +11,7 @@ class WordList {
   static List<dynamic> _words;
   int dayLimit = 5;
   int currentIndex = -1;
+  int myDid = -1;
   Levenshtein d = new Levenshtein();
 
   int getInterval(int repetitions, double ef) {
@@ -23,12 +26,14 @@ class WordList {
   }
 
   Future<String> getNextWord() async {
-    if (_words == null) {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
       await _fillWords();
+      myDid = prefs.getInt(ConstVariables.current_dictionary_id);
     }
     if (currentIndex == _words.length) {
-      currentIndex = -1;
-      return getNextWord();
+      currentIndex = 0;
+      return Future.value(_words[currentIndex]["word"]);
     }
     currentIndex++;
     return Future.value(_words[currentIndex]["word"]);
