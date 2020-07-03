@@ -50,7 +50,7 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE WordsAndLists (lid INTEGER, wid INTEGER, PRIMARY KEY (lid, wid))");
      await _addDefault(db);
-    await _addGerman(db);
+   // await _addGerman(db);
   }
 
   Future _addDefault(db) async {

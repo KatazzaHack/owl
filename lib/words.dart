@@ -42,7 +42,7 @@ class WordList {
 
   Future _fillWords() async {
     WordsHelper wordsHelper = WordsHelper();
-    List<Map<String, dynamic>> allWords = await wordsHelper.queryAllRows();
+    List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
     _words = new List();
     for (var j = 0; j < allWords.length; j++) {
       if (allWords[j]["next_date"] <= timeToInt(DateTime.now())) {
