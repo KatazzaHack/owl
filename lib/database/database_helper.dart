@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
-  static final _databaseName = "owl_database8.db";
-  static final _databaseVersion = 6;
+  static final _databaseName = "owl_database17.db";
+  static final _databaseVersion = 11;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -38,10 +38,17 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE Lists ( lid INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
     await db.execute(
-        "CREATE TABLE Words ( wid INTEGER PRIMARY KEY, word TEXT NOT NULL UNIQUE)");
+        "CREATE TABLE Words ("
+            "wid INTEGER PRIMARY KEY,"
+            "word TEXT NOT NULL UNIQUE,"
+            "translation TEXT,"
+            "ef REAL,"
+            "repetitions INTEGER,"
+            "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (lid INTEGER, wid INTEGER, PRIMARY KEY (lid, wid))");
-    await _addDefault(db);
+    // await _addDefault(db);
+    await _addGerman(db);
   }
 
   Future _addDefault(db) async {
@@ -60,4 +67,35 @@ class DatabaseHelper {
     batch.execute("end");
     await batch.commit(noResult: true);
   }
+
+  Future _addGerman(db) async {
+    String words = await rootBundle.loadString('assets/deckB1.txt');
+    List wordsList = words.split("\n");
+    Batch batch = db.batch();
+
+    batch.execute("begin");
+    batch.insert("Lists", {"name": "deutsch", "lid": 2});
+    int id = 0;
+    wordsList.forEach((word) {
+      List wordTranslation = word.split("\t");
+      id = id + 1;
+      batch.insert("Words",
+          {
+            "word": wordTranslation[0], "wid": id,
+            "translation": wordTranslation[1].split(",")[0],
+            "ef": 2.5,
+            "next_date": timeToInt(DateTime.now()),
+            "repetitions": 0,
+          });
+      batch.insert("WordsAndLists", {"lid": 2, "wid": id});
+    });
+    batch.execute("end");
+    await batch.commit(noResult: true);
+  }
+
+  int timeToInt(DateTime dateTime) {
+    return (dateTime.millisecondsSinceEpoch / 1000000).round();
+  }
 }
+
+

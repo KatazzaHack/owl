@@ -29,9 +29,8 @@ class _StopPage extends State<StopPage> {
 
   void initTts() async {
     flutterTts = FlutterTts();
-
-    await flutterTts.setLanguage("en-US");
-    await flutterTts.isLanguageAvailable("en-US");
+    await flutterTts.setLanguage("de-DE");
+    await flutterTts.isLanguageAvailable("de-DE");
     playing = false;
     flutterTts.setStartHandler(() {
       setState(() {
@@ -51,7 +50,7 @@ class _StopPage extends State<StopPage> {
   void initStream() {
     _streamController.addStream((() async* {
       for (var i = 0;; i++) {
-        String word = await wl.getRandomWord();
+        String word = await wl.getNextWord();
         yield word;
         await Future<void>.delayed(Duration(seconds: 1));
         await say(word);
