@@ -7,8 +7,8 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class DatabaseHelper {
-  static final _databaseName = "owl_database.db";
-  static final _databaseVersion = 1;
+  static final _databaseName = "owl_database4.db";
+  static final _databaseVersion = 4;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -46,6 +46,7 @@ class DatabaseHelper {
 
   Future _addDefault(db) async {
     String words = await rootBundle.loadString('assets/words.txt');
+    print(words);
     List wordsList = words.split("\n");
     Batch batch = db.batch();
     batch.insert("Lists", {"name": "default", "lid": 1});
@@ -54,6 +55,9 @@ class DatabaseHelper {
       id = id + 1;
       batch.insert("Words", {"word": word, "wid": id});
       batch.insert("WordsAndLists", {"lid": 1, "wid": id});
+      print(word);
     });
+    await batch.commit(noResult: true);
+    print("Filled Database");
   }
 }
