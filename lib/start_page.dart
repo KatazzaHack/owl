@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'StopPage.dart';
+import 'package:owl/stop_page.dart';
+import 'package:owl/dictionary_selection_page.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -21,7 +22,17 @@ class StartPage extends StatelessWidget {
                 child: Text("START", style: TextStyle(fontSize: 40)),
               ),
             )
-        )
+        ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DictionarySelectionPage()),
+          );
+        },
+        tooltip: 'Change dictionary',
+        child: Icon(Icons.library_books),
+      ),
     );
   }
 }

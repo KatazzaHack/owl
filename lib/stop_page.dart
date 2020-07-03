@@ -8,7 +8,8 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'dart:async';
 
 import 'package:flutter_tts/flutter_tts.dart';
-import 'Words.dart';
+import 'package:owl/words.dart';
+import 'package:owl/tts/tts_helper.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -68,9 +69,9 @@ class _StopPage extends State<StopPage> {
   void initStream() {
     _streamController.addStream((() async* {
       for (var i = 0;; i++) {
-        String word = await wl.getRandomWord();
+        String word = await wl.getNextWord();
         yield word;
-        Future<void> future = say(word);
+        Future<void> future = TtsHelper().say(word);
         future.then((_) => {
             print("Saying future completed"),
             _listeningFinished = startListen()
@@ -85,21 +86,6 @@ class _StopPage extends State<StopPage> {
       }
     })());
     print("initStream finished");
-  }
-
-  Future say(String word) {
-    print("Start saying...");
-    completer = Completer();
-    assert(playing == false);
-    flutterTts.speak(word).then((resp) {
-      print(resp);
-      return resp;
-    }, onError: (obj, st) {
-      print(obj);
-      print(st.toString());
-    });
-    print("Before returning future");
-    return completer.future;
   }
 
   Future<void> startListen() async {
