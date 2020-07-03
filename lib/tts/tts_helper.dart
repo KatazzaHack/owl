@@ -64,4 +64,10 @@ class TtsHelper {
     });
     return ttsState.completer.future;
   }
+
+  Future stop() async {
+    TtsState ttsState = await _state.ttsState;
+    var result = await TtsState.flutterTts.stop();
+    if (result == 1) ttsState.playing = false;
+  }
 }
