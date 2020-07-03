@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_database17.db";
-  static final _databaseVersion = 14;
+  static final _databaseName = "owl_database228.db";
+  static final _databaseVersion = 228;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -49,7 +49,7 @@ class DatabaseHelper {
             "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-     await _addDefault(db);
+    // await _addDefault(db);
     await _addGerman(db);
   }
 
@@ -105,7 +105,7 @@ class DatabaseHelper {
   }
 
   int timeToInt(DateTime dateTime) {
-    return (dateTime.millisecondsSinceEpoch / 1000000).round();
+    return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
   }
 }
 
