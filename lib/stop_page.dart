@@ -5,7 +5,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'dart:async';
 
 import 'package:flutter_tts/flutter_tts.dart';
-import 'Words.dart';
+import 'words.dart';
 
 class StopPage extends StatefulWidget {
   @override
