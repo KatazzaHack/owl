@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_databasea3.db";
-  static final _databaseVersion = 117;
+  static final _databaseName = "owl_databasea123.db";
+  static final _databaseVersion = 275;
 
 
   // make this a singleton class
@@ -126,7 +126,7 @@ class DatabaseHelper {
     await batch.commit(noResult: true);
     print("end3");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(ConstVariables.current_dictionary_id, 3);
+    prefs.setInt(ConstVariables.current_dictionary_id, 2);
   }
 
   int timeToInt(DateTime dateTime) {

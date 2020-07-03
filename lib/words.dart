@@ -27,8 +27,8 @@ class WordList {
       await _fillWords();
     }
     if (currentIndex == _words.length) {
-      currentIndex = -1;
-      return getNextWord();
+      currentIndex = 0;
+      return Future.value(_words[currentIndex]["word"]);
     }
     currentIndex++;
     return Future.value(_words[currentIndex]["word"]);
