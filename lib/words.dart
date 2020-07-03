@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'database/words_helper.dart';
+import 'package:owl/database/words_helper.dart';
 
 class WordList {
   WordList._privateConstructor();

@@ -1,5 +1,5 @@
 import 'package:sqflite/sqflite.dart';
-import 'database_helper.dart';
+import 'package:owl/database/database_helper.dart';
 
 class WordsHelper {
   static final tableName = "Words";
@@ -9,4 +9,7 @@ class WordsHelper {
     Database db = await _instance.database;
     return await db.query(tableName);
   }
+
+  Future<List<Map<String, dynamic>>> getWordsFromDictionary() async {
+    }
 }
