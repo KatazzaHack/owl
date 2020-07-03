@@ -69,7 +69,7 @@ class DatabaseHelper {
   }
 
   Future _addGerman(db) async {
-    String words = await rootBundle.loadString('assets/deckB1.txt');
+    String words = await rootBundle.loadString('assets/deckb1.txt');
     List wordsList = words.split("\n");
     Batch batch = db.batch();
 
