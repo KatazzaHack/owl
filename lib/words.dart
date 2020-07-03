@@ -31,11 +31,8 @@ class WordList {
       await _fillWords();
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
     }
-    if (currentIndex == _words.length) {
-      currentIndex = 0;
-      return Future.value(_words[currentIndex]["word"]);
-    }
     currentIndex++;
+    currentIndex = currentIndex % _words.length;
     return Future.value(_words[currentIndex]["word"]);
   }
 
