@@ -12,6 +12,7 @@ class DatabaseHelper {
   static final _databaseName = "owl_databasea3.db";
   static final _databaseVersion = 117;
 
+
   // make this a singleton class
   DatabaseHelper._privateConstructor();
 
@@ -129,6 +130,6 @@ class DatabaseHelper {
   }
 
   int timeToInt(DateTime dateTime) {
-    return (dateTime.millisecondsSinceEpoch / 1000000).round();
+    return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
   }
 }

@@ -54,8 +54,10 @@ class WordList {
         repetitions = 0;
         _words.add(_words[currentIndex]);
       }
-      int next_date = _words[currentIndex]["next_date"];
-
+      int nextDate = _words[currentIndex]["next_date"];
+      nextDate = nextDate + getInterval(
+          _words[currentIndex]["repetitions"],
+          _words[currentIndex]["ef"]) - 1;
       // TODO(affina73): here we should make some db updates for ef, rep, date
 
     }
@@ -78,5 +80,5 @@ int compare(dynamic first, dynamic second) {
 }
 
 int timeToInt(DateTime dateTime) {
-  return (dateTime.millisecondsSinceEpoch / 1000000).round();
+  return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
 }
