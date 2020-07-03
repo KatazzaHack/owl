@@ -5,10 +5,12 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:shared_preferences/shared_preferences.dart';
+import '../const_variables.dart';
 
 class DatabaseHelper {
   static final _databaseName = "owl_database17.db";
-  static final _databaseVersion = 11;
+  static final _databaseVersion = 14;
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -36,7 +38,7 @@ class DatabaseHelper {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE Lists ( lid INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
+        "CREATE TABLE Dictionaries ( did INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
     await db.execute(
         "CREATE TABLE Words ("
             "wid INTEGER PRIMARY KEY,"
@@ -46,8 +48,8 @@ class DatabaseHelper {
             "repetitions INTEGER,"
             "next_date INTEGER)");
     await db.execute(
-        "CREATE TABLE WordsAndLists (lid INTEGER, wid INTEGER, PRIMARY KEY (lid, wid))");
-    // await _addDefault(db);
+        "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
+     await _addDefault(db);
     await _addGerman(db);
   }
 
@@ -55,17 +57,26 @@ class DatabaseHelper {
     String words = await rootBundle.loadString('assets/words.txt');
     List wordsList = words.split("\n");
     Batch batch = db.batch();
-
     batch.execute("begin");
-    batch.insert("Lists", {"name": "default", "lid": 1});
+    batch.insert("Dictionaries", {"name": "default", "did": 1});
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setInt(ConstVariables.current_dictionary_id, 1);
     int id = 0;
     wordsList.forEach((word) {
       id = id + 1;
       batch.insert("Words", {"word": word, "wid": id});
-      batch.insert("WordsAndLists", {"lid": 1, "wid": id});
+      batch.insert("WordsAndLists", {"did": 1, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);
+    Batch batch2 = db.batch();
+    batch2.execute("begin");
+    batch2.insert("Dictionaries", {"name": "football", "did": 2});
+    id = id + 1;
+    batch2.insert("Words", {"word": "hulikau", "wid": id});
+    batch2.insert("WordsAndLists", {"did": 2, "wid": id});
+    batch2.execute("end");
+    await batch2.commit(noResult: true);
   }
 
   Future _addGerman(db) async {
@@ -74,7 +85,7 @@ class DatabaseHelper {
     Batch batch = db.batch();
 
     batch.execute("begin");
-    batch.insert("Lists", {"name": "deutsch", "lid": 2});
+    batch.insert("Lists", {"name": "deutsch", "did": 2});
     int id = 0;
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
@@ -87,7 +98,7 @@ class DatabaseHelper {
             "next_date": timeToInt(DateTime.now()),
             "repetitions": 0,
           });
-      batch.insert("WordsAndLists", {"lid": 2, "wid": id});
+      batch.insert("WordsAndLists", {"did": 2, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);
