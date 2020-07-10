@@ -75,4 +75,9 @@ class SttHelper {
       _sttState.completer.complete(result.recognizedWords);
     }
   }
+
+  Future stop() async {
+    _sttState = await _state.sttState;
+    await SttState.speech.stop();
+  }
 }

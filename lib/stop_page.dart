@@ -83,6 +83,7 @@ class _StopPage extends State<StopPage> {
                                   color: Colors.red,
                                   onPressed: () {
                                     TtsHelper().stop();
+                                    SttHelper().stop();
                                     Navigator.pop(context);
                                   },
                                   child: AutoSizeText(
