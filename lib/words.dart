@@ -14,6 +14,7 @@ class WordList {
   int myDid = -1;
   Levenshtein d = new Levenshtein();
   bool prevousWasWord = false;
+  bool listenMode = false;
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   // TODO(affina73): move support of the listenMode higher
 
@@ -27,7 +28,12 @@ class WordList {
     // l(n) = l(n - 1) * ef
     return (pow(ef, repetitions - 2) * 4).round();
   }
-  Future<String> getNextWord(bool listenMode) async {
+
+  void setListenMode(bool listenMode) {
+    this.listenMode = listenMode;
+  }
+
+  Future<String> getNextWord() async {
     print("next word asked");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
