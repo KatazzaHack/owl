@@ -9,6 +9,7 @@ import 'dart:async';
 
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
+import 'package:speech_to_text/speech_to_text.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -20,6 +21,7 @@ class _StopPage extends State<StopPage> {
   WordList wl = WordList.instance;
   Completer listenCompleter = Completer();
   Future<void> _listeningFinished;
+  List<LocaleName> _localeNames = [];
 
   final StreamController<String> _streamController = StreamController<String>();
 
@@ -38,21 +40,26 @@ class _StopPage extends State<StopPage> {
     } else {
       print("The user has denied the use of speech recognition");
     }
+
+    _localeNames = await speech.locales();
+//    for (LocaleName locale in _localeNames) {
+//      print(locale.localeId);
+//    }
   }
 
   void initStream() {
     _streamController.addStream((() async* {
       List<String> languages = ["de-DE", "ru-RU"];
+      List<String> locales = ["de_DE", "ru_RU"];
       int currentLanguageIndex = 0;
       for (var i = 0;; i++) {
-        String word = await wl.getNextWord(/* listenMode = */ true);
+        String word = await wl.getNextWord(/* listenMode = */ false);
         yield word;
 
         Future<void> future = TtsHelper().say(word, languages[currentLanguageIndex]);
-        currentLanguageIndex = 1 - currentLanguageIndex;
         future.then((_) => {
             print("Saying future completed"),
-            _listeningFinished = startListen()
+            _listeningFinished = startListen(locales[1 - currentLanguageIndex])
         })
             .catchError((error) => print("Error happend"));
         // Wait till original word is said.
@@ -66,9 +73,9 @@ class _StopPage extends State<StopPage> {
     print("initStream finished");
   }
 
-  Future<void> startListen() async {
-    print("Start listening...");
-    speech.listen( onResult: resultListener );
+  Future<void> startListen(String locale) async {
+    print("Start listening in locale " + locale + "...");
+    speech.listen( onResult: resultListener, localeId: locale);
     print("Starting waiting for input");
     listenCompleter = Completer();
     return listenCompleter.future;
