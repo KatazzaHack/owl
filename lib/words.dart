@@ -13,6 +13,9 @@ class WordList {
   int currentIndex = -1;
   int myDid = -1;
   Levenshtein d = new Levenshtein();
+  bool prevousWasWord = false;
+  var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
+  // TODO(affina73): move support of the listenMode higher
 
   int getInterval(int repetitions, double ef) {
     if (repetitions == 1) {
@@ -24,16 +27,44 @@ class WordList {
     // l(n) = l(n - 1) * ef
     return (pow(ef, repetitions - 2) * 4).round();
   }
-
-  Future<String> getNextWord() async {
+  Future<String> getNextWord(bool listenMode) async {
+    print("next word asked");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
+      myDid = prefs.getInt(ConstVariables.current_dictionary_id);
       await _fillWords();
+    }
+    if (currentIndex == -1) {
+      currentIndex = rng.nextInt(_words.length) % _words.length;
+    }
+    if (currentIndex == _words.length) {
+      currentIndex = -1;
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
     }
-    currentIndex++;
-    currentIndex = currentIndex % _words.length;
+    print("current index");
+    print(currentIndex);
+    if (listenMode && prevousWasWord) {
+      print("current index in translation");
+      print(currentIndex);
+      prevousWasWord = false;
+      return this._getNextTranslation();
+    } else {
+      print("current index in word");
+      print(currentIndex);
+      print(_words.length);
+      print((rng.nextInt(_words.length)) % _words.length);
+      currentIndex = rng.nextInt(_words.length) % _words.length;
+      prevousWasWord = true;
+      return this._getNextWord();
+    }
+  }
+
+  Future<String> _getNextWord() async {
     return Future.value(_words[currentIndex]["word"]);
+  }
+
+  Future<String> _getNextTranslation() async {
+    return Future.value(_words[currentIndex]["translation"]);
   }
 
   void updateCurrentResult(String saidWord) {
@@ -43,6 +74,7 @@ class WordList {
       // EF':=EF+(0.1-(5-q)*(0.08+(5-q)*0.02))
       // EF < 1.3 => EF==1.3;
       //quality < 3 => repetitions := 0;
+      // never called in listenMode??
       int responseDistance = d.distance(saidWord, _words[currentIndex]["word"]);
       int quality = (5.0 * responseDistance
           / _words[currentIndex]["word"]).round();
@@ -66,8 +98,11 @@ class WordList {
   }
 
   Future _fillWords() async {
+    currentIndex = -1;
+    prevousWasWord = false;
     WordsHelper wordsHelper = WordsHelper();
     List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
+    print("all words awaited");
     _words = new List();
     for (var j = 0; j < allWords.length; j++) {
       if (allWords[j]["next_date"] <= timeToInt(DateTime.now())) {

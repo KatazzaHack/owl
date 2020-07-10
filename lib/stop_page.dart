@@ -42,15 +42,19 @@ class _StopPage extends State<StopPage> {
 
   void initStream() {
     _streamController.addStream((() async* {
+      List<String> languages = ["de-DE", "ru-RU"];
+      int currentLanguageIndex = 0;
       for (var i = 0;; i++) {
-        String word = await wl.getNextWord();
+        String word = await wl.getNextWord(/* listenMode = */ true);
         yield word;
-        Future<void> future = TtsHelper().say(word);
+
+        Future<void> future = TtsHelper().say(word, languages[currentLanguageIndex]);
+        currentLanguageIndex = 1 - currentLanguageIndex;
         future.then((_) => {
             print("Saying future completed"),
             _listeningFinished = startListen()
         })
-          .catchError((error) => print("Error happend"));
+            .catchError((error) => print("Error happend"));
         // Wait till original word is said.
         await future;
         // Wait till user is suggested translation.
