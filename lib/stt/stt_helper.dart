@@ -12,8 +12,7 @@ class SttState {
 
   initState() async {
     speech = stt.SpeechToText();
-    bool available = await speech.initialize(
-        onStatus: statusListener, onError: errorListener);
+    bool available = await speech.initialize(onStatus: statusListener);
     if (available) {
       print("Stt is available");
     } else {
@@ -22,10 +21,6 @@ class SttState {
 
     // TODO(okalitova): Use it.
 //    _localeNames = await speech.locales();
-  }
-
-  void errorListener(SpeechRecognitionError error) {
-    print("Received error status: $error, listening: ${speech.isListening}");
   }
 
   void statusListener(String status) {
@@ -60,11 +55,18 @@ class SttHelper {
 
   Future<String> listen(String locale) async {
     _sttState = await _state.sttState;
+    SttState.speech.errorListener = errorListener;
     print("Start listening in locale " + locale + "...");
     SttState.speech.listen(onResult: resultListener, localeId: locale);
     print("Starting waiting for input");
     _sttState.completer = Completer<String>();
     return _sttState.completer.future;
+  }
+
+  void errorListener(SpeechRecognitionError error) {
+    print("Received error status: $error");
+    SttState.speech.stop();
+    _sttState.completer.complete("");
   }
 
   void resultListener(SpeechRecognitionResult result) {
