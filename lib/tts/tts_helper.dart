@@ -13,8 +13,8 @@ class TtsState {
   initState() async {
     flutterTts = FlutterTts();
 
-    await flutterTts.setLanguage("en-US");
-    await flutterTts.isLanguageAvailable("en-US");
+    await flutterTts.setLanguage("de-DE");
+    await flutterTts.isLanguageAvailable("de-DE");
     playing = false;
     flutterTts.setStartHandler(() {
       assert(playing == false);
@@ -51,8 +51,10 @@ class TtsHelper {
   static TtsStateSingleton _state = TtsStateSingleton.instance;
 
 
-  Future say(String word) async {
+  Future say(String word, String lang) async {
     TtsState ttsState = await _state.ttsState;
+    await TtsState.flutterTts.setLanguage(lang);
+    await TtsState.flutterTts.isLanguageAvailable(lang);
     ttsState.completer = Completer();
     assert(ttsState.playing == false);
     TtsState.flutterTts.speak(word).then((resp) {
@@ -63,5 +65,11 @@ class TtsHelper {
       print(st.toString());
     });
     return ttsState.completer.future;
+  }
+
+  Future stop() async {
+    TtsState ttsState = await _state.ttsState;
+    var result = await TtsState.flutterTts.stop();
+    if (result == 1) ttsState.playing = false;
   }
 }

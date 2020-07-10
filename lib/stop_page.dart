@@ -4,7 +4,6 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'dart:async';
 
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
 
@@ -26,12 +25,15 @@ class _StopPage extends State<StopPage> {
 
   void initStream() {
     _streamController.addStream((() async* {
+      List<String> languages = ["de-DE", "ru-RU"];
+      int currentLanguageIndex = 0;
       for (var i = 0;; i++) {
-        String word = await wl.getNextWord();
+        String word = await wl.getNextWord(/* listenMode = */ true);
         yield word;
         await Future<void>.delayed(Duration(seconds: 1));
-        await TtsHelper().say(word);
-        await Future<void>.delayed(Duration(seconds: 1));
+        await TtsHelper().say(word, languages[currentLanguageIndex]);
+        currentLanguageIndex = 1 - currentLanguageIndex;
+        await Future<void>.delayed(Duration(seconds: 3));
       }
     })());
   }
@@ -63,6 +65,7 @@ class _StopPage extends State<StopPage> {
                                   shape: CircleBorder(),
                                   color: Colors.red,
                                   onPressed: () {
+                                    TtsHelper().stop();
                                     Navigator.pop(context);
                                   },
                                   child: AutoSizeText(
