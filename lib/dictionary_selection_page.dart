@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:owl/dictionary_list_page.dart';
-import 'package:owl/dictionary_upload.dart';
+import 'package:owl/dictionary_upload_from_url.dart';
 
 class DictionarySelectionPage extends StatelessWidget {
   @override

@@ -17,14 +17,22 @@ class DictionariesHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int currentDictionaryId =
         prefs.getInt(ConstVariables.current_dictionary_id);
-    List<Map<String, dynamic>> newResult = List.generate(result.length, (index) {
-        Map<String,dynamic> map = new Map<String,dynamic>();
-        map['active'] = currentDictionaryId == result[index]['did'];
-        map['did'] = result[index]['did'];
-        map['name'] = result[index]['name'];
-        return map;
-      });
-    print(newResult);
+    List<Map<String, dynamic>> newResult =
+        List.generate(result.length, (index) {
+      Map<String, dynamic> map = new Map<String, dynamic>();
+      map['active'] = currentDictionaryId == result[index]['did'];
+      map['did'] = result[index]['did'];
+      map['name'] = result[index]['name'];
+      return map;
+    });
     return newResult;
   }
+
+  Future<bool> checkIfDictionaryExists(String name) async {
+    Database db = await _instance.database;
+    int count = Sqflite.firstIntValue(
+        await db.rawQuery('SELECT COUNT(*) FROM $tableName where name=?', [name]));
+    return count > 0;
+  }
+
 }

@@ -9,9 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_databasea200.db";
+  static final _databaseName = "owl_databasea230.db";
   static final _databaseVersion = 33;
-
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -42,76 +41,47 @@ class DatabaseHelper {
         "CREATE TABLE Dictionaries ( did INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
     await db.execute("CREATE TABLE Words ("
         "wid INTEGER PRIMARY KEY,"
-        "word TEXT NOT NULL UNIQUE,"
+        "word TEXT NOT NULL,"
         "translation TEXT,"
         "ef REAL,"
         "repetitions INTEGER,"
         "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-    await _addDefault(db);
     await _addGerman(db, "deckb1_1", 2);
     // await _addGerman(db, "deckb1_2", 4);
     // await _addGerman(db, "deckb1_3", 5);
     // await _addGerman(db, "deckb1_4", 6);
   }
 
-  Future _addDefault(db) async {
-    String words = await rootBundle.loadString('assets/words.txt');
-    List wordsList = words.split("\n");
-    Batch batch = db.batch();
-    batch.execute("begin");
-    batch.insert("Dictionaries", {"name": "default", "did": 1});
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(ConstVariables.current_dictionary_id, 1);
-    int id = 0;
-    wordsList.forEach((word) {
-      id = id + 1;
-      batch.insert("Words", {
-        "word": word,
-        "wid": id,
-        "translation": word,
-        "ef": 2.5,
-        "next_date": timeToInt(DateTime.now()),
-        "repetitions": 0
-      });
-      batch.insert("WordsAndLists", {"did": 1, "wid": id});
-    });
-    batch.execute("end");
-    await batch.commit(noResult: true);
-    print("end1");
-    Batch batch2 = db.batch();
-    batch2.execute("begin");
-    batch2.insert("Dictionaries", {"name": "football", "did": 3});
-    id = id + 1;
-    batch2.insert("Words", {
-      "word": "hulikau",
-      "wid": id,
-      "translation": "hulikau",
-      "ef": 2.5,
-      "next_date": timeToInt(DateTime.now()),
-      "repetitions": 0
-    });
-    batch2.insert("WordsAndLists", {"did": 3, "wid": id});
-    batch2.execute("end");
-    print("end2");
-    await batch2.commit(noResult: true);
-  }
-
-  Future<int> getCount(db) async {
-    var x = await db.rawQuery('SELECT COUNT (*) from Words');
+  Future<int> getCount(db, String dbName) async {
+    var x = await db.rawQuery('SELECT COUNT (*) from $dbName');
     int count = Sqflite.firstIntValue(x);
     return count;
   }
 
   Future _addGerman(db, String fileName, int did) async {
     String words = await rootBundle.loadString('assets/' + fileName + '.txt');
-    List wordsList = words.split("\n");
-    int id = await getCount(db);
-    Batch batch = db.batch();
+    await _addNewDictionary(db, fileName, words);
+  }
 
+  int timeToInt(DateTime dateTime) {
+    return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
+  }
+
+  Future _addNewDictionary(Database db, String name, String data) async {
+    int count = Sqflite.firstIntValue(await db
+        .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
+    if (count > 0) {
+      return;
+    }
+    List wordsList = data.split("\n");
+    int id = await getCount(db, "Words");
+    int did = await getCount(db, "Dictionaries");
+    did = did + 1;
+    Batch batch = db.batch();
     batch.execute("begin");
-    batch.insert("Dictionaries", {"name": fileName, "did": did});
+    batch.insert("Dictionaries", {"name": name, "did": did});
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
       id = id + 1;
@@ -127,12 +97,7 @@ class DatabaseHelper {
     });
     batch.execute("end");
     await batch.commit(noResult: true);
-    print("end3");
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setInt(ConstVariables.current_dictionary_id, 2);
-  }
-
-  int timeToInt(DateTime dateTime) {
-    return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
+    prefs.setInt(ConstVariables.current_dictionary_id, did);
   }
 }
