@@ -3,12 +3,12 @@ import 'package:owl/database/dictionary_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:owl/database/common_helper.dart';
 
-class LoginPage extends StatefulWidget {
+class DictionaryFromUrlPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => new _LoginPageState();
+  State<StatefulWidget> createState() => new _DictionaryFromUrlPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
   final TextEditingController _urlFilter = new TextEditingController();
   final TextEditingController _nameFilter = new TextEditingController();
 
@@ -17,7 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   DictionariesHelper dh = DictionariesHelper();
   CommonHelper ch = CommonHelper();
 
-  _LoginPageState() {
+  _DictionaryFromUrlPageState() {
     _urlFilter.addListener(_urlListen);
     _nameFilter.addListener(_nameListen);
   }
