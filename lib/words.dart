@@ -31,6 +31,7 @@ class WordList {
     print("next word asked");
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
+      myDid = prefs.getInt(ConstVariables.current_dictionary_id);
       await _fillWords();
     }
     if (currentIndex == -1) {
@@ -97,9 +98,8 @@ class WordList {
   }
 
   Future _fillWords() async {
-    // TODO(anton) this thing is called every time if did != 2
-    // currentIndex = -1;
-    // prevousWasWord = false;
+    currentIndex = -1;
+    prevousWasWord = false;
     WordsHelper wordsHelper = WordsHelper();
     List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
     print("all words awaited");
@@ -109,8 +109,6 @@ class WordList {
         _words.add(allWords[j]);
       }
     }
-    print(_words);
-    print("words added");
   }
 }
 
