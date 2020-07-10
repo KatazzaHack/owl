@@ -28,5 +28,11 @@ class ConstVariables {
     "Russian": SupportedLanguage.Russian,
     "German": SupportedLanguage.German,
   };
+
+  static List<SupportedLanguage> all_languages = [
+    SupportedLanguage.English,
+    SupportedLanguage.German,
+    SupportedLanguage.Russian,
+  ];
 }
 

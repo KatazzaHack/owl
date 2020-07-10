@@ -74,12 +74,9 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
                     _l_o = newValue;
                   });
                 },
-                items: <SupportedLanguage>[
-                  SupportedLanguage.German,
-                  SupportedLanguage.English,
-                  SupportedLanguage.Russian,
-                ].map<DropdownMenuItem<SupportedLanguage>>(
-                    (SupportedLanguage value) {
+                items: ConstVariables.all_languages
+                    .map<DropdownMenuItem<SupportedLanguage>>(
+                        (SupportedLanguage value) {
                   return DropdownMenuItem<SupportedLanguage>(
                     value: value,
                     child: Text(ConstVariables.human_languages[value]),
@@ -96,12 +93,9 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
                     _l_t = newValue;
                   });
                 },
-                items: <SupportedLanguage>[
-                  SupportedLanguage.German,
-                  SupportedLanguage.English,
-                  SupportedLanguage.Russian,
-                ].map<DropdownMenuItem<SupportedLanguage>>(
-                    (SupportedLanguage value) {
+                items: ConstVariables.all_languages
+                    .map<DropdownMenuItem<SupportedLanguage>>(
+                        (SupportedLanguage value) {
                   return DropdownMenuItem<SupportedLanguage>(
                     value: value,
                     child: Text(ConstVariables.human_languages[value]),
