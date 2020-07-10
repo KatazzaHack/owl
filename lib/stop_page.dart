@@ -7,7 +7,6 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import 'dart:async';
 
-import 'package:flutter_tts/flutter_tts.dart';
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
 
@@ -140,6 +139,7 @@ class _StopPage extends State<StopPage> {
                                   shape: CircleBorder(),
                                   color: Colors.red,
                                   onPressed: () {
+                                    TtsHelper().stop();
                                     Navigator.pop(context);
                                   },
                                   child: AutoSizeText(

@@ -1,5 +1,7 @@
+import 'package:owl/const_variables.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:owl/database/database_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WordsHelper {
   static final tableName = "Words";
@@ -9,5 +11,17 @@ class WordsHelper {
     Database db = await _instance.database;
     return await db.query(tableName);
   }
-  
+
+  Future<List<Map<String, dynamic>>> getCurrentWords() async {
+    Database db = await _instance.database;
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    int did = prefs.getInt(ConstVariables.current_dictionary_id);
+    print(did);
+    if (did < 0) {
+      did = 0;
+      prefs.setInt(ConstVariables.current_dictionary_id, did);
+    }
+    return await db.rawQuery('select Words.* from Words inner join WordsAndLists on (WordsAndLists.wid = Words.wid) where WordsAndLists.did=?', [did]);
+  }
+
 }
