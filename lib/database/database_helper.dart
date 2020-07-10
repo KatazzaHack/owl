@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_databasea35.db";
-  static final _databaseVersion = 117;
+  static final _databaseName = "owl_databasea200.db";
+  static final _databaseVersion = 33;
 
 
   // make this a singleton class
@@ -50,7 +50,10 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
     await _addDefault(db);
-    await _addGerman(db);
+    await _addGerman(db, "deckb1_1", 2);
+    // await _addGerman(db, "deckb1_2", 4);
+    // await _addGerman(db, "deckb1_3", 5);
+    // await _addGerman(db, "deckb1_4", 6);
   }
 
   Future _addDefault(db) async {
@@ -101,14 +104,14 @@ class DatabaseHelper {
     return count;
   }
 
-  Future _addGerman(db) async {
-    String words = await rootBundle.loadString('assets/deckb1.txt');
+  Future _addGerman(db, String fileName, int did) async {
+    String words = await rootBundle.loadString('assets/' + fileName + '.txt');
     List wordsList = words.split("\n");
     int id = await getCount(db);
     Batch batch = db.batch();
 
     batch.execute("begin");
-    batch.insert("Dictionaries", {"name": "deutsch", "did": 2});
+    batch.insert("Dictionaries", {"name": fileName, "did": did});
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
       id = id + 1;
@@ -120,7 +123,7 @@ class DatabaseHelper {
         "next_date": timeToInt(DateTime.now()),
         "repetitions": 0,
       });
-      batch.insert("WordsAndLists", {"did": 2, "wid": id});
+      batch.insert("WordsAndLists", {"did": did, "wid": id});
     });
     batch.execute("end");
     await batch.commit(noResult: true);
