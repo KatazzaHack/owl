@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary_selection_page.dart';
+import 'package:owl/database/common_helper.dart';
 import 'package:owl/settings/listen_mode.dart';
 
 class StartPage extends StatelessWidget {
+
+  CommonHelper ch = CommonHelper();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

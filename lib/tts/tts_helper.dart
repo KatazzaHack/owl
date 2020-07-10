@@ -1,4 +1,3 @@
-
 import 'dart:async';
 
 import 'package:flutter_tts/flutter_tts.dart';
@@ -8,7 +7,7 @@ class TtsState {
   static FlutterTts flutterTts;
 
   bool playing;
-  Completer completer;
+  Completer completer = Completer();
 
   initState() async {
     flutterTts = FlutterTts();
@@ -50,7 +49,6 @@ class TtsHelper {
 
   static TtsStateSingleton _state = TtsStateSingleton.instance;
 
-
   Future say(String word, String lang) async {
     TtsState ttsState = await _state.ttsState;
     await TtsState.flutterTts.setLanguage(lang);
@@ -58,7 +56,7 @@ class TtsHelper {
     ttsState.completer = Completer();
     assert(ttsState.playing == false);
     TtsState.flutterTts.speak(word).then((resp) {
-      print("Response: " + resp.toString());
+      print("Response received after speaking: " + resp.toString());
       return resp;
     }, onError: (obj, st) {
       print(obj);
