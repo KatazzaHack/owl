@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:speech_to_text/speech_recognition_error.dart';
+import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:owl/const_variables.dart';
 
 import 'dart:async';
 
@@ -23,6 +28,12 @@ class _StopPage extends State<StopPage> {
   void initState() {
     super.initState();
     initStream();
+    initListenModeCheck();
+  }
+
+  void initListenModeCheck() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool(ConstVariables.listen_mode, true);
   }
 
   void initStream() {
