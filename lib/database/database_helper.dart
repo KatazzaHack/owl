@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "owl_databasea230.db";
   static final _databaseVersion = 33;
+  static final _databaseName = "owl_databasea202.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();

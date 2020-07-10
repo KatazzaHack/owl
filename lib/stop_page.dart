@@ -1,15 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:speech_to_text/speech_recognition_error.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 
 import 'dart:async';
 
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
-import 'package:speech_to_text/speech_to_text.dart';
+import 'package:owl/stt/stt_helper.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -17,34 +14,15 @@ class StopPage extends StatefulWidget {
 }
 
 class _StopPage extends State<StopPage> {
-  stt.SpeechToText speech;
   WordList wl = WordList.instance;
-  Completer listenCompleter = Completer();
-  Future<void> _listeningFinished;
-  List<LocaleName> _localeNames = [];
+  Future<String> _listeningFinished;
 
   final StreamController<String> _streamController = StreamController<String>();
 
   @override
   void initState() {
     super.initState();
-    initStt();
     initStream();
-  }
-
-  void initStt() async {
-    speech = stt.SpeechToText();
-    bool available = await speech.initialize(onStatus: statusListener, onError: errorListener);
-    if ( available ) {
-      print("Stt is available");
-    } else {
-      print("The user has denied the use of speech recognition");
-    }
-
-    _localeNames = await speech.locales();
-//    for (LocaleName locale in _localeNames) {
-//      print(locale.localeId);
-//    }
   }
 
   void initStream() {
@@ -53,49 +31,28 @@ class _StopPage extends State<StopPage> {
       List<String> locales = ["de_DE", "ru_RU"];
       int currentLanguageIndex = 0;
       for (var i = 0;; i++) {
-        String word = await wl.getNextWord(/* listenMode = */ false);
+        String word = await wl.getNextWord();
         yield word;
 
-        Future<void> future = TtsHelper().say(word, languages[currentLanguageIndex]);
-        future.then((_) => {
-            print("Saying future completed"),
-            _listeningFinished = startListen(locales[1 - currentLanguageIndex])
-        })
+        Future<void> future =
+            TtsHelper().say(word, languages[currentLanguageIndex]);
+        future
+            .then((_) => {
+                  print("Saying future completed"),
+                  _listeningFinished =
+                      SttHelper().listen(locales[1 - currentLanguageIndex])
+                })
             .catchError((error) => print("Error happend"));
         // Wait till original word is said.
         await future;
         // Wait till user is suggested translation.
         print("Waiting for user input...");
-        await _listeningFinished;
-        print("Finished waiting for user input");
+        String parsedWords = await _listeningFinished;
+        print(
+            "Finished waiting for user input, parsed words are " + parsedWords);
       }
     })());
     print("initStream finished");
-  }
-
-  Future<void> startListen(String locale) async {
-    print("Start listening in locale " + locale + "...");
-    speech.listen( onResult: resultListener, localeId: locale);
-    print("Starting waiting for input");
-    listenCompleter = Completer();
-    return listenCompleter.future;
-  }
-
-  void resultListener(SpeechRecognitionResult result) {
-    print("${result.recognizedWords} - ${result.finalResult}");
-    if (result.finalResult) {
-      print("Stopped listening");
-      speech.stop();
-      listenCompleter.complete();
-    }
-  }
-
-  void errorListener(SpeechRecognitionError error) {
-    print("Received error status: $error, listening: ${speech.isListening}");
-  }
-
-  void statusListener(String status) {
-     print("Received listener status: $status, listening: ${speech.isListening}");
   }
 
   @override
@@ -126,6 +83,7 @@ class _StopPage extends State<StopPage> {
                                   color: Colors.red,
                                   onPressed: () {
                                     TtsHelper().stop();
+                                    SttHelper().stop();
                                     Navigator.pop(context);
                                   },
                                   child: AutoSizeText(
