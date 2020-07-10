@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary_selection_page.dart';
 import 'package:owl/settings/listen_mode.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -44,10 +45,15 @@ class StartPage extends StatelessWidget {
               child: RaisedButton(
                 shape: CircleBorder(),
                 color: Colors.green,
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (_) {
-                    return StopPage();
-                  }));
+                onPressed: () async {
+                  PermissionStatus status = await Permission.microphone.request();
+                  if (status.isGranted) {
+                    Navigator.push(context, MaterialPageRoute(builder: (_) {
+                      return StopPage();
+                    }));
+                  } else if (status.isPermanentlyDenied) {
+                    openAppSettings();
+                  }
                 },
                 child: Text("START", style: TextStyle(fontSize: 40)),
               ),
