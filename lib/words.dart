@@ -8,13 +8,19 @@ import 'package:owl/const_variables.dart';
 class WordList {
   WordList._privateConstructor();
   static final WordList instance = WordList._privateConstructor();
+  static final listenModeBatchSize = 5;
+  static final repetitionTimesPerBatch = 2;
+  static List<int> _listenModeSchedule;
   static List<dynamic> _words;
-  int dayLimit = 5;
   int currentIndex = -1;
+  int currentBatchStart = -1;
+  int currentBatchRepetitions = -1;
+  int currentIndexInBatch = -1;
+  bool reachedEndInListenMode = false;
   int myDid = -1;
   Levenshtein d = new Levenshtein();
   bool prevousWasWord = false;
-  bool listenMode = false;
+  bool listenMode = true;
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   // TODO(affina73): move support of the listenMode higher
 
@@ -34,35 +40,69 @@ class WordList {
   }
 
   Future<String> getNextWord() async {
-    print("next word asked");
     SharedPreferences prefs = await SharedPreferences.getInstance();
+    listenMode = prefs.getBool(ConstVariables.listen_mode);
     if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
       await _fillWords();
     }
-    if (currentIndex == -1) {
-      currentIndex = rng.nextInt(_words.length) % _words.length;
-    }
-    if (currentIndex == _words.length) {
-      currentIndex = -1;
-      myDid = prefs.getInt(ConstVariables.current_dictionary_id);
-    }
-    print("current index");
-    print(currentIndex);
     if (listenMode && prevousWasWord) {
-      print("current index in translation");
-      print(currentIndex);
       prevousWasWord = false;
       return this._getNextTranslation();
-    } else {
-      print("current index in word");
-      print(currentIndex);
-      print(_words.length);
-      print((rng.nextInt(_words.length)) % _words.length);
-      currentIndex = rng.nextInt(_words.length) % _words.length;
-      prevousWasWord = true;
-      return this._getNextWord();
     }
+    updateCurrentIndex();
+    print("current index: " + currentIndex.toString());
+    return this._getNextWord();
+  }
+
+  void updateCurrentIndex() {
+    print("update current index");
+    print("listen mode");
+    print(listenMode);
+    print(currentIndexInBatch);
+    print(_listenModeSchedule);
+    if (listenMode) {
+      if (_listenModeSchedule == null) {
+        _regenerateScheduleInListenMode();
+      }
+      if (currentIndexInBatch == -1) {
+        currentIndexInBatch = 0;
+      }
+      currentIndexInBatch += 1;
+      if (currentIndexInBatch == _listenModeSchedule.length) {
+        currentBatchRepetitions += 1;
+        currentIndexInBatch = 0;
+        if (currentBatchRepetitions >= repetitionTimesPerBatch) {
+          _regenerateScheduleInListenMode();
+        }
+      }
+      currentIndex = _listenModeSchedule[currentIndexInBatch];
+    } else {
+      currentIndex = (currentIndex + 1) % _words.length;
+    }
+  }
+
+  void _regenerateScheduleInListenMode() {
+    print("regenerate schedule");
+    if (currentBatchStart == -1) {
+      currentBatchStart = 0;
+      currentBatchRepetitions = 0;
+    }
+    if (currentBatchRepetitions == repetitionTimesPerBatch) {
+      currentBatchStart += listenModeBatchSize;
+      currentBatchRepetitions = 0;
+    }
+    int currentBatchEnd = min(
+        currentBatchStart + listenModeBatchSize, _words.length);
+    if ((currentBatchStart >= _words.length) || reachedEndInListenMode) {
+      reachedEndInListenMode = true;
+      currentBatchStart = 0;
+      currentBatchEnd = _words.length;
+    }
+    _listenModeSchedule = [
+      for(var i=currentBatchStart; i<currentBatchEnd; i++) i];
+    _listenModeSchedule.shuffle(rng);
+    print(_listenModeSchedule);
   }
 
   Future<String> _getNextWord() async {
@@ -79,7 +119,7 @@ class WordList {
       // q = quality of the response from 0 to 5
       // EF':=EF+(0.1-(5-q)*(0.08+(5-q)*0.02))
       // EF < 1.3 => EF==1.3;
-      //quality < 3 => repetitions := 0;
+      // quality < 3 => repetitions := 0;
       // never called in listenMode??
       int responseDistance = d.distance(saidWord, _words[currentIndex]["word"]);
       int quality = (5.0 * responseDistance
@@ -103,9 +143,18 @@ class WordList {
     }
   }
 
-  Future _fillWords() async {
+  void clear() {
     currentIndex = -1;
     prevousWasWord = false;
+    currentBatchStart = -1;
+    currentBatchRepetitions = -1;
+    currentIndexInBatch = -1;
+    reachedEndInListenMode = false;
+    _listenModeSchedule = null;
+  }
+
+  Future _fillWords() async {
+    clear();
     WordsHelper wordsHelper = WordsHelper();
     List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
     print("all words awaited");
