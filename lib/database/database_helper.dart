@@ -6,7 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../const_variables.dart';
+import 'package:owl/const_variables.dart';
 
 class DatabaseHelper {
   static final _databaseName = "owl_databasea35.db";
