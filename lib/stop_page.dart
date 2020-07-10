@@ -16,10 +16,7 @@ class StopPage extends StatefulWidget {
 }
 
 class _StopPage extends State<StopPage> {
-  FlutterTts flutterTts;
   stt.SpeechToText speech;
-  bool playing;
-  Completer completer = Completer();
   WordList wl = WordList.instance;
   Completer listenCompleter = Completer();
   Future<void> _listeningFinished;
@@ -29,30 +26,8 @@ class _StopPage extends State<StopPage> {
   @override
   void initState() {
     super.initState();
-    initTts();
     initStt();
     initStream();
-  }
-
-  void initTts() async {
-    flutterTts = FlutterTts();
-
-    await flutterTts.isLanguageAvailable("en-US");
-    playing = false;
-    flutterTts.setStartHandler(() {
-      setState(() {
-        assert(playing == false);
-        playing = true;
-      });
-    });
-    flutterTts.setCompletionHandler(() {
-      setState(() {
-        assert(playing == true);
-        playing = false;
-        completer.complete();
-      });
-    });
-    print("initTts finished");
   }
 
   void initStt() async {

@@ -56,7 +56,7 @@ class TtsHelper {
     ttsState.completer = Completer();
     assert(ttsState.playing == false);
     TtsState.flutterTts.speak(word).then((resp) {
-      print(resp);
+      print("Response: " + resp.toString());
       return resp;
     }, onError: (obj, st) {
       print(obj);
