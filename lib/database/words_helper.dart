@@ -16,10 +16,7 @@ class WordsHelper {
     Database db = await _instance.database;
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int did = prefs.getInt(ConstVariables.current_dictionary_id);
-<<<<<<< HEAD
     print("Did is:");
-=======
->>>>>>> b2b813614e4689dfb9e17e0936dd6eb1d724ad8f
     print(did);
     if (did < 0) {
       did = 0;
