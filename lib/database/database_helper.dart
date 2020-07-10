@@ -9,8 +9,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 
 class DatabaseHelper {
-  static final _databaseVersion = 33;
-  static final _databaseName = "owl_databasea202.db";
+  static final _databaseVersion = 10;
+  static final _databaseName = "owl_databasea102021.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -38,7 +38,7 @@ class DatabaseHelper {
   // SQL code to create the database table
   Future _onCreate(Database db, int version) async {
     await db.execute(
-        "CREATE TABLE Dictionaries ( did INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE)");
+        "CREATE TABLE Dictionaries ( did INTEGER PRIMARY KEY, name TEXT NOT NULL UNIQUE, l_original TEXT, l_translation TEXT)");
     await db.execute("CREATE TABLE Words ("
         "wid INTEGER PRIMARY KEY,"
         "word TEXT NOT NULL,"
@@ -62,14 +62,16 @@ class DatabaseHelper {
 
   Future _addGerman(db, String fileName, int did) async {
     String words = await rootBundle.loadString('assets/' + fileName + '.txt');
-    await _addNewDictionary(db, fileName, words);
+    await _addNewDictionary(db, fileName, words, SupportedLanguage.German,
+        SupportedLanguage.Russian);
   }
 
   int timeToInt(DateTime dateTime) {
     return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
   }
 
-  Future _addNewDictionary(Database db, String name, String data) async {
+  Future _addNewDictionary(Database db, String name, String data,
+      SupportedLanguage l_o, SupportedLanguage l_t) async {
     int count = Sqflite.firstIntValue(await db
         .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
     if (count > 0) {
@@ -81,7 +83,12 @@ class DatabaseHelper {
     did = did + 1;
     Batch batch = db.batch();
     batch.execute("begin");
-    batch.insert("Dictionaries", {"name": name, "did": did});
+    batch.insert("Dictionaries", {
+      "name": name,
+      "did": did,
+      "l_original": ConstVariables.human_languages[l_o],
+      "l_translation": ConstVariables.human_languages[l_t]
+    });
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
       id = id + 1;
