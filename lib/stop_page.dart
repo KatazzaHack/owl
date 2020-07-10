@@ -31,7 +31,7 @@ class _StopPage extends State<StopPage> {
       List<String> locales = ["de_DE", "ru_RU"];
       int currentLanguageIndex = 0;
       for (var i = 0;; i++) {
-        String word = await wl.getNextWord(/* listenMode = */ false);
+        String word = await wl.getNextWord();
         yield word;
 
         Future<void> future =

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:owl/dictionary_list_page.dart';
+import 'package:owl/dictionary_upload.dart';
 
 class DictionarySelectionPage extends StatelessWidget {
   @override
@@ -16,6 +17,10 @@ class DictionarySelectionPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => LoginPage()),
+          );
         },
         tooltip: "Add new dictionary",
         child: Icon(Icons.add_box),
