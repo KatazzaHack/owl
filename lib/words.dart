@@ -24,17 +24,6 @@ class WordList {
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   // TODO(affina73): move support of the listenMode higher
 
-  int getInterval(int repetitions, double ef) {
-    if (repetitions == 1) {
-      return 1;
-    }
-    if (repetitions == 2) {
-      return 4;
-    }
-    // l(n) = l(n - 1) * ef
-    return (pow(ef, repetitions - 2) * 4).round();
-  }
-
   void setListenMode(bool listenMode) {
     this.listenMode = listenMode;
   }
@@ -50,12 +39,12 @@ class WordList {
       prevousWasWord = false;
       return this._getNextTranslation();
     }
-    updateCurrentIndex();
+    _updateCurrentIndex();
     print("current index: " + currentIndex.toString());
     return this._getNextWord();
   }
 
-  void updateCurrentIndex() {
+  void _updateCurrentIndex() {
     print("update current index");
     print("listen mode");
     print(listenMode);
@@ -106,14 +95,14 @@ class WordList {
   }
 
   Future<String> _getNextWord() async {
-    return Future.value(_words[currentIndex]["word"]);
+    return _words[currentIndex]["word"];
   }
 
-  Future<String> _getNextTranslation() async {
-    return Future.value(_words[currentIndex]["translation"]);
+  String _getNextTranslation() {
+    return _words[currentIndex]["translation"];
   }
 
-  void updateCurrentResult(String saidWord) {
+  void _updateCurrentResult(String saidWord) {
     if (currentIndex != -1) {
       // https://www.supermemo.com/en/archives1990-2015/english/ol/sm2
       // q = quality of the response from 0 to 5
@@ -135,7 +124,7 @@ class WordList {
         _words.add(_words[currentIndex]);
       }
       int nextDate = _words[currentIndex]["next_date"];
-      nextDate = nextDate + getInterval(
+      nextDate = nextDate + _getInterval(
           _words[currentIndex]["repetitions"],
           _words[currentIndex]["ef"]) - 1;
       // TODO(affina73): here we should make some db updates for ef, rep, date
@@ -143,7 +132,7 @@ class WordList {
     }
   }
 
-  void clear() {
+  void _clear() {
     currentIndex = -1;
     prevousWasWord = false;
     currentBatchStart = -1;
@@ -154,7 +143,7 @@ class WordList {
   }
 
   Future _fillWords() async {
-    clear();
+    _clear();
     WordsHelper wordsHelper = WordsHelper();
     List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
     print("all words awaited");
@@ -164,6 +153,17 @@ class WordList {
         _words.add(allWords[j]);
       }
     }
+  }
+
+  static int _getInterval(int repetitions, double ef) {
+    if (repetitions == 1) {
+      return 1;
+    }
+    if (repetitions == 2) {
+      return 4;
+    }
+    // l(n) = l(n - 1) * ef
+    return (pow(ef, repetitions - 2) * 4).round();
   }
 }
 
