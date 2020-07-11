@@ -38,6 +38,7 @@ class _StopPage extends State<StopPage> {
       List<String> languages = ["de-DE", "ru-RU"];
       List<String> locales = ["de_DE", "ru_RU"];
       int currentLanguageIndex = 0;
+      int targetLanguageIndex = 1 - currentLanguageIndex;
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
         yield word;
@@ -48,7 +49,7 @@ class _StopPage extends State<StopPage> {
             .then((_) => {
                   print("Saying future completed"),
                   _listeningFinished =
-                      SttHelper().listen(locales[1 - currentLanguageIndex])
+                      SttHelper().listen(locales[targetLanguageIndex])
                 })
             .catchError((error) => print("Error happend"));
         // Wait till original word is said.
@@ -59,6 +60,10 @@ class _StopPage extends State<StopPage> {
         print(
             "Finished waiting for user input, parsed words are " + parsedWords);
         await wl.updateCurrentResult(parsedWords);
+        String correctTranslation = wl.getNextTranslation();
+        yield correctTranslation;
+        await TtsHelper().say(correctTranslation,
+          languages[targetLanguageIndex]);
       }
     })());
     print("initStream finished");
@@ -82,8 +87,11 @@ class _StopPage extends State<StopPage> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          AutoSizeText("${snapshot.data}",
-                              style: TextStyle(fontSize: 100), maxLines: 1),
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: AutoSizeText("${snapshot.data}",
+                              style: TextStyle(fontSize: 100), maxLines: 1)
+                          ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.2,

@@ -40,7 +40,7 @@ class WordList {
     }
     if (listenMode && prevousWasWord) {
       prevousWasWord = false;
-      return this._getNextTranslation();
+      return this.getNextTranslation();
     }
     _updateCurrentIndex();
     print("current index: " + currentIndex.toString());
@@ -102,7 +102,7 @@ class WordList {
     return _words[currentIndex]["word"];
   }
 
-  String _getNextTranslation() {
+  String getNextTranslation() {
     return _words[currentIndex]["translation"];
   }
 
