@@ -2,6 +2,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:owl/database/database_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
+import 'package:owl/utils.dart';
 
 class CommonHelper {
   static final _instance = DatabaseHelper.instance;
@@ -28,7 +29,7 @@ class CommonHelper {
         "wid": id,
         "translation": wordTranslation[1].split(",")[0],
         "ef": 2.5,
-        "next_date": _instance.timeToInt(DateTime.now()),
+        "next_date": timeToInt(DateTime.now()),
         "repetitions": 0,
       });
       batch.insert("WordsAndLists", {"did": did, "wid": id});

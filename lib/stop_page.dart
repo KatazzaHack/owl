@@ -33,7 +33,7 @@ class _StopPage extends State<StopPage> {
 
   void initListenModeCheck() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(ConstVariables.listen_mode, true);
+    prefs.setBool(ConstVariables.listen_mode, false);
   }
 
   void initStream() {
@@ -61,6 +61,10 @@ class _StopPage extends State<StopPage> {
         String parsedWords = await _listeningFinished;
         print(
             "Finished waiting for user input, parsed words are " + parsedWords);
+        Future<int> another_future = wl.updateCurrentResult(parsedWords);
+        print("got future");
+        await another_future;
+        print("awaited");
       }
     })());
     print("initStream finished");

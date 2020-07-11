@@ -7,10 +7,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
+import 'package:owl/utils.dart';
 
 class DatabaseHelper {
-  static final _databaseVersion = 33;
-  static final _databaseName = "owl_databasea202.db";
+  static final _databaseVersion = 35;
+  static final _databaseName = "owl_databasea212.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -63,10 +64,6 @@ class DatabaseHelper {
   Future _addGerman(db, String fileName, int did) async {
     String words = await rootBundle.loadString('assets/' + fileName + '.txt');
     await _addNewDictionary(db, fileName, words);
-  }
-
-  int timeToInt(DateTime dateTime) {
-    return (dateTime.millisecondsSinceEpoch / (1000000 * 60 * 60 * 24)).round();
   }
 
   Future _addNewDictionary(Database db, String name, String data) async {

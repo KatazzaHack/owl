@@ -23,4 +23,14 @@ class WordsHelper {
     return await db.rawQuery('select Words.* from Words inner join WordsAndLists on (WordsAndLists.wid = Words.wid) where WordsAndLists.did=?', [did]);
   }
 
+  Future<int> updateOneRecord(Map<String, dynamic> newRecord) async {
+    Database db = await _instance.database;
+    print('newRecord');
+    print(tableName);
+    print(newRecord);
+    return db.update(
+      tableName,
+      newRecord,
+    );
+  }
 }
