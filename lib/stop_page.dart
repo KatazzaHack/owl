@@ -38,6 +38,7 @@ class _StopPage extends State<StopPage> {
       List<String> languages = ["de-DE", "ru-RU"];
       List<String> locales = ["de_DE", "ru_RU"];
       int currentLanguageIndex = 0;
+      int targetLanguageIndex = 1 - currentLanguageIndex;
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
         yield word;
@@ -48,7 +49,7 @@ class _StopPage extends State<StopPage> {
             .then((_) => {
                   print("Saying future completed"),
                   _listeningFinished =
-                      SttHelper().listen(locales[1 - currentLanguageIndex])
+                      SttHelper().listen(locales[targetLanguageIndex])
                 })
             .catchError((error) => print("Error happend"));
         // Wait till original word is said.
@@ -58,6 +59,10 @@ class _StopPage extends State<StopPage> {
         String parsedWords = await _listeningFinished;
         print(
             "Finished waiting for user input, parsed words are " + parsedWords);
+        // TODO(affina73): Put logic here.
+        String correctTranslation = wl.getNextTranslation();
+        await TtsHelper().say(correctTranslation,
+          languages[targetLanguageIndex]);
       }
     })());
     print("initStream finished");

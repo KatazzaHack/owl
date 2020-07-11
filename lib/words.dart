@@ -37,7 +37,7 @@ class WordList {
     }
     if (listenMode && prevousWasWord) {
       prevousWasWord = false;
-      return this._getNextTranslation();
+      return this.getNextTranslation();
     }
     _updateCurrentIndex();
     print("current index: " + currentIndex.toString());
@@ -98,13 +98,13 @@ class WordList {
     return _words[currentIndex]["word"];
   }
 
-  String _getNextTranslation() {
+  String getNextTranslation() {
     return _words[currentIndex]["translation"];
   }
 
   void _updateCurrentResult(String saidWord) {
     if (currentIndex != -1) {
-      // https://www.supermemo.com/en/archives1990-2015/english/ol/sm2
+      // https://www.supermemo.com/en_updateCurrentResult/archives1990-2015/english/ol/sm2
       // q = quality of the response from 0 to 5
       // EF':=EF+(0.1-(5-q)*(0.08+(5-q)*0.02))
       // EF < 1.3 => EF==1.3;
