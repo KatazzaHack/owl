@@ -27,7 +27,7 @@ class _TrainingModBarState extends State<TrainingModBar> {
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.speaker),
-              title: Text('Passive practice'),
+              title: Text('Passive listening'),
             ),
           ],
           currentIndex: trainingMod.state,

@@ -59,7 +59,8 @@ class _StopPage extends State<StopPage> {
         String parsedWords = await _listeningFinished;
         print(
             "Finished waiting for user input, parsed words are " + parsedWords);
-        await wl.updateCurrentResult(parsedWords);
+        int quality = await wl.obtainCurrentResult(parsedWords);
+        print(quality);
         String correctTranslation = wl.getNextTranslation();
         yield correctTranslation;
         await TtsHelper().say(correctTranslation,
