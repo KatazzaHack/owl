@@ -106,7 +106,7 @@ class WordList {
     return _words[currentIndex]["translation"];
   }
 
-  Future<int> updateCurrentResult(String saidWord) {
+  Future<int> obtainCurrentResult(String saidWord) async {
     assert(currentIndex != -1);
     // https://www.supermemo.com/en/archives1990-2015/english/ol/sm2
     // q = quality of the response from 0 to 5
@@ -146,7 +146,8 @@ class WordList {
         _words[currentIndex]["repetitions"],
         _words[currentIndex]["ef"]);
     newRecord["next_date"] = nextDate;
-    return wordsHelper.updateOneRecord(newRecord);
+    await wordsHelper.updateOneRecord(newRecord);
+    return quality;
   }
 
   void _clear() {
