@@ -12,17 +12,18 @@ class OWLApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => DictionariesModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => TrainingModModel()),
+        ChangeNotifierProvider(create:(context) => DictionariesModel()),
+      ],
       child: MaterialApp(
         title: 'Owl Application',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: MultiProvider(providers: [
-          ChangeNotifierProvider(create: (context) => TrainingModModel()),
-        ], child: StartPage()),
+        home: StartPage(),
       ),
     );
   }

@@ -22,15 +22,15 @@ class _TrainingModBarState extends State<TrainingModBar> {
         return BottomNavigationBar(
           items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
-              title: Text('Test yourself'),
-            ),
-            BottomNavigationBarItem(
               icon: Icon(Icons.speaker),
               title: Text('Passive listening'),
             ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school),
+              title: Text('Test yourself'),
+            ),
           ],
-          currentIndex: trainingMod.state,
+          currentIndex: trainingMod.stateIdx,
           onTap: _onItemTapped,
         );
       },

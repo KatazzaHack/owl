@@ -9,6 +9,9 @@ import 'dart:async';
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
+import 'package:provider/provider.dart';
+import 'package:owl/start_page/training_mod_model.dart';
+
 
 class StopPage extends StatefulWidget {
   @override
@@ -34,6 +37,9 @@ class _StopPage extends State<StopPage> {
   }
 
   void initStream() {
+    TrainingModModel model = Provider.of<TrainingModModel>(context, listen: false);
+    bool listen = model.listen;
+    wl.setListenMode(listen);
     _streamController.addStream((() async* {
       List<String> languages = ["de-DE", "ru-RU"];
       List<String> locales = ["de_DE", "ru_RU"];
