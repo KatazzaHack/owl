@@ -3,6 +3,7 @@ import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:owl/database/common_helper.dart';
+import 'package:owl/training_mod_bar.dart';
 
 class StartPage extends StatelessWidget {
 
@@ -72,6 +73,7 @@ class StartPage extends StatelessWidget {
         tooltip: 'Change dictionary',
         child: Icon(Icons.library_books),
       ),
+      bottomNavigationBar: TrainingModBar(),
     );
   }
 }
