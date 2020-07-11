@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:owl/training_mod_model.dart';
+import 'package:owl/start_page/training_mod_model.dart';
 
 class TrainingModBar extends StatefulWidget {
   TrainingModBar({Key key}) : super(key: key);
