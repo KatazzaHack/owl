@@ -3,6 +3,8 @@ import 'package:owl/const_variables.dart';
 import 'package:owl/database/dictionary_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:owl/database/common_helper.dart';
+import 'package:owl/dictionaries_model.dart';
+import 'package:provider/provider.dart';
 
 class DictionaryFromUrlPage extends StatefulWidget {
   @override
@@ -233,6 +235,7 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
     } else {
       await ch.addNewDictionary(_name, response.body, _l_o, _l_t);
     }
+    Provider.of<DictionariesModel>(context, listen: false).updateList();
     Navigator.of(context).pop();
   }
 }
