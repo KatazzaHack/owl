@@ -45,7 +45,6 @@ class _ListSearchState extends State<DictionaryListPage> {
     return Checkbox(
       value: active,
       onChanged: (bool value) async {
-        print(id);
         SharedPreferences prefs = await SharedPreferences.getInstance();
         if (!value) {
           prefs.setInt(ConstVariables.current_dictionary_id, -1);

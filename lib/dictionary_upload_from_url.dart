@@ -67,7 +67,7 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
       child: Column(
         children: <Widget>[
           ListTile(
-              title: Text("Original Language"),
+              title: Text("Original language"),
               trailing: DropdownButton<SupportedLanguage>(
                 value: _l_o,
                 onChanged: (SupportedLanguage newValue) {
@@ -157,6 +157,27 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
     return !_exists;
   }
 
+  Widget _alertWindow(String title, String text, String action_text) {
+    return AlertDialog(
+      title: Text(title),
+      content: SingleChildScrollView(
+        child: ListBody(
+          children: <Widget>[
+            Text(text),
+          ],
+        ),
+      ),
+      actions: <Widget>[
+        FlatButton(
+          child: Text(action_text),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+      ],
+    );
+  }
+
   Future<void> _uploadPressed() async {
     bool _correct_name_format = await _validateName(_name);
     if (!_correct_name_format) {
@@ -164,25 +185,10 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Dictionary name'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text(
-                      'You have a dictionary with that name. Please change it!'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Will change!'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
+          return _alertWindow(
+              'Dictionary name',
+              'You have a dictionary with that name. Please change it!',
+              'Will change!');
         },
       );
     }
@@ -191,47 +197,13 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
         context: context,
         barrierDismissible: false, // user must tap button!
         builder: (BuildContext context) {
-          return AlertDialog(
-            title: Text('Url'),
-            content: SingleChildScrollView(
-              child: ListBody(
-                children: <Widget>[
-                  Text('Please check your url'),
-                ],
-              ),
-            ),
-            actions: <Widget>[
-              FlatButton(
-                child: Text('Ok'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
+          return _alertWindow('Url', 'Please check your url', 'Ok');
         },
       );
     }
     final response = await http.get(_url);
     if (response.statusCode != 200) {
-      return AlertDialog(
-        title: Text('Url'),
-        content: SingleChildScrollView(
-          child: ListBody(
-            children: <Widget>[
-              Text(response.reasonPhrase),
-            ],
-          ),
-        ),
-        actions: <Widget>[
-          FlatButton(
-            child: Text('Ok'),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-          ),
-        ],
-      );
+      return _alertWindow('Url', response.reasonPhrase, 'Ok');
     } else {
       await ch.addNewDictionary(_name, response.body, _l_o, _l_t);
     }
