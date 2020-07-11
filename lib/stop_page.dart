@@ -1,9 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:speech_to_text/speech_recognition_error.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
-import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 
@@ -61,10 +58,7 @@ class _StopPage extends State<StopPage> {
         String parsedWords = await _listeningFinished;
         print(
             "Finished waiting for user input, parsed words are " + parsedWords);
-        Future<int> another_future = wl.updateCurrentResult(parsedWords);
-        print("got future");
-        await another_future;
-        print("awaited");
+        await wl.updateCurrentResult(parsedWords);
       }
     })());
     print("initStream finished");

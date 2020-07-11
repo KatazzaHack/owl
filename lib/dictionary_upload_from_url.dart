@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:owl/const_variables.dart';
 import 'package:owl/database/dictionary_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:owl/database/common_helper.dart';
@@ -14,12 +15,16 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
 
   String _name = "";
   String _url = "";
+  SupportedLanguage _l_o;
+  SupportedLanguage _l_t;
   DictionariesHelper dh = DictionariesHelper();
   CommonHelper ch = CommonHelper();
 
   _DictionaryFromUrlPageState() {
     _urlFilter.addListener(_urlListen);
     _nameFilter.addListener(_nameListen);
+    _l_o = SupportedLanguage.German;
+    _l_t = SupportedLanguage.Russian;
   }
 
   void _urlListen() {
@@ -47,9 +52,57 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
         child: new Column(
           children: <Widget>[
             _buildTextFields(),
+            _buildLanguages(),
             _buildButtons(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _buildLanguages() {
+    return new Container(
+      child: Column(
+        children: <Widget>[
+          ListTile(
+              title: Text("Original Language"),
+              trailing: DropdownButton<SupportedLanguage>(
+                value: _l_o,
+                onChanged: (SupportedLanguage newValue) {
+                  setState(() {
+                    print(newValue);
+                    _l_o = newValue;
+                  });
+                },
+                items: ConstVariables.all_languages
+                    .map<DropdownMenuItem<SupportedLanguage>>(
+                        (SupportedLanguage value) {
+                  return DropdownMenuItem<SupportedLanguage>(
+                    value: value,
+                    child: Text(ConstVariables.human_languages[value]),
+                  );
+                }).toList(),
+              )),
+          ListTile(
+              title: Text("Translation Language"),
+              trailing: DropdownButton<SupportedLanguage>(
+                value: _l_t,
+                onChanged: (SupportedLanguage newValue) {
+                  setState(() {
+                    print(newValue);
+                    _l_t = newValue;
+                  });
+                },
+                items: ConstVariables.all_languages
+                    .map<DropdownMenuItem<SupportedLanguage>>(
+                        (SupportedLanguage value) {
+                  return DropdownMenuItem<SupportedLanguage>(
+                    value: value,
+                    child: Text(ConstVariables.human_languages[value]),
+                  );
+                }).toList(),
+              )),
+        ],
       ),
     );
   }
@@ -103,7 +156,6 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
   }
 
   Future<void> _uploadPressed() async {
-
     bool _correct_name_format = await _validateName(_name);
     if (!_correct_name_format) {
       return showDialog<void>(
@@ -115,7 +167,8 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text('You have a dictionary with that name. Please change it!'),
+                  Text(
+                      'You have a dictionary with that name. Please change it!'),
                 ],
               ),
             ),
@@ -178,7 +231,7 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
         ],
       );
     } else {
-      await ch.addNewDictionary(_name, response.body);
+      await ch.addNewDictionary(_name, response.body, _l_o, _l_t);
     }
     Navigator.of(context).pop();
   }

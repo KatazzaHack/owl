@@ -44,7 +44,7 @@ class WordList {
     }
     _updateCurrentIndex();
     print("current index: " + currentIndex.toString());
-    return this._getNextWord();
+    return Future.value(this._getNextWord());
   }
 
   void _updateCurrentIndex() {
@@ -126,10 +126,8 @@ class WordList {
     quality = max(quality, 0);
     quality = min(quality, 5);
     print("quality: " +  quality.toString());
-    print("previous ef: " + _words[currentIndex]["ef"].toString());
     double ef = _words[currentIndex]["ef"]
         + (0.1 - (5 - quality) * (0.08 + quality * 0.02));
-    print("ef: " +  ef.toString());
     newRecord["ef"] = ef;
     if (ef < 1.3) {
       ef = 1.3;
@@ -141,17 +139,13 @@ class WordList {
       repetitions = 0;
       _words.insert(
           currentIndex + insertWrongAnsweredDistance,
-          _words[currentIndex]);
+          newRecord);
     }
     int nextDate = _words[currentIndex]["next_date"];
-    print("nextDate: " +  nextDate.toString());
     nextDate = timeToInt(DateTime.now()) + _getInterval(
         _words[currentIndex]["repetitions"],
         _words[currentIndex]["ef"]);
     newRecord["next_date"] = nextDate;
-    print("new nextDate: " +  nextDate.toString());
-    print("today: " +  timeToInt(DateTime.now()).toString());
-    print("reached end of the update");
     return wordsHelper.updateOneRecord(newRecord);
   }
 
@@ -168,7 +162,7 @@ class WordList {
   Future _fillWords() async {
     _clear();
     List<Map<String, dynamic>> allWords = await wordsHelper.getCurrentWords();
-    print("all words awaited");
+    print("We got all words for the current deck");
     _words = new List();
     for (var j = 0; j < allWords.length; j++) {
       if (allWords[j]["next_date"] <= timeToInt(DateTime.now())) {

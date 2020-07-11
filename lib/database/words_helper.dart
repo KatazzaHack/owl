@@ -25,12 +25,9 @@ class WordsHelper {
 
   Future<int> updateOneRecord(Map<String, dynamic> newRecord) async {
     Database db = await _instance.database;
-    print('newRecord');
-    print(tableName);
-    print(newRecord);
-    return db.update(
-      tableName,
-      newRecord,
-    );
+    return await db.rawUpdate(
+        'UPDATE Words SET wid = ?, ef = ?, next_date = ?, repetitions = ? WHERE wid = ?',
+        [newRecord["wid"], newRecord["ef"], newRecord["next_date"],
+          newRecord["repetitions"], newRecord["wid"]]);
   }
 }
