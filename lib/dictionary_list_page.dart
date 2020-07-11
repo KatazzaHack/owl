@@ -31,11 +31,11 @@ class _ListSearchState extends State<DictionaryListPage> {
           child: Column(children: <Widget>[
             Expanded(
                 child: ListView(
-              children: dictionaries.dictionariesList.map((data) {
+              children: dictionaries.dictionariesList?.map((data) {
                 return ListTile(
                     leading: checkbox(data["did"], data["active"]),
                     title: Text(data["name"]));
-              }).toList(),
+              })?.toList() ?? [],
             ))
           ]));
     });
