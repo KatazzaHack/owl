@@ -5,6 +5,7 @@ import 'package:owl/database/words_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/utils.dart';
+import 'package:owl/settings/settings.dart';
 
 class WordList {
   WordList._privateConstructor();
@@ -22,23 +23,17 @@ class WordList {
   int myDid = -1;
   Levenshtein d = new Levenshtein();
   bool prevousWasWord = false;
-  bool listenMode = true;
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   WordsHelper wordsHelper = WordsHelper();
-  // TODO(affina73): move support of the listenMode higher
-
-  void setListenMode(bool listenMode) {
-    this.listenMode = listenMode;
-  }
 
   Future<String> getNextWord() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    listenMode = prefs.getBool(ConstVariables.listen_mode);
     if (_words == null || myDid != prefs.getInt(ConstVariables.current_dictionary_id)) {
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
       await _fillWords();
     }
-    if (listenMode && prevousWasWord) {
+    bool listen = Settings().listen;
+    if (listen && prevousWasWord) {
       prevousWasWord = false;
       return this.getNextTranslation();
     }
@@ -49,8 +44,9 @@ class WordList {
 
   void _updateCurrentIndex() {
     print("update current index");
-    print("listen mode:" + listenMode.toString());
-    if (listenMode) {
+    bool listen = Settings().listen;
+    print("listen mode:" + listen.toString());
+    if (listen) {
       print("current index in batch:" + currentIndexInBatch.toString());
       if (_listenModeSchedule == null) {
         _regenerateScheduleInListenMode();

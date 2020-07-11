@@ -18,29 +18,6 @@ class StartPage extends StatelessWidget {
           child: Text("Oral word learning"),
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: const <Widget>[
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Settings',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              // leading: ListenModeCheckBox(),
-              leading: Text("checkbox"),
-            ),
-          ],
-        ),
-      ),
         body: Container(
             alignment: Alignment.center,
             child: SizedBox(

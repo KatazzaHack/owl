@@ -6,7 +6,6 @@ enum SupportedLanguage {
 
 class ConstVariables {
   static String current_dictionary_id = "CurrentDictionaryName";
-  static String listen_mode = "ListenMode";
   static Map<SupportedLanguage, String> supported_locales = {
     SupportedLanguage.English: "en_EN",
     SupportedLanguage.Russian: "ru_RU",

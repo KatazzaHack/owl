@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:owl/const_variables.dart';
 
 import 'dart:async';
 
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
-import 'package:provider/provider.dart';
-import 'package:owl/start_page/training_mod_model.dart';
 
 
 class StopPage extends StatefulWidget {
@@ -28,18 +24,9 @@ class _StopPage extends State<StopPage> {
   void initState() {
     super.initState();
     initStream();
-    initListenModeCheck();
-  }
-
-  void initListenModeCheck() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setBool(ConstVariables.listen_mode, false);
   }
 
   void initStream() {
-    TrainingModModel model = Provider.of<TrainingModModel>(context, listen: false);
-    bool listen = model.listen;
-    wl.setListenMode(listen);
     _streamController.addStream((() async* {
       List<String> languages = ["de-DE", "ru-RU"];
       List<String> locales = ["de_DE", "ru_RU"];

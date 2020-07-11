@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:owl/settings/settings.dart';
 
 class TrainingModModel extends ChangeNotifier {
-  bool _listen = false;
-
-  int get stateIdx => _listen ? 1 : 0;
-  bool get listen => _listen;
+  int get stateIdx => Settings().listen ? 1 : 0;
 
   void setState(int state) {
     assert((state == 0) || (state == 1));
-    _listen = state == 1;
+    Settings().listen = state == 1;
     notifyListeners();
   }
 }
