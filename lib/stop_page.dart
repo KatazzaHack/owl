@@ -61,6 +61,7 @@ class _StopPage extends State<StopPage> {
             "Finished waiting for user input, parsed words are " + parsedWords);
         // TODO(affina73): Put logic here.
         String correctTranslation = wl.getNextTranslation();
+        yield correctTranslation;
         await TtsHelper().say(correctTranslation,
           languages[targetLanguageIndex]);
       }
