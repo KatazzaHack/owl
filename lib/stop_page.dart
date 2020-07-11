@@ -87,8 +87,11 @@ class _StopPage extends State<StopPage> {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          AutoSizeText("${snapshot.data}",
-                              style: TextStyle(fontSize: 100), maxLines: 1),
+                          Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: AutoSizeText("${snapshot.data}",
+                              style: TextStyle(fontSize: 100), maxLines: 1)
+                          ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.2,
