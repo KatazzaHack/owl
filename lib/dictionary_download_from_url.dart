@@ -111,7 +111,7 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
 
   Widget _buildBar(BuildContext context) {
     return new AppBar(
-      title: new Text("Upload New Dictionary"),
+      title: new Text("Download New Dictionary"),
       centerTitle: true,
     );
   }
@@ -142,8 +142,8 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
       child: new Column(
         children: <Widget>[
           new RaisedButton(
-            child: new Text('Upload'),
-            onPressed: _uploadPressed,
+            child: new Text('download'),
+            onPressed: _downloadPressed,
           ),
         ],
       ),
@@ -178,7 +178,7 @@ class _DictionaryFromUrlPageState extends State<DictionaryFromUrlPage> {
     );
   }
 
-  Future<void> _uploadPressed() async {
+  Future<void> _downloadPressed() async {
     bool _correct_name_format = await _validateName(_name);
     if (!_correct_name_format) {
       return showDialog<void>(
