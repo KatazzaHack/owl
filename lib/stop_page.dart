@@ -7,6 +7,7 @@ import 'dart:async';
 import 'package:owl/words.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
+import 'package:owl/settings/settings.dart';
 
 
 class StopPage extends StatefulWidget {
@@ -16,7 +17,6 @@ class StopPage extends StatefulWidget {
 
 class _StopPage extends State<StopPage> {
   WordList wl = WordList.instance;
-  Future<String> _listeningFinished;
 
   final StreamController<String> _streamController = StreamController<String>();
 
@@ -36,24 +36,18 @@ class _StopPage extends State<StopPage> {
         String word = await wl.getNextWord();
         yield word;
 
-        Future<void> future =
-            TtsHelper().say(word, languages[currentLanguageIndex]);
-        future
-            .then((_) => {
-                  print("Saying future completed"),
-                  _listeningFinished =
-                      SttHelper().listen(locales[targetLanguageIndex])
-                })
-            .catchError((error) => print("Error happend"));
-        // Wait till original word is said.
-        await future;
-        // Wait till user is suggested translation.
+        await TtsHelper().say(word, languages[currentLanguageIndex]);
+        print("Saying future completed");
         print("Waiting for user input...");
-        String parsedWords = await _listeningFinished;
-        print(
-            "Finished waiting for user input, parsed words are " + parsedWords);
-        int quality = await wl.obtainCurrentResult(parsedWords);
-        print(quality);
+        if (Settings().listen) {
+          String parsedWords = await SttHelper().listen(
+              locales[targetLanguageIndex]);
+          // Wait till user is suggested translation.
+          print(
+              "Finished waiting for user input, parsed words are " + parsedWords);
+          int quality = await wl.obtainCurrentResult(parsedWords);
+          print(quality);
+        }
         String correctTranslation = wl.getNextTranslation();
         yield correctTranslation;
         await TtsHelper().say(correctTranslation,
