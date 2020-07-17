@@ -8,11 +8,12 @@ class SttState {
   static stt.SpeechToText speech;
 
   Completer<String> completer = Completer<String>();
+
 //  List<LocaleName> _localeNames = [];
 
   initState() async {
     speech = stt.SpeechToText();
-    bool available = await speech.initialize(onStatus: statusListener);
+    bool available = await speech.initialize();
     if (available) {
       print("Stt is available");
     } else {
@@ -21,11 +22,6 @@ class SttState {
 
     // TODO(okalitova): Use it.
 //    _localeNames = await speech.locales();
-  }
-
-  void statusListener(String status) {
-    print(
-        "Received listener status: $status, listening: ${speech.isListening}");
   }
 }
 
@@ -57,7 +53,10 @@ class SttHelper {
     _sttState = await _state.sttState;
     SttState.speech.errorListener = errorListener;
     print("Start listening in locale " + locale + "...");
-    SttState.speech.listen(onResult: resultListener, localeId: locale);
+    SttState.speech.listen(
+        onResult: resultListener,
+        localeId: locale,
+        listenFor: new Duration(seconds: 5));
     print("Starting waiting for input");
     _sttState.completer = Completer<String>();
     return _sttState.completer.future;
@@ -67,6 +66,10 @@ class SttHelper {
     print("Received error status: $error");
     SttState.speech.stop();
     _sttState.completer.complete("");
+  }
+
+  void statusListener(String status) {
+    print("Received listener status: $status");
   }
 
   void resultListener(SpeechRecognitionResult result) {
