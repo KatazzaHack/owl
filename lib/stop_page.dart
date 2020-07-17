@@ -42,6 +42,8 @@ class _StopPage extends State<StopPage> {
         ConstVariables.supported_locales[lOriginal],
         ConstVariables.supported_locales[lTranslate]
       ];
+      print(locales);
+      print(languages);
       int currentLanguageIndex = 0;
       int targetLanguageIndex = 1 - currentLanguageIndex;
       for (var i = 0;; i++) {
@@ -110,7 +112,7 @@ class _StopPage extends State<StopPage> {
                                   ))),
                         ])));
           } else {
-            return LinearProgressIndicator();
+            return CircularProgressIndicator();
           }
         });
   }

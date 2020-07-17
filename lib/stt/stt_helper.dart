@@ -8,9 +8,7 @@ class SttState {
   static stt.SpeechToText speech;
 
   Completer<String> completer = Completer<String>();
-
-//  List<LocaleName> _localeNames = [];
-
+  
   initState() async {
     speech = stt.SpeechToText();
     bool available = await speech.initialize();
@@ -19,9 +17,6 @@ class SttState {
     } else {
       print("The user has denied the use of speech recognition");
     }
-
-    // TODO(okalitova): Use it.
-//    _localeNames = await speech.locales();
   }
 }
 

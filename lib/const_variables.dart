@@ -10,12 +10,12 @@ class ConstVariables {
   static String translate_language = "TranslateLanguage";
 
   static Map<SupportedLanguage, String> supported_locales = {
-    SupportedLanguage.English: "en_EN",
+    SupportedLanguage.English: "en_US",
     SupportedLanguage.Russian: "ru_RU",
     SupportedLanguage.German: "de_DE",
   };
   static Map<SupportedLanguage, String> supported_languages = {
-    SupportedLanguage.English: "en-EN",
+    SupportedLanguage.English: "en-US",
     SupportedLanguage.Russian: "ru-RU",
     SupportedLanguage.German: "de-DE",
   };
