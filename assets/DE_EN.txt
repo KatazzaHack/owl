@@ -1,0 +1,4 @@
+der Geruch	smell
+lecker	tasty
+language	язык
+die Mutter	mother

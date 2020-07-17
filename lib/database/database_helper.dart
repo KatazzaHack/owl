@@ -10,8 +10,8 @@ import 'package:owl/const_variables.dart';
 import 'package:owl/utils.dart';
 
 class DatabaseHelper {
-  static final _databaseVersion = 10;
-  static final _databaseName = "owl_databasea102022.db";
+  static final _databaseVersion = 14;
+  static final _databaseName = "owl_daabaa102.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -49,10 +49,13 @@ class DatabaseHelper {
         "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-    await _addGerman(db, "deckb1_1", 2);
-    // await _addGerman(db, "deckb1_2", 4);
-    // await _addGerman(db, "deckb1_3", 5);
-    // await _addGerman(db, "deckb1_4", 6);
+    // await _addGerman(db, "deckb1_1");
+    await _addNewDictionary(db, "DE_EN", SupportedLanguage.German, SupportedLanguage.English);
+    await _addNewDictionary(db, "DE_RU", SupportedLanguage.German, SupportedLanguage.Russian);
+    await _addNewDictionary(db, "EN_DE", SupportedLanguage.English, SupportedLanguage.German);
+    await _addNewDictionary(db, "EN_RU", SupportedLanguage.English, SupportedLanguage.Russian);
+    await _addNewDictionary(db, "RU_DE", SupportedLanguage.Russian, SupportedLanguage.German);
+    await _addNewDictionary(db, "RU_EN", SupportedLanguage.Russian, SupportedLanguage.English);
   }
 
   Future<int> getCount(db, String dbName) async {
@@ -61,15 +64,14 @@ class DatabaseHelper {
     return count;
   }
 
-  Future _addGerman(db, String fileName, int did) async {
-    String words = await rootBundle.loadString('assets/' + fileName + '.txt');
-    await _addNewDictionary(db, fileName, words, SupportedLanguage.German,
+  Future _addGerman(db, String fileName) async {
+    await _addNewDictionary(db, fileName, SupportedLanguage.German,
         SupportedLanguage.Russian);
   }
 
-
-  Future _addNewDictionary(Database db, String name, String data,
+  Future _addNewDictionary(Database db, String name,
       SupportedLanguage l_o, SupportedLanguage l_t) async {
+    String data = await rootBundle.loadString('assets/' + name + '.txt');
     int count = Sqflite.firstIntValue(await db
         .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
     if (count > 0) {
