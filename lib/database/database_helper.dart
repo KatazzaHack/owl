@@ -50,9 +50,6 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
     await _addGerman(db, "deckb1_1", 2);
-    // await _addGerman(db, "deckb1_2", 4);
-    // await _addGerman(db, "deckb1_3", 5);
-    // await _addGerman(db, "deckb1_4", 6);
   }
 
   Future<int> getCount(db, String dbName) async {
