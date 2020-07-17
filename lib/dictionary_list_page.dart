@@ -12,6 +12,9 @@ class DictionaryListPage extends StatefulWidget {
 }
 
 class _ListSearchState extends State<DictionaryListPage> {
+
+  int _globalId = 0;
+
   @override
   void initState() {
     super.initState();
@@ -26,31 +29,29 @@ class _ListSearchState extends State<DictionaryListPage> {
   Widget build(BuildContext context) {
     return Consumer<DictionariesModel>(builder: (context, dictionaries, child) {
       assert(dictionaries != null);
+      _globalId = dictionaries.globalId;
       return Container(
           height: MediaQuery.of(context).size.height * 0.8,
           child: Column(children: <Widget>[
             Expanded(
                 child: ListView(
               children: dictionaries.dictionariesList?.map((data) {
-                return ListTile(
-                    leading: checkbox(data["did"], data["active"]),
-                    title: Text(data["name"]));
+                return radioListTile(data["did"], data["name"]);
               })?.toList() ?? [],
             ))
           ]));
     });
   }
 
-  Widget checkbox(int id, bool active) {
-    return Checkbox(
-      value: active,
-      onChanged: (bool value) async {
+  Widget radioListTile(int id, String text) {
+    return RadioListTile<int>(
+      title: Text(text),
+      value: id,
+      groupValue: _globalId,
+      onChanged: (int value) async {
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        if (!value) {
-          prefs.setInt(ConstVariables.current_dictionary_id, -1);
-        } else {
-          prefs.setInt(ConstVariables.current_dictionary_id, id);
-        }
+        prefs.setInt(ConstVariables.current_dictionary_id, id);
+        setState(() { _globalId = value; });
         Provider.of<DictionariesModel>(context, listen: false).updateList();
       },
     );
