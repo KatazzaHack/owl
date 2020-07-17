@@ -98,7 +98,7 @@ class _StopPage extends State<StopPage> {
                                   ))),
                         ])));
           } else {
-            return CircularProgressIndicator();
+            return LinearProgressIndicator();
           }
         });
   }
