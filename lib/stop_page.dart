@@ -4,7 +4,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'dart:async';
 
-import 'package:owl/words.dart';
+import 'package:owl/word_scheduler.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
 import 'package:owl/settings/settings.dart';
@@ -16,7 +16,7 @@ class StopPage extends StatefulWidget {
 }
 
 class _StopPage extends State<StopPage> {
-  WordList wl = WordList.instance;
+  WordScheduler wl = WordScheduler.instance;
 
   final StreamController<String> _streamController = StreamController<String>();
 

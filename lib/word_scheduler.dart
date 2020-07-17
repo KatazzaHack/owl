@@ -7,9 +7,9 @@ import 'package:owl/const_variables.dart';
 import 'package:owl/utils.dart';
 import 'package:owl/settings/settings.dart';
 
-class WordList {
-  WordList._privateConstructor();
-  static final WordList instance = WordList._privateConstructor();
+class WordScheduler {
+  WordScheduler._privateConstructor();
+  static final WordScheduler instance = WordScheduler._privateConstructor();
   static final listenModeBatchSize = 5;
   static final repetitionTimesPerBatch = 2;
   static List<int> _listenModeSchedule;
