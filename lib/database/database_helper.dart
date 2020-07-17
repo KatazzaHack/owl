@@ -11,7 +11,7 @@ import 'package:owl/utils.dart';
 
 class DatabaseHelper {
   static final _databaseVersion = 141;
-  static final _databaseName = "owl_daabaa1012.db";
+  static final _databaseName = "owl_dabg1ff012.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -49,7 +49,8 @@ class DatabaseHelper {
         "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-    // await _addGerman(db, "deckb1_1");
+    await _addNewDictionary(
+        db, "DE_RU_B1.1", SupportedLanguage.German, SupportedLanguage.Russian);
     await _addNewDictionary(
         db, "DE_EN", SupportedLanguage.German, SupportedLanguage.English);
     await _addNewDictionary(

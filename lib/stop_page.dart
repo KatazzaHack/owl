@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'dart:async';
 
@@ -10,6 +11,7 @@ import 'package:owl/word_scheduler.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
 import 'package:owl/settings/settings.dart';
+import 'package:f_logs/f_logs.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -98,19 +100,22 @@ class _StopPage extends State<StopPage> {
                               child: RaisedButton(
                                   shape: CircleBorder(),
                                   color: Colors.red,
-                                  onPressed: () {
+                                  onPressed: () async {
                                     TtsHelper().stop();
                                     SttHelper().stop();
                                     Navigator.pop(context);
+                                    FLog.exportLogs();
                                   },
                                   child: AutoSizeText(
                                     "STOP",
                                     style: TextStyle(fontSize: 20),
                                     maxLines: 1,
                                   ))),
-                        ])));
+                        ]),
+
+                ));
           } else {
-            return LinearProgressIndicator();
+            return CircularProgressIndicator();
           }
         });
   }

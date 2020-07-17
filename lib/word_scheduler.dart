@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'database/words_helper.dart';
 import 'package:edit_distance/edit_distance.dart';
-import 'package:owl/database/words_helper.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
+import 'package:owl/database/words_helper.dart';
 import 'package:owl/utils.dart';
 import 'package:owl/settings/settings.dart';
+
 
 class WordScheduler {
   WordScheduler._privateConstructor();
@@ -25,6 +27,14 @@ class WordScheduler {
   bool prevousWasWord = false;
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   WordsHelper wordsHelper = WordsHelper();
+//  final logger = Logger(
+//      printer: PrettyPrinter(
+//        methodCount: 0,
+//        errorMethodCount: 5,
+//        lineLength: 50,
+//        printTime: true,
+//      )
+//  );
 
   Future<String> getNextWord() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -38,7 +48,13 @@ class WordScheduler {
       return this.getNextTranslation();
     }
     _updateCurrentIndex();
-    print("current index: " + currentIndex.toString());
+    FLog.logThis(
+      className: "WordScheduler",
+      methodName: "getNextWord",
+      text: "current index: " + currentIndex.toString(),
+      type: LogLevel.INFO,
+      dataLogType: DataLogType.DEVICE.toString(),
+    );
     return Future.value(this._getNextWord());
   }
 
@@ -134,7 +150,7 @@ class WordScheduler {
     if (quality <= 3) {
       repetitions = 0;
       _words.insert(
-          currentIndex + insertWrongAnsweredDistance,
+          min(currentIndex + insertWrongAnsweredDistance, _words.length),
           newRecord);
     }
     int nextDate = _words[currentIndex]["next_date"];

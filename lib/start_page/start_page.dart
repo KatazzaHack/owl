@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:f_logs/f_logs.dart';
 import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -13,6 +14,20 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: RaisedButton(
+          shape: CircleBorder(),
+          color: Colors.blue,
+          onPressed: ()  {
+            FLog.printDataLogs(dataLogsType: [
+              DataLogType.DEVICE.toString(),
+            ], logLevels: [
+              LogLevel.ERROR.toString(),
+              LogLevel.WARNING.toString(),
+              LogLevel.INFO.toString()
+            ],
+            );
+          },
+        ),
         title: Container(
           alignment: Alignment.center,
           child: Text("Oral word learning"),
