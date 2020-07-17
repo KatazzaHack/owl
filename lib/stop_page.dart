@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:owl/const_variables.dart';
 
 import 'dart:async';
 
@@ -8,7 +10,6 @@ import 'package:owl/word_scheduler.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
 import 'package:owl/settings/settings.dart';
-
 
 class StopPage extends StatefulWidget {
   @override
@@ -28,8 +29,19 @@ class _StopPage extends State<StopPage> {
 
   void initStream() {
     _streamController.addStream((() async* {
-      List<String> languages = ["de-DE", "ru-RU"];
-      List<String> locales = ["de_DE", "ru_RU"];
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      SupportedLanguage lOriginal = ConstVariables.reverse_human_languages[
+          prefs.getString(ConstVariables.original_language)];
+      SupportedLanguage lTranslate = ConstVariables.reverse_human_languages[
+          prefs.getString(ConstVariables.translate_language)];
+      List<String> languages = [
+        ConstVariables.supported_languages[lOriginal],
+        ConstVariables.supported_languages[lTranslate]
+      ];
+      List<String> locales = [
+        ConstVariables.supported_locales[lOriginal],
+        ConstVariables.supported_locales[lTranslate]
+      ];
       int currentLanguageIndex = 0;
       int targetLanguageIndex = 1 - currentLanguageIndex;
       for (var i = 0;; i++) {
@@ -40,18 +52,18 @@ class _StopPage extends State<StopPage> {
         print("Saying future completed");
         print("Waiting for user input...");
         if (Settings().listen) {
-          String parsedWords = await SttHelper().listen(
-              locales[targetLanguageIndex]);
+          String parsedWords =
+              await SttHelper().listen(locales[targetLanguageIndex]);
           // Wait till user is suggested translation.
-          print(
-              "Finished waiting for user input, parsed words are " + parsedWords);
+          print("Finished waiting for user input, parsed words are " +
+              parsedWords);
           int quality = await wl.obtainCurrentResult(parsedWords);
           print(quality);
         }
         String correctTranslation = wl.getNextTranslation();
         yield correctTranslation;
-        await TtsHelper().say(correctTranslation,
-          languages[targetLanguageIndex]);
+        await TtsHelper()
+            .say(correctTranslation, languages[targetLanguageIndex]);
       }
     })());
     print("initStream finished");
@@ -76,10 +88,10 @@ class _StopPage extends State<StopPage> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(16.0),
-                            child: AutoSizeText("${snapshot.data}",
-                              style: TextStyle(fontSize: 100), maxLines: 1)
-                          ),
+                              padding: EdgeInsets.all(16.0),
+                              child: AutoSizeText("${snapshot.data}",
+                                  style: TextStyle(fontSize: 100),
+                                  maxLines: 1)),
                           SizedBox(
                               width: MediaQuery.of(context).size.width * 0.2,
                               height: MediaQuery.of(context).size.height * 0.2,

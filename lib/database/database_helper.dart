@@ -49,13 +49,19 @@ class DatabaseHelper {
         "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
-    await _addNewDictionary(db, "DE_RU_B1.1", SupportedLanguage.German, SupportedLanguage.Russian);
-    await _addNewDictionary(db, "DE_EN", SupportedLanguage.German, SupportedLanguage.English);
-    await _addNewDictionary(db, "DE_RU", SupportedLanguage.German, SupportedLanguage.Russian);
-    await _addNewDictionary(db, "EN_DE", SupportedLanguage.English, SupportedLanguage.German);
-    await _addNewDictionary(db, "EN_RU", SupportedLanguage.English, SupportedLanguage.Russian);
-    await _addNewDictionary(db, "RU_DE", SupportedLanguage.Russian, SupportedLanguage.German);
-    await _addNewDictionary(db, "RU_EN", SupportedLanguage.Russian, SupportedLanguage.English);
+    // await _addGerman(db, "deckb1_1");
+    await _addNewDictionary(
+        db, "DE_EN", SupportedLanguage.German, SupportedLanguage.English);
+    await _addNewDictionary(
+        db, "DE_RU", SupportedLanguage.German, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "EN_DE", SupportedLanguage.English, SupportedLanguage.German);
+    await _addNewDictionary(
+        db, "EN_RU", SupportedLanguage.English, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "RU_DE", SupportedLanguage.Russian, SupportedLanguage.German);
+    await _addNewDictionary(
+        db, "RU_EN", SupportedLanguage.Russian, SupportedLanguage.English);
   }
 
   Future<int> getCount(db, String dbName) async {
@@ -65,12 +71,12 @@ class DatabaseHelper {
   }
 
   Future _addGerman(db, String fileName) async {
-    await _addNewDictionary(db, fileName, SupportedLanguage.German,
-        SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, fileName, SupportedLanguage.German, SupportedLanguage.Russian);
   }
 
-  Future _addNewDictionary(Database db, String name,
-      SupportedLanguage l_o, SupportedLanguage l_t) async {
+  Future _addNewDictionary(Database db, String name, SupportedLanguage l_o,
+      SupportedLanguage l_t) async {
     String data = await rootBundle.loadString('assets/' + name + '.txt');
     int count = Sqflite.firstIntValue(await db
         .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
@@ -89,6 +95,7 @@ class DatabaseHelper {
       "l_original": ConstVariables.human_languages[l_o],
       "l_translation": ConstVariables.human_languages[l_t]
     });
+
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
       id = id + 1;
@@ -106,5 +113,9 @@ class DatabaseHelper {
     await batch.commit(noResult: true);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt(ConstVariables.current_dictionary_id, did);
+    prefs.setString(
+        ConstVariables.original_language, ConstVariables.human_languages[l_o]);
+    prefs.setString(
+        ConstVariables.translate_language, ConstVariables.human_languages[l_t]);
   }
 }

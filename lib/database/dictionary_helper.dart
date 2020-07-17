@@ -17,6 +17,7 @@ class DictionariesHelper {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     int currentDictionaryId =
         prefs.getInt(ConstVariables.current_dictionary_id);
+    await _setLanguages(currentDictionaryId);
     List<Map<String, dynamic>> newResult =
         List.generate(result.length, (index) {
       Map<String, dynamic> map = new Map<String, dynamic>();
@@ -28,11 +29,20 @@ class DictionariesHelper {
     return newResult;
   }
 
-  Future<bool> checkIfDictionaryExists(String name) async {
+  Future _setLanguages(int currentDictionaryId) async {
     Database db = await _instance.database;
-    int count = Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $tableName where name=?', [name]));
-    return count > 0;
+    List<Map<String, dynamic>> result = await db.rawQuery(
+        'SELECT * from $tableName where did=?', [currentDictionaryId]);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString(ConstVariables.original_language, result[0]['l_original']);
+    prefs.setString(
+        ConstVariables.translate_language, result[0]['l_translation']);
   }
 
+  Future<bool> checkIfDictionaryExists(String name) async {
+    Database db = await _instance.database;
+    int count = Sqflite.firstIntValue(await db
+        .rawQuery('SELECT COUNT(*) FROM $tableName where name=?', [name]));
+    return count > 0;
+  }
 }
