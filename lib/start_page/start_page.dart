@@ -4,6 +4,7 @@ import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:owl/database/common_helper.dart';
+import 'package:owl/log_page.dart';
 import 'package:owl/start_page/training_mod_bar.dart';
 
 class StartPage extends StatelessWidget {
@@ -14,18 +15,13 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: RaisedButton(
+        leading: FlatButton(
           shape: CircleBorder(),
           color: Colors.blue,
           onPressed: ()  {
-            FLog.printDataLogs(dataLogsType: [
-              DataLogType.DEVICE.toString(),
-            ], logLevels: [
-              LogLevel.ERROR.toString(),
-              LogLevel.WARNING.toString(),
-              LogLevel.INFO.toString()
-            ],
-            );
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return LogPage();
+            }));
           },
         ),
         title: Container(

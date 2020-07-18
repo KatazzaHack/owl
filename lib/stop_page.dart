@@ -60,6 +60,13 @@ class _StopPage extends State<StopPage> {
           // Wait till user is suggested translation.
           print("Finished waiting for user input, parsed words are " +
               parsedWords);
+          FLog.logThis(
+            className: "StopPage",
+            methodName: "initStream",
+            text: "parsed words: " + parsedWords.toString(),
+            type: LogLevel.INFO,
+            dataLogType: DataLogType.DEVICE.toString(),
+          );
           int quality = await wl.obtainCurrentResult(parsedWords);
           print(quality);
         }
