@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:owl/database/words_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -31,6 +32,7 @@ class _StopPage extends State<StopPage> {
 
   void initStream() {
     _streamController.addStream((() async* {
+      WordsHelper _wH = WordsHelper();
       SharedPreferences prefs = await SharedPreferences.getInstance();
       SupportedLanguage lOriginal = ConstVariables.reverse_human_languages[
           prefs.getString(ConstVariables.original_language)];
