@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:owl/dictionary_list_page.dart';
 import 'package:owl/dictionary_download_from_url.dart';
+import 'package:owl/dictionary_load_from_file.dart';
 
 class DictionarySelectionPage extends StatelessWidget {
   @override
@@ -19,7 +20,7 @@ class DictionarySelectionPage extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DictionaryFromUrlPage()),
+            MaterialPageRoute(builder: (context) => DictionaryFromFilePage()),
           );
         },
         tooltip: "Add new dictionary",
