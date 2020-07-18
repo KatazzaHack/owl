@@ -11,9 +11,6 @@ class TtsState {
 
   initState() async {
     flutterTts = FlutterTts();
-
-    await flutterTts.setLanguage("de-DE");
-    await flutterTts.isLanguageAvailable("de-DE");
     playing = false;
     flutterTts.setStartHandler(() {
       assert(playing == false);
