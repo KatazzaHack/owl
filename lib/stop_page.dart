@@ -164,9 +164,7 @@ class WordWithResult {
 
 enum ListeningResult {
   bad,
-  fine,
   medium,
-  good,
   perfect,
   undefined
 }
@@ -176,12 +174,8 @@ Color getColorFromWordResult(WordWithResult wordWithResult) {
     switch (wordWithResult.listeningResult) {
       case ListeningResult.bad:
         return Colors.red;
-      case ListeningResult.fine:
-        return Colors.orange;
       case ListeningResult.medium:
         return Colors.yellow;
-      case ListeningResult.good:
-        return Colors.lightGreenAccent;
       case ListeningResult.perfect:
         return Colors.green;
       default:
@@ -194,14 +188,16 @@ Color getColorFromWordResult(WordWithResult wordWithResult) {
 
 ListeningResult convertQualityToResult(int quality) {
     switch (quality) {
+      case 0:
+        return ListeningResult.bad;
       case 1:
         return ListeningResult.bad;
       case 2:
-        return ListeningResult.fine;
+        return ListeningResult.bad;
       case 3:
-        return ListeningResult.medium;
+        return ListeningResult.bad;
       case 4:
-        return ListeningResult.good;
+        return ListeningResult.medium;
       case 5:
         return ListeningResult.perfect;
     }
