@@ -21,7 +21,7 @@ class StopPage extends StatefulWidget {
 class _StopPage extends State<StopPage> {
   WordScheduler wl = WordScheduler.instance;
 
-  final StreamController<String> _streamController = StreamController<String>();
+  final StreamController<WordWithResult> _streamController = StreamController<WordWithResult>();
 
   @override
   void initState() {
@@ -49,9 +49,13 @@ class _StopPage extends State<StopPage> {
       print(languages);
       int currentLanguageIndex = 0;
       int targetLanguageIndex = 1 - currentLanguageIndex;
+      int quality = -1;
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
-        yield word;
+        yield WordWithResult(
+          /* isTranslation = */ false,
+            /* text = */ word,
+            /* listeningResult = */ ListeningResult.undefined);
 
         await TtsHelper().say(word, languages[currentLanguageIndex]);
         print("Saying future completed");
@@ -71,10 +75,13 @@ class _StopPage extends State<StopPage> {
               dataLogType: DataLogType.DEVICE.toString(),
             );
           }
-          int quality = await wl.updateWithAnswer(parsedWords);
+          quality = await wl.updateWithAnswer(parsedWords);
         }
         String correctTranslation = wl.getNextTranslation();
-        yield correctTranslation;
+        yield WordWithResult(
+          /* isTranslation = */ true,
+            /* text = */ correctTranslation,
+            /* listeningResult = */ convertQualityToResult(quality));
         await TtsHelper()
             .say(correctTranslation, languages[targetLanguageIndex]);
       }
@@ -90,9 +97,9 @@ class _StopPage extends State<StopPage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<String>(
+    return StreamBuilder<WordWithResult>(
         stream: _streamController.stream,
-        builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<WordWithResult> snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
                 body: Container(
@@ -107,8 +114,12 @@ class _StopPage extends State<StopPage> {
                                 Center(
                             child: Padding(
                                 padding: EdgeInsets.all(16.0),
-                                child: AutoSizeText("${snapshot.data}",
-                                    style: TextStyle(fontSize: 100),
+                                child: AutoSizeText("${snapshot.data.text}",
+                                    style: TextStyle(
+                                      fontSize: 100,
+                                      color: getColorFromWordResult(
+                                          snapshot.data),
+                                    ),
                                     maxLines: 1)),
                                 ),
                           ),
@@ -142,4 +153,57 @@ class _StopPage extends State<StopPage> {
           }
         });
   }
+}
+class WordWithResult {
+  bool isTranslation = false;
+  String text = "";
+  ListeningResult listeningResult = ListeningResult.undefined;
+
+  WordWithResult(this.isTranslation, this.text, this.listeningResult);
+}
+
+enum ListeningResult {
+  bad,
+  fine,
+  medium,
+  good,
+  perfect,
+  undefined
+}
+
+Color getColorFromWordResult(WordWithResult wordWithResult) {
+  if (wordWithResult.isTranslation) {
+    switch (wordWithResult.listeningResult) {
+      case ListeningResult.bad:
+        return Colors.red;
+      case ListeningResult.fine:
+        return Colors.orange;
+      case ListeningResult.medium:
+        return Colors.yellow;
+      case ListeningResult.good:
+        return Colors.lightGreenAccent;
+      case ListeningResult.perfect:
+        return Colors.green;
+      default:
+        return Colors.black;
+    }
+  }
+  return Colors.black;
+}
+
+
+ListeningResult convertQualityToResult(int quality) {
+    switch (quality) {
+      case 1:
+        return ListeningResult.bad;
+      case 2:
+        return ListeningResult.fine;
+      case 3:
+        return ListeningResult.medium;
+      case 4:
+        return ListeningResult.good;
+      case 5:
+        return ListeningResult.perfect;
+    }
+  return ListeningResult.undefined;
 }
