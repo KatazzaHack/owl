@@ -17,23 +17,25 @@ class _SettingsPageState extends State<SettingsPage> {
     return Consumer<SettingsModel>(
       builder: (context, settingsModel, child) {
         assert(settingsModel != null);
-        return SettingsList(
-          sections: [
-            SettingsSection(
-              title: 'Settings',
-              tiles: [
-                SettingsTile(
-                  title: 'Logs',
-                  leading: Icon(Icons.description),
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (_) {
-                      return LogPage();
-                    }));
-                  },
-                ),
-              ],
-            ),
-          ],
+        return Scaffold(
+          appBar: AppBar(title: Text('Settings')),
+          body: SettingsList(
+            sections: [
+              SettingsSection(
+                tiles: [
+                  SettingsTile(
+                    title: 'Logs',
+                    leading: Icon(Icons.description),
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return LogPage();
+                      }));
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
