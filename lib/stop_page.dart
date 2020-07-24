@@ -54,22 +54,23 @@ class _StopPage extends State<StopPage> {
 
         await TtsHelper().say(word, languages[currentLanguageIndex]);
         print("Saying future completed");
-        print("Waiting for user input...");
-        if (Settings().listen) {
+        if (Settings().practiceMod) {
+          print("Waiting for user input...");
           String parsedWords =
               await SttHelper().listen(locales[targetLanguageIndex]);
           // Wait till user is suggested translation.
           print("Finished waiting for user input, parsed words are " +
               parsedWords);
-          FLog.logThis(
-            className: "StopPage",
-            methodName: "initStream",
-            text: "parsed words: " + parsedWords.toString(),
-            type: LogLevel.INFO,
-            dataLogType: DataLogType.DEVICE.toString(),
-          );
-          int quality = await wl.obtainCurrentResult(parsedWords);
-          print(quality);
+          if (parsedWords != null) {
+            FLog.logThis(
+              className: "StopPage",
+              methodName: "initStream",
+              text: "parsed words: " + parsedWords.toString(),
+              type: LogLevel.INFO,
+              dataLogType: DataLogType.DEVICE.toString(),
+            );
+          }
+          int quality = await wl.updateWithAnswer(parsedWords);
         }
         String correctTranslation = wl.getNextTranslation();
         yield correctTranslation;

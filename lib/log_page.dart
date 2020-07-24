@@ -34,21 +34,7 @@ class LogPage extends StatelessWidget {
 
 String getText(List<Log> logs) {
   var buffer = StringBuffer();
-  LogsConfig config = FLog.getDefaultConfigurations()
-    ..isDevelopmentDebuggingEnabled = true
-    ..timestampFormat = TimestampFormat.TIME_FORMAT_FULL_3
-    ..formatType = FormatType.FORMAT_CUSTOM
-    ..fieldOrderFormatCustom = [
-      FieldName.TIMESTAMP,
-      FieldName.LOG_LEVEL,
-      FieldName.CLASSNAME,
-      FieldName.METHOD_NAME,
-      FieldName.TEXT,
-      FieldName.EXCEPTION,
-      FieldName.STACKTRACE
-    ]
-    ..customOpeningDivider = "|"
-    ..customClosingDivider = "|";
+  LogsConfig config = getLogConfig();
   logs.forEach((log) {
     buffer.write(Formatter.format(log, config));
   });
