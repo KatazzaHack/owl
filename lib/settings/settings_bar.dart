@@ -4,14 +4,14 @@ import 'package:settings_ui/settings_ui.dart';
 import 'package:owl/settings/setting_model.dart';
 import 'package:owl/log_page.dart';
 
-class TrainingModBar extends StatefulWidget {
-  TrainingModBar({Key key}) : super(key: key);
+class SettingsPage extends StatefulWidget {
+  SettingsPage({Key key}) : super(key: key);
 
   @override
-  _TrainingModBarState createState() => _TrainingModBarState();
+  _SettingsPageState createState() => _SettingsPageState();
 }
 
-class _TrainingModBarState extends State<TrainingModBar> {
+class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SettingsModel>(

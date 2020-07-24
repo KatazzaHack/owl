@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:owl/settings/settings_bar.dart';
 import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -12,10 +13,14 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Container(
-          alignment: Alignment.center,
-          child: Text("Oral word learning"),
-        ),
+        title: Text("Oral word learning"),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.settings), onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (_) {
+              return SettingsPage();
+            }));
+          })
+        ],
       ),
       body: Container(
           alignment: Alignment.center,
