@@ -10,7 +10,7 @@ import 'dart:async';
 import 'package:owl/word_scheduler.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
-import 'package:owl/settings/settings.dart';
+import 'package:owl/start_page/settings.dart';
 import 'package:f_logs/f_logs.dart';
 
 class StopPage extends StatefulWidget {
