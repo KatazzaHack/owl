@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:owl/settings/settings.dart';
 import 'package:f_logs/f_logs.dart';
+import 'package:owl/start_page/settings.dart';
 
 class TrainingModModel extends ChangeNotifier {
   int get stateIdx => Settings().practiceMod ? 1 : 0;

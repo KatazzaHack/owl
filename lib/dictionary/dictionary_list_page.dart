@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
-import 'package:owl/dictionaries_model.dart';
+import 'package:owl/dictionary/dictionaries_model.dart';
 import 'package:provider/provider.dart';
 
 class DictionaryListPage extends StatefulWidget {

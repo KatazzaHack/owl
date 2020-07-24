@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/database/words_helper.dart';
 import 'package:owl/utils.dart';
-import 'package:owl/settings/settings.dart';
+import 'package:owl/start_page/settings.dart';
 
 
 class WordScheduler {
