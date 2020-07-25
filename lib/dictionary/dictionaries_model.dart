@@ -18,5 +18,4 @@ class DictionariesModel extends ChangeNotifier {
     _globalId = prefs.getInt(ConstVariables.current_dictionary_id);
     notifyListeners();
   }
-
 }
