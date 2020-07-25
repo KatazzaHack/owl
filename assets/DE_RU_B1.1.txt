@@ -158,7 +158,7 @@ der Quelle	источник
 abstellen	пресекать
 der Zweifel	сомнение
 schonen	экономить, беречь
-bevorzugen	prefer
+bevorzugen	предпочитать
 verhindern	Предотвратить
 Mehrwegflaschen	многоразовые бутылки
 von +Dativ an	начиная с

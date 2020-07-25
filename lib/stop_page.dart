@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:soundpool/soundpool.dart';
+import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:owl/database/words_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,6 +22,7 @@ class StopPage extends StatefulWidget {
 
 class _StopPage extends State<StopPage> {
   WordScheduler wl = WordScheduler.instance;
+  Soundpool pool = Soundpool(streamType: StreamType.notification);
 
   final StreamController<WordWithResult> _streamController = StreamController<WordWithResult>();
 
@@ -76,6 +79,17 @@ class _StopPage extends State<StopPage> {
             );
           }
           quality = await wl.updateWithAnswer(parsedWords);
+//          int soundId = await rootBundle.load("sounds/tada.wav").then((ByteData soundData) {
+//            return pool.load(soundData);
+//          });
+//          print("SOUNDID");
+//          print(soundId)
+//          int streamId = await pool.play(soundId);
+          if (quality == 5 || quality == 4) {
+            await TtsHelper().say("ok", "en-US");
+          } else {
+            await TtsHelper().say("bad", "en-US");
+          }
         }
         String correctTranslation = wl.getNextTranslation();
         yield WordWithResult(
