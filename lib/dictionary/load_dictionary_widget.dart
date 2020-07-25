@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/database/common_helper.dart';
-import 'package:owl/dictionaries_model.dart';
+import 'package:owl/dictionary/dictionaries_model.dart';
 import 'package:owl/dictionary_validator.dart';
 import 'package:provider/provider.dart';
 
