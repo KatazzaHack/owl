@@ -92,12 +92,15 @@ class _StopPage extends State<StopPage> {
           } else {
             await TtsHelper().say("bad", "en-US");
           }
+        } else {
+          await new Future.delayed(const Duration(seconds : 2));
         }
         String correctTranslation = wl.getNextTranslation();
         yield WordWithResult(
           /* isTranslation = */ true,
             /* text = */ correctTranslation,
             /* listeningResult = */ convertQualityToResult(quality));
+
         await TtsHelper()
             .say(correctTranslation, languages[targetLanguageIndex]);
       }
