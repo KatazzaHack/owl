@@ -79,12 +79,14 @@ class _StopPage extends State<StopPage> {
             );
           }
           quality = await wl.updateWithAnswer(parsedWords);
-//          int soundId = await rootBundle.load("sounds/tada.wav").then((ByteData soundData) {
-//            return pool.load(soundData);
-//          });
-//          print("SOUNDID");
-//          print(soundId)
-//          int streamId = await pool.play(soundId);
+//          var asset = await rootBundle.load("sounds/ok.m4a");
+//          int soundId = await pool.load(asset);
+          // String churl = "https://raw.githubusercontent.com/ukasz123/soundpool/feature/web_support/example/web/c-c-1.mp3";
+          // int _cheeringId  = await pool.loadUri(churl);
+
+          // print(_cheeringId);
+          // pool.play(soundId);
+
           if (quality == 5 || quality == 4) {
             await TtsHelper().say("ok", "en-US");
           } else {
