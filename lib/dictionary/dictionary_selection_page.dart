@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:owl/dictionary_add_page.dart';
-import 'package:owl/dictionary_list_page.dart';
-import 'package:owl/download_dictionary_widget.dart';
-import 'package:owl/load_dictionary_widget.dart';
+import 'package:owl/dictionary/dictionary_add_page.dart';
+import 'package:owl/dictionary/download_dictionary_widget.dart';
+import 'package:owl/dictionary/load_dictionary_widget.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:owl/dictionary/dictionary_list_page.dart';
 
 enum AddDictionaryMethod { load_from_file, download_from_url }
 

@@ -3,8 +3,9 @@ import 'package:owl/start_page/start_page.dart';
 import 'package:owl/start_page/training_mod_model.dart';
 import 'package:owl/utils.dart';
 import 'package:provider/provider.dart';
-import 'package:owl/dictionaries_model.dart';
+import 'package:owl/dictionary/dictionaries_model.dart';
 import 'package:f_logs/f_logs.dart';
+import 'package:owl/settings/setting_model.dart';
 
 void main() async {
   FLog.applyConfigurations(getLogConfig());
@@ -19,6 +20,7 @@ class OWLApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (context) => TrainingModModel()),
         ChangeNotifierProvider(create:(context) => DictionariesModel()),
+        ChangeNotifierProvider(create:(context) => SettingsModel()),
       ],
       child: MaterialApp(
         title: 'Owl Application',

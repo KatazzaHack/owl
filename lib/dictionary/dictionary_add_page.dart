@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/database/dictionary_helper.dart';
 import 'package:owl/database/common_helper.dart';
-import 'package:owl/load_dictionary_widget.dart';
-import 'package:owl/download_dictionary_widget.dart';
+import 'package:owl/dictionary/load_dictionary_widget.dart';
+import 'package:owl/dictionary/download_dictionary_widget.dart';
 
 import 'dictionary_selection_page.dart';
 
