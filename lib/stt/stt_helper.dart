@@ -23,7 +23,7 @@ class SttState {
     }
 
     // TODO(okalitova): Use it.
-//    _localeNames = await speech.locales();
+     print(await speech.locales());
   }
 }
 
