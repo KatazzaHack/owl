@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:f_logs/f_logs.dart';
 import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:owl/utils.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:downloads_path_provider/downloads_path_provider.dart';
 
 class LogPage extends StatelessWidget {
   @override
@@ -22,19 +26,16 @@ class LogPage extends StatelessWidget {
                     return ListView(
                       children: <Widget>[
                         RaisedButton(
-                          child: Text('Copy to Clipboard'),
-                          onPressed: () {
-                            ClipboardManager.copyToClipBoard(_logText)
-                                .then((result) {
-                              final snackBar = SnackBar(
-                                content: Text('Copied to Clipboard'),
-                                action: SnackBarAction(
-                                  label: 'Undo',
-                                  onPressed: () {},
-                                ),
-                              );
-                              Scaffold.of(context).showSnackBar(snackBar);
-                            });
+                          child: Text('Save to Downloads'),
+                          onPressed: () async {
+                            final downloadsDirectory =
+                              await DownloadsPathProvider.downloadsDirectory;
+                            File logs = new File(
+                                downloadsDirectory.path + '/owl_logs.txt');
+                            logs.writeAsStringSync(_logText);
+                            Scaffold.of(context).showSnackBar(
+                                SnackBar(content: Text(
+                                    'Saved to Downloads as owl_logs.txt')));
                           },
                         ),
                       ] + buildTextLog(snapshot.data)
