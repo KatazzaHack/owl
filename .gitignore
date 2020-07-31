@@ -46,6 +46,8 @@ gradle-app.setting
 /build/
 ios/
 /ios/
+android/
+/android/
 
 # Web related
 lib/generated_plugin_registrant.dart

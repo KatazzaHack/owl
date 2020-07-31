@@ -1,10 +1,8 @@
-enum SupportedLanguage {
-  English,
-  German,
-  Russian
-}
+enum SupportedLanguage { English, German, Russian }
 
 class ConstVariables {
+  static String FeedbackURL =
+      "https://docs.google.com/forms/d/1QZ0ebto10I-v_Qaava70gK9n2iZpR8OlKo-SvfktjYY";
   static String current_dictionary_id = "CurrentDictionaryName";
   static String original_language = "OriginalLanguage";
   static String translate_language = "TranslateLanguage";
@@ -37,4 +35,3 @@ class ConstVariables {
     SupportedLanguage.Russian,
   ];
 }
-

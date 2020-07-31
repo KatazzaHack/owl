@@ -14,13 +14,18 @@ class StartPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Oral word learning"),
+        title: Container(
+          alignment: Alignment.center,
+          child: Text("           Oral word learning"),
+        ),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.settings), onPressed: () {
-            Navigator.push(context, MaterialPageRoute(builder: (_) {
-              return SettingsPage();
-            }));
-          })
+          IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (_) {
+                  return SettingsPage();
+                }));
+              })
         ],
       ),
       body: Container(
