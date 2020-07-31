@@ -11,8 +11,8 @@ import 'package:owl/utils.dart';
 
 class DatabaseHelper {
 
-  static final _databaseVersion = 141;
-  static final _databaseName = "owl_daabaa1017.db";
+  static final _databaseVersion = 41;
+  static final _databaseName = "owl_daaba1017.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -51,19 +51,19 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
     await _addNewDictionary(
-        db, "DE_RU_B1.1", SupportedLanguage.German, SupportedLanguage.Russian);
+        db, "DE_RU_A1", SupportedLanguage.German, SupportedLanguage.Russian);
     await _addNewDictionary(
-        db, "DE_EN", SupportedLanguage.German, SupportedLanguage.English);
+        db, "DE_RU_A1-B1", SupportedLanguage.German, SupportedLanguage.Russian);
     await _addNewDictionary(
-        db, "DE_RU", SupportedLanguage.German, SupportedLanguage.Russian);
+        db, "DE_RU_A2", SupportedLanguage.German, SupportedLanguage.Russian);
     await _addNewDictionary(
-        db, "EN_DE", SupportedLanguage.English, SupportedLanguage.German);
+        db, "EN_DE_A2", SupportedLanguage.English, SupportedLanguage.German);
     await _addNewDictionary(
-        db, "EN_RU", SupportedLanguage.English, SupportedLanguage.Russian);
+        db, "EN_RU_A2", SupportedLanguage.English, SupportedLanguage.Russian);
     await _addNewDictionary(
-        db, "RU_DE", SupportedLanguage.Russian, SupportedLanguage.German);
+        db, "EN_RU_B2", SupportedLanguage.English, SupportedLanguage.Russian);
     await _addNewDictionary(
-        db, "RU_EN", SupportedLanguage.Russian, SupportedLanguage.English);
+        db, "EN_RU_C1", SupportedLanguage.English, SupportedLanguage.Russian);
   }
 
   Future<int> getCount(db, String dbName) async {

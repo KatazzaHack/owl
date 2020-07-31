@@ -1,0 +1,226 @@
+abscond	скрываться
+aberrant	отклоняющийся
+alacrity	готовность, рвение
+anomaly	аномалия
+approbation	опробование
+arduous	трудный
+assuage	успокоить
+audacious	дерзкий
+austere	суровый
+axiomatic	самоочевидный
+canonical	канонический
+capricious	капризный, своенравный
+censure	порицание, осуждение
+chicanery	кляузничество
+connoisseur	ценитель, знаток
+convoluted	запутанный, замысловатый
+disabuse	разуверить
+discordant	диссонирующий, несогласный
+disparate	различный
+effrontery	наглость
+eloquent	красноречивый, выразительный
+enervate	расслабленный, обессиленный
+ennui	тоска, скука
+equivocate	увиливать
+erudite	эрудированный
+exculpate	выгораживать, оправдывать
+exigent	привиредливый
+extemporaneous	импровизированный, спонтанный
+filibuster	пират
+fulminate	громить
+ingenious	гениальный
+inured	вступившее в законную силу
+irascible	вспыльчивый
+laud	хвалить, превозносить
+lucid	ясный, прозрачный, понятный
+magnanimity	великодушие
+martial	боевой, военный
+mundane	обыденный
+nascent	зарождающиеся
+nebulous	смутный, неясный
+neologism	неологизм
+noxious	вредный, пагубный
+obtuse	бестолковый
+obviate	устранять, избегать
+onerous	обременительный, тягостный
+paean	прославление
+parody	пародия
+perennial	многолетний
+perfidy	вероломство, коварство
+perfunctory	поверхностный
+perspicacious	прозорливый, проницательный
+prattle	болтовня
+precipitate	опрометчивый, поспешный
+predilection	пристрастие, склонность
+prescience	дальновидность
+prevaricate	кривить душой
+qualms	зазрения совести
+recant	отречься
+refute	опровергнуть
+relegate	отодвинуть
+reticent	немногословен
+solicitous	заботливый, внимательный
+sordid	грязный, убогий, подлый
+sporadic	спорадический, единичный
+squander	растрачивать, транжирить
+static	статический
+stupefy	одурманивать
+stymie	загнать в угол
+synthesis	синтез, обобщение
+torque	крутящий момент
+tortuous	извилистый
+truculent	свирепый
+veracity	достоверность, точность
+virulent	вирулентный
+voracious	ненасытный
+waver	колебаться
+abate	стихать, стихать
+accolade	похвала, награда
+adulation	лесть
+aesthetic	эстетичный
+ameliorate	улучшать
+ascetic	подвижник, отшельник
+avarice	скупость
+axiom	аксиома, постулат
+burgeon	размножаться
+bucolic	сельский
+cacophony	какофония
+canon	канон
+castigation	бичевание
+catalyst	катализатор
+caustic	едкий, язвительный
+chary	скупой, осторожный
+cogent	убедительный
+complaisance	покладистость, обходительность
+contentious	спорный
+contrite	кающийся
+culpable	виновный
+dearth	недостаток, нехватка, голод
+demur	возражать
+didactic	дидактический, учебный
+discretion	благоразумие, рассудительность
+disinterested	бескорыстный
+dogmatic	догматический
+ebullience	возбуждение
+eclectic	эклектика
+elegy	скорбный напев
+emollient	смягчающее
+empirical	эмпирический
+enigmatic	загадочный
+ephemeral	эфемерный, недолговечный
+esoteric	эзотерический, тайный
+eulogy	восхваление, похвальное слово
+exonerate	реабилитировать
+facetious	шутливый, шуточный
+fallacy	заблуждение, ошибка
+furtive	украдкой
+gregarious	общительный
+harangue	разглагольствование
+heretical	еретический
+hyperbole	гипербола, преувеличение
+impecunious	безденежный
+incipient	зарождающийся
+inert	инертный, нейтральный
+innocuous	безобидный, безвредный
+intransigent	непримиримый, непреклонный
+inveigle	заманивать
+morose	угрюмый, мрачный
+odious	одиозный
+opaque	непрозрачный, матовый
+oscillation	колебание, осцилляция, вибрация
+penurious	малообеспеченный
+pernicious	пагубный, губительный, вредный
+peruse	ознакомиться
+pious	благочестивый
+precursor	предшественник, предвестник
+preen	прихорашивается
+prodigious	потрясающий
+prolific	плодовитый, плодотворный
+putrefy	разлагаться
+quaff	безмятежность
+quiescence	покой, неподвижность
+redoubtable	грозный
+sanction	санкция, наказание
+satire	насмешка, ирония
+squalid	убогий, грязный, жалкий
+stoic	стоик
+supplant	вытеснять, заменить, подменять, замещать
+torpid	вялый
+ubiquitous	вездесущий, повсеместный
+urbane	вежливый
+vilify	поносить
+viscous	вязкий, тягучий, липкий
+acumen	проницательность, сообразительность
+adulterate	фальсифицированный
+amalgamate	объединять
+archaic	архаичный, устаревший
+aver	утверждать, доказывать
+bolster	поддерживать
+bombastic	пафосный
+diatribe	обличительная речь
+dissemble	притворяться, лукавить
+eccentric	странный, необычный
+endemic	эндемичный, повальный
+evanescent	мимолетный
+exacerbate	усугубить
+fervent	горячий, пылкий, пламенный, страстный
+fortuitous	случайный
+germane	уместный
+grandiloquence	высокопарность
+hackneyed	банальный, заезженный, избитый
+halcyon	безмятежный
+hedonism	гедонизм
+hegemony	гегемония, господство
+iconoclast	иконоборец
+idolatrous	идолопоклоннический
+impassive	бесстрастный, невозмутимый, безмятежный
+imperturbable	невозмутимый, спокойный
+implacable	неумолимый, безжалостный
+impunity	безнаказанность
+inchoate	зачаточный, незвершенный
+infelicitous	несчастный
+insipid	безвкусный, пресный, неинтересный
+loquacious	болтливый, говорливый
+luminous	световой
+malevolent	злобный, злой, злорадный
+malleable	ковкий, податливый, тягучий, уступчивый
+mendacity	лживость
+meticulous	тщательный, щепетильный
+misanthrope	мизантроп, человеконенавистник
+mitigate	смягчать
+obdurate	упрямый
+obsequious	подобострастный, раболепный, угодливый
+occlude	закрывать
+opprobrium	позор, посрамление
+pedantic	педантичный
+penury	нищета, бедность
+pervasive	распространяющийся, проникающий, повсеместный
+pine	томиться, изнывать, (сущ. сосна)
+pith	пробковый, суть, сущность
+pithy	содержательный
+placate	задобрить, успокаивать
+platitude	банальность, пошлость
+plummet	отвес
+prodigal	расточительный, блудный
+profuse	обильный, щедрый
+proliferate	быстро увеличиваться, распространяться
+queries	запрашивать, спрашивать
+querulous	ворчливой
+rancorous	враждебный, злопамятный
+recalcitrant	непокорный, упорный, стойкий
+repudiate	отрекаться от, отвергать, отказываться
+rescind	аннулировать, отменять, расторгать
+reverent	почтительный, трепетный
+salubrious	целебный
+solvent	платежеспособный, (сущ. растворитель)
+specious	благовидный, правдоподобный, обманчивый
+spurious	фальшивый, подложный
+subpoena	повестка
+succinct	краткий
+superfluous	излишний, избыточный, ненужный
+surfeit	чревоугодие
+tenacity	упорство, цепкость, стойкость
+tenuous	незначительный, слабый
+tirade	тирада
+transient	преходящий, скоротечный, мимолетный, недолговечный
+zealous	усердный, рьяный
