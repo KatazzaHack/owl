@@ -1,4 +1,4 @@
-enum SupportedLanguage { English, German, Russian }
+enum SupportedLanguage { English, German, Russian, French, Hebrew }
 
 class Language {
   String supportedLocale;
@@ -26,12 +26,16 @@ class ConstVariables {
     "English": Language(SupportedLanguage.English, "en_US", "en-US", "English"),
     "Russian": Language(SupportedLanguage.Russian, "ru_RU", "ru-RU", "Russian"),
     "German": Language(SupportedLanguage.German, "de_DE", "de-DE", "German"),
+    "French": Language(SupportedLanguage.French, "fr_FR", "fr-FR", "French"),
+    "Hebrew": Language(SupportedLanguage.Hebrew, "he_IL", "he-IL", "Hebrew"),
   };
 
   static Map<SupportedLanguage, Language> reverse_languages = {
     SupportedLanguage.English: Language(SupportedLanguage.English, "en_US", "en-US", "English"),
     SupportedLanguage.Russian: Language(SupportedLanguage.Russian, "ru_RU", "ru-RU", "Russian"),
     SupportedLanguage.German: Language(SupportedLanguage.German, "de_DE", "de-DE", "German"),
+    SupportedLanguage.French: Language(SupportedLanguage.French, "fr_FR", "fr-FR", "French"),
+    SupportedLanguage.Hebrew: Language(SupportedLanguage.Hebrew, "he_IL", "he-IL", "Hebrew"),
   };
 
   static List<Language> all_languages = reverse_human_languages.values.toList();
