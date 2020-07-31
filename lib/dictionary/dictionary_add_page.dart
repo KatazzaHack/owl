@@ -43,11 +43,15 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: _buildBar(context),
-      body: new Container(
+    return Scaffold(
+      appBar: AppBar(
+        title: Container(
+          child: Text("Add New Dictionary"),
+        ),
+      ),
+      body: Container(
         padding: EdgeInsets.all(16.0),
-        child: new Column(
+        child: Column(
           children: <Widget>[
             _buildInfo(),
             _buildNameField(),
@@ -106,18 +110,11 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
     );
   }
 
-  Widget _buildBar(BuildContext context) {
-    return new AppBar(
-      title: new Text("Add New Dictionary"),
-      centerTitle: true,
-    );
-  }
-
   Widget _buildNameField() {
-    return new Container(
-      child: new TextField(
+    return Container(
+      child: TextField(
         controller: _nameFilter,
-        decoration: new InputDecoration(labelText: 'Dictionary name'),
+        decoration: InputDecoration(labelText: 'Dictionary name'),
       ),
     );
   }
