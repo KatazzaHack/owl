@@ -10,9 +10,8 @@ import 'package:owl/const_variables.dart';
 import 'package:owl/utils.dart';
 
 class DatabaseHelper {
-
   static final _databaseVersion = 41;
-  static final _databaseName = "owl_daaba1017.db";
+  static final _databaseName = "owl_daaba1018.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -51,19 +50,40 @@ class DatabaseHelper {
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
     await _addNewDictionary(
-        db, "DE_RU_A1", SupportedLanguage.German, SupportedLanguage.Russian);
+        db,
+        "DE_RU_A1",
+        ConstVariables.reverse_languages[SupportedLanguage.German],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
     await _addNewDictionary(
-        db, "DE_RU_A1-B1", SupportedLanguage.German, SupportedLanguage.Russian);
+        db,
+        "DE_RU_A1-B1",
+        ConstVariables.reverse_languages[SupportedLanguage.German],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
     await _addNewDictionary(
-        db, "DE_RU_A2", SupportedLanguage.German, SupportedLanguage.Russian);
+        db,
+        "DE_RU_A2",
+        ConstVariables.reverse_languages[SupportedLanguage.German],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
     await _addNewDictionary(
-        db, "EN_DE_A2", SupportedLanguage.English, SupportedLanguage.German);
+        db,
+        "EN_DE_A2",
+        ConstVariables.reverse_languages[SupportedLanguage.English],
+        ConstVariables.reverse_languages[SupportedLanguage.German]);
     await _addNewDictionary(
-        db, "EN_RU_A2", SupportedLanguage.English, SupportedLanguage.Russian);
+        db,
+        "EN_RU_A2",
+        ConstVariables.reverse_languages[SupportedLanguage.English],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
     await _addNewDictionary(
-        db, "EN_RU_B2", SupportedLanguage.English, SupportedLanguage.Russian);
+        db,
+        "EN_RU_B2",
+        ConstVariables.reverse_languages[SupportedLanguage.English],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
     await _addNewDictionary(
-        db, "EN_RU_C1", SupportedLanguage.English, SupportedLanguage.Russian);
+        db,
+        "EN_RU_C1",
+        ConstVariables.reverse_languages[SupportedLanguage.English],
+        ConstVariables.reverse_languages[SupportedLanguage.Russian]);
   }
 
   Future<int> getCount(db, String dbName) async {
@@ -72,8 +92,8 @@ class DatabaseHelper {
     return count;
   }
 
-  Future _addNewDictionary(Database db, String name, Language l_o,
-      Language l_t) async {
+  Future _addNewDictionary(
+      Database db, String name, Language l_o, Language l_t) async {
     String data = await rootBundle.loadString('assets/' + name + '.txt');
     int count = Sqflite.firstIntValue(await db
         .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
@@ -110,9 +130,7 @@ class DatabaseHelper {
     await batch.commit(noResult: true);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt(ConstVariables.current_dictionary_id, did);
-    prefs.setString(
-        ConstVariables.original_language, l_o.humanLanguage);
-    prefs.setString(
-        ConstVariables.translate_language, l_t.humanLanguage);
+    prefs.setString(ConstVariables.original_language, l_o.humanLanguage);
+    prefs.setString(ConstVariables.translate_language, l_t.humanLanguage);
   }
 }
