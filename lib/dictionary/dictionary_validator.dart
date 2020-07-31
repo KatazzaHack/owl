@@ -14,7 +14,8 @@ class DictionaryValidator {
     String title = "", errorText, actionText;
     if (!_correctNameFormat) {
       title = 'Dictionary name';
-      errorText = 'You already have a dictionary with this name. Please change it!';
+      errorText = 'Name is empty or you already have a dictionary with this '
+          'name. Please change it!';
       actionText = 'Will change!';
     }
 
@@ -66,6 +67,8 @@ class DictionaryValidator {
   }
 
   Future<bool> _validateName(String name) async {
+    if (name.isEmpty)
+      return false;
     bool _exists = await dh.checkIfDictionaryExists(name);
     return !_exists;
   }
