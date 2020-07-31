@@ -59,6 +59,7 @@ class _StopPage extends State<StopPage> {
       int quality = -1;
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
+        await new Future.delayed(Duration(seconds: 1));
         yield WordWithResult(
             /* isTranslation = */ false,
             /* text = */ word,
