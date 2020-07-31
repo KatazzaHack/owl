@@ -2,9 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:f_logs/f_logs.dart';
-import 'package:clipboard_manager/clipboard_manager.dart';
 import 'package:owl/utils.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:downloads_path_provider/downloads_path_provider.dart';
 
 class LogPage extends StatelessWidget {

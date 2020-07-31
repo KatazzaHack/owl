@@ -40,7 +40,6 @@ dependencies:
   provider:
   flutter_document_picker: ^4.0.0
   flutter_speed_dial: ^1.2.5
-  clipboard_manager: ^0.0.1
   url_launcher: ^5.5.0
   downloads_path_provider: ^0.1.0
 
