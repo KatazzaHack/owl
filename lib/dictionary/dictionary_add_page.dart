@@ -1,9 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/database/dictionary_helper.dart';
 import 'package:owl/database/common_helper.dart';
 import 'package:owl/dictionary/load_dictionary_widget.dart';
 import 'package:owl/dictionary/download_dictionary_widget.dart';
+import 'package:owl/information_page.dart';
 
 import 'dictionary_selection_page.dart';
 
@@ -47,6 +49,7 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
         padding: EdgeInsets.all(16.0),
         child: new Column(
           children: <Widget>[
+            _buildInfo(),
             _buildNameField(),
             _buildLangSelectors(),
             _buildAddDictionaryWidgets(),
@@ -120,7 +123,7 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
   }
 
   Widget _buildAddDictionaryWidgets() {
-    return new Container(
+    return Container(
       child: (() {
         if (widget.addDictionaryMethod ==
             AddDictionaryMethod.load_from_file) {
@@ -134,6 +137,52 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
             originalLang: _originalLang,
             targetLang: _targetLang);
       })()
+    );
+  }
+
+  Widget _buildInfo() {
+    return Container(
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text("How to add a deck?",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  fontSize: 32,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ),
+          RichText(
+            text: TextSpan(
+              children: [
+                TextSpan(
+                  text: "To add a deck please create a text file. This file "
+                  "should consist of lines, where each line is a text splitted "
+                  "by a tab symbol. For example, if you are creating a deck "
+                  "for learning languages, then put the word you would like to "
+                  "learn before tab and its translation after tab. ",
+                  style: TextStyle(color: Colors.black38, fontSize: 16),
+                ),
+                TextSpan(
+                  text: "Learn more...",
+                  style: TextStyle(color: Colors.blue, fontSize: 16),
+                  recognizer: new TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InformationPage()),
+                      );
+                    },
+                ),
+              ]
+            )
+          )
+        ],
+      ),
     );
   }
 }

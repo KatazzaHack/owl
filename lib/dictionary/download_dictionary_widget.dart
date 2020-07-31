@@ -4,7 +4,7 @@ import 'package:owl/database/dictionary_helper.dart';
 import 'package:http/http.dart' as http;
 import 'package:owl/database/common_helper.dart';
 import 'package:owl/dictionary/dictionaries_model.dart';
-import 'package:owl/dictionary_validator.dart';
+import 'package:owl/dictionary/dictionary_validator.dart';
 import 'package:provider/provider.dart';
 
 class DownloadDictionaryWidget extends StatefulWidget {
