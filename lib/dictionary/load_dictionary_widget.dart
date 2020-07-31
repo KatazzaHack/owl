@@ -10,16 +10,17 @@ import 'package:provider/provider.dart';
 
 class LoadDictionaryWidget extends StatefulWidget {
   final String name;
-  final SupportedLanguage originalLang, targetLang;
+  final Language originalLang, targetLang;
 
-  const LoadDictionaryWidget({Key key, this.name, this.originalLang, this.targetLang}) : super(key: key);
+  const LoadDictionaryWidget(
+      {Key key, this.name, this.originalLang, this.targetLang})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => new _LoadDictionaryWidgetState();
 }
 
 class _LoadDictionaryWidgetState extends State<LoadDictionaryWidget> {
-
   String _fileName = "...";
   String _path = "";
   CommonHelper ch = CommonHelper();
@@ -36,9 +37,7 @@ class _LoadDictionaryWidgetState extends State<LoadDictionaryWidget> {
             Flexible(
                 child: Text(_fileName,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                        fontSize: 16
-                    ))),
+                    style: TextStyle(fontSize: 16))),
             RaisedButton(
               onPressed: _pickFile,
               child: new Text("Load File"),
@@ -46,28 +45,28 @@ class _LoadDictionaryWidgetState extends State<LoadDictionaryWidget> {
           ],
         ),
         SizedBox(
-          child: new RaisedButton(
-              child: Text("Load"),
-              onPressed: _onLoadPressed
-          ),
-          width: double.infinity
-      )],
+            child: new RaisedButton(
+                child: Text("Load"), onPressed: _onLoadPressed),
+            width: double.infinity)
+      ],
     );
   }
 
   _pickFile() async {
-    FlutterDocumentPickerParams params = FlutterDocumentPickerParams(
-        allowedMimeTypes: ["text/*"]);
+    FlutterDocumentPickerParams params =
+        FlutterDocumentPickerParams(allowedMimeTypes: ["text/*"]);
     _path = await FlutterDocumentPicker.openDocument(params: params);
-    setState(() { _fileName = _path.split('/').last; });
+    setState(() {
+      _fileName = _path.split('/').last;
+    });
   }
 
   void _onLoadPressed() async {
     bool isDataValid = await dv.validateChosenFile(widget.name, _path);
     if (isDataValid) {
       String content = await File(_path).readAsString();
-      await ch.addNewDictionary(
-          widget.name, content, widget.originalLang, widget.targetLang);
+      await ch.addNewDictionary(widget.name, content,
+          widget.originalLang, widget.targetLang);
       Provider.of<DictionariesModel>(context, listen: false).updateList();
       Navigator.of(context).pop();
     }

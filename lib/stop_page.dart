@@ -36,21 +36,19 @@ class _StopPage extends State<StopPage> {
     _streamController.addStream((() async* {
       WordsHelper _wH = WordsHelper();
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      SupportedLanguage lOriginal = ConstVariables.reverse_human_languages[
+      Language lOriginal = ConstVariables.reverse_human_languages[
           prefs.getString(ConstVariables.original_language)];
-      SupportedLanguage lTranslate = ConstVariables.reverse_human_languages[
+      Language lTranslate = ConstVariables.reverse_human_languages[
           prefs.getString(ConstVariables.translate_language)];
       if (!prefs.containsKey(ConstVariables.speed_id)) {
         prefs.setInt(ConstVariables.speed_id, 2);
       }
       int _speed = prefs.getInt(ConstVariables.speed_id);
       List<String> languages = [
-        ConstVariables.supported_languages[lOriginal],
-        ConstVariables.supported_languages[lTranslate]
+        lOriginal.supportedLanguage, lTranslate.supportedLanguage,
       ];
       List<String> locales = [
-        ConstVariables.supported_locales[lOriginal],
-        ConstVariables.supported_locales[lTranslate]
+        lOriginal.supportedLocale, lTranslate.supportedLocale
       ];
       print(locales);
       print(languages);

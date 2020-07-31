@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 
 class DownloadDictionaryWidget extends StatefulWidget {
   final String name;
-  final SupportedLanguage originalLang, targetLang;
+  final Language originalLang, targetLang;
 
   const DownloadDictionaryWidget({Key key, this.name, this.originalLang, this.targetLang}) : super(key: key);
 
