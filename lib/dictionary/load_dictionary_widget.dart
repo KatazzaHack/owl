@@ -57,7 +57,6 @@ class _LoadDictionaryWidgetState extends State<LoadDictionaryWidget> {
 
   _pickFile() async {
     FlutterDocumentPickerParams params = FlutterDocumentPickerParams(
-        allowedFileExtensions: ["txt", "tsv", "csv"],
         allowedMimeTypes: ["text/*"]);
     _path = await FlutterDocumentPicker.openDocument(params: params);
     setState(() { _fileName = _path.split('/').last; });

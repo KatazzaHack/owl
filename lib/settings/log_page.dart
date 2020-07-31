@@ -37,7 +37,7 @@ class LogPage extends StatelessWidget {
                             });
                           },
                         ),
-                      ] + BuildTextLog(snapshot.data)
+                      ] + buildTextLog(snapshot.data)
                     );
                   } else {
                     return CircularProgressIndicator();
@@ -56,7 +56,7 @@ String getText(List<Log> logs) {
   return buffer.toString();
 }
 
-List<Widget> BuildTextLog(List<Log> logs) {
+List<Widget> buildTextLog(List<Log> logs) {
   List<Widget> result = [];
   LogsConfig config = getLogConfig();
   logs.forEach((log) {
