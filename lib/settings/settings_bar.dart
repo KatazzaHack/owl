@@ -50,9 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     title: 'Logs',
                     leading: Icon(Icons.description),
                     onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return LogPage();
-                      }));
+                      downloadLogs();
                     },
                   ),
                 ],
