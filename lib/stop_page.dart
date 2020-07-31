@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:soundpool/soundpool.dart';
-import 'package:flutter/services.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:owl/database/words_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,7 +23,8 @@ class _StopPage extends State<StopPage> {
   WordScheduler wl = WordScheduler.instance;
   Soundpool pool = Soundpool(streamType: StreamType.notification);
 
-  final StreamController<WordWithResult> _streamController = StreamController<WordWithResult>();
+  final StreamController<WordWithResult> _streamController =
+      StreamController<WordWithResult>();
 
   @override
   void initState() {
@@ -40,6 +40,10 @@ class _StopPage extends State<StopPage> {
           prefs.getString(ConstVariables.original_language)];
       SupportedLanguage lTranslate = ConstVariables.reverse_human_languages[
           prefs.getString(ConstVariables.translate_language)];
+      if (!prefs.containsKey(ConstVariables.speed_id)) {
+        prefs.setInt(ConstVariables.speed_id, 2);
+      }
+      int _speed = prefs.getInt(ConstVariables.speed_id);
       List<String> languages = [
         ConstVariables.supported_languages[lOriginal],
         ConstVariables.supported_languages[lTranslate]
@@ -56,7 +60,7 @@ class _StopPage extends State<StopPage> {
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
         yield WordWithResult(
-          /* isTranslation = */ false,
+            /* isTranslation = */ false,
             /* text = */ word,
             /* listeningResult = */ ListeningResult.undefined);
 
@@ -65,7 +69,7 @@ class _StopPage extends State<StopPage> {
         if (Settings().practiceMod) {
           print("Waiting for user input...");
           String parsedWords =
-              await SttHelper().listen(locales[targetLanguageIndex]);
+              await SttHelper().listen(locales[targetLanguageIndex], _speed);
           // Wait till user is suggested translation.
           print("Finished waiting for user input, parsed words are " +
               parsedWords);
@@ -93,11 +97,11 @@ class _StopPage extends State<StopPage> {
             await TtsHelper().say("bad", "en-US");
           }
         } else {
-          await new Future.delayed(const Duration(seconds : 2));
+          await new Future.delayed(Duration(seconds: _speed));
         }
         String correctTranslation = wl.getNextTranslation();
         yield WordWithResult(
-          /* isTranslation = */ true,
+            /* isTranslation = */ true,
             /* text = */ correctTranslation,
             /* listeningResult = */ convertQualityToResult(quality));
 
@@ -118,61 +122,59 @@ class _StopPage extends State<StopPage> {
   Widget build(BuildContext context) {
     return StreamBuilder<WordWithResult>(
         stream: _streamController.stream,
-        builder: (BuildContext context, AsyncSnapshot<WordWithResult> snapshot) {
+        builder:
+            (BuildContext context, AsyncSnapshot<WordWithResult> snapshot) {
           if (snapshot.hasData) {
             return Scaffold(
                 body: Container(
-                    alignment: Alignment.center,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Spacer (flex:1),
-                          Expanded (
-                            flex: 1,
-                            child:
-                                Center(
-                            child: Padding(
-                                padding: EdgeInsets.all(16.0),
-                                child: AutoSizeText("${snapshot.data.text}",
-                                    style: TextStyle(
-                                      fontSize: 100,
-                                      color: getColorFromWordResult(
-                                          snapshot.data),
-                                    ),
-                                    maxLines: 1)),
+              alignment: Alignment.center,
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Spacer(flex: 1),
+                    Expanded(
+                      flex: 1,
+                      child: Center(
+                        child: Padding(
+                            padding: EdgeInsets.all(16.0),
+                            child: AutoSizeText("${snapshot.data.text}",
+                                style: TextStyle(
+                                  fontSize: 100,
+                                  color: getColorFromWordResult(snapshot.data),
                                 ),
-                          ),
-                          Expanded (
-                            flex: 1,
-                            child:
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width * 0.2,
-                                height: MediaQuery.of(context).size.height * 0.2,
-                                child: RaisedButton(
-                                    shape: CircleBorder(),
-                                    color: Colors.red,
-                                    onPressed: () async {
-                                      TtsHelper().stop();
-                                      SttHelper().stop();
-                                      Navigator.pop(context);
-                                      FLog.exportLogs();
-                                    },
-                                    child: AutoSizeText(
-                                      "STOP",
-                                      style: TextStyle(fontSize: 20),
-                                      maxLines: 1,
-                                    ))),
-                          ),
-                          Spacer (flex:1),
-                        ]),
-
-                ));
+                                maxLines: 1)),
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.2,
+                          height: MediaQuery.of(context).size.height * 0.2,
+                          child: RaisedButton(
+                              shape: CircleBorder(),
+                              color: Colors.red,
+                              onPressed: () async {
+                                TtsHelper().stop();
+                                SttHelper().stop();
+                                Navigator.pop(context);
+                                FLog.exportLogs();
+                              },
+                              child: AutoSizeText(
+                                "STOP",
+                                style: TextStyle(fontSize: 20),
+                                maxLines: 1,
+                              ))),
+                    ),
+                    Spacer(flex: 1),
+                  ]),
+            ));
           } else {
             return CircularProgressIndicator();
           }
         });
   }
 }
+
 class WordWithResult {
   bool isTranslation = false;
   String text = "";
@@ -181,12 +183,7 @@ class WordWithResult {
   WordWithResult(this.isTranslation, this.text, this.listeningResult);
 }
 
-enum ListeningResult {
-  bad,
-  medium,
-  perfect,
-  undefined
-}
+enum ListeningResult { bad, medium, perfect, undefined }
 
 Color getColorFromWordResult(WordWithResult wordWithResult) {
   if (wordWithResult.isTranslation) {
@@ -204,21 +201,20 @@ Color getColorFromWordResult(WordWithResult wordWithResult) {
   return Colors.black;
 }
 
-
 ListeningResult convertQualityToResult(int quality) {
-    switch (quality) {
-      case 0:
-        return ListeningResult.bad;
-      case 1:
-        return ListeningResult.bad;
-      case 2:
-        return ListeningResult.bad;
-      case 3:
-        return ListeningResult.bad;
-      case 4:
-        return ListeningResult.medium;
-      case 5:
-        return ListeningResult.perfect;
-    }
+  switch (quality) {
+    case 0:
+      return ListeningResult.bad;
+    case 1:
+      return ListeningResult.bad;
+    case 2:
+      return ListeningResult.bad;
+    case 3:
+      return ListeningResult.bad;
+    case 4:
+      return ListeningResult.medium;
+    case 5:
+      return ListeningResult.perfect;
+  }
   return ListeningResult.undefined;
 }

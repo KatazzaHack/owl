@@ -3,6 +3,8 @@ import 'dart:async';
 import 'package:speech_to_text/speech_recognition_error.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
+import 'package:owl/const_variables.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SttState {
   static stt.SpeechToText speech;
@@ -49,14 +51,14 @@ class SttHelper {
 
   SttState _sttState;
 
-  Future<String> listen(String locale) async {
+  Future<String> listen(String locale, int speed) async {
     _sttState = await _state.sttState;
     SttState.speech.errorListener = errorListener;
     print("Start listening in locale " + locale + "...");
     SttState.speech.listen(
         onResult: resultListener,
         localeId: locale,
-        listenFor: new Duration(seconds: 5));
+        listenFor: new Duration(seconds: speed));
     print("Starting waiting for input");
     _sttState.completer = Completer<String>();
     return _sttState.completer.future;

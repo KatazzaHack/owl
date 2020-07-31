@@ -4,7 +4,7 @@ import 'package:owl/stop_page.dart';
 import 'package:owl/dictionary/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:owl/database/common_helper.dart';
-import 'package:owl/log_page.dart';
+import 'package:owl/settings/log_page.dart';
 import 'package:owl/start_page/training_mod_bar.dart';
 
 class StartPage extends StatelessWidget {
