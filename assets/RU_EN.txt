@@ -1,4 +1,0 @@
-кошка	cat
-собака	dog
-мама	mother
-папа	father

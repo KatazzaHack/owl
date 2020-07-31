@@ -11,8 +11,8 @@ import 'package:owl/utils.dart';
 
 class DatabaseHelper {
 
-  static final _databaseVersion = 141;
-  static final _databaseName = "owl_daabaa1017.db";
+  static final _databaseVersion = 41;
+  static final _databaseName = "owl_daaba1017.db";
 
   // make this a singleton class
   DatabaseHelper._privateConstructor();
@@ -50,15 +50,26 @@ class DatabaseHelper {
         "next_date INTEGER)");
     await db.execute(
         "CREATE TABLE WordsAndLists (did INTEGER, wid INTEGER, PRIMARY KEY (did, wid))");
+    await _addNewDictionary(
+        db, "DE_RU_A1", SupportedLanguage.German, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "DE_RU_A1-B1", SupportedLanguage.German, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "DE_RU_A2", SupportedLanguage.German, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "EN_DE_A2", SupportedLanguage.English, SupportedLanguage.German);
+    await _addNewDictionary(
+        db, "EN_RU_A2", SupportedLanguage.English, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "EN_RU_B2", SupportedLanguage.English, SupportedLanguage.Russian);
+    await _addNewDictionary(
+        db, "EN_RU_C1", SupportedLanguage.English, SupportedLanguage.Russian);
   }
 
   Future<int> getCount(db, String dbName) async {
     var x = await db.rawQuery('SELECT COUNT (*) from $dbName');
     int count = Sqflite.firstIntValue(x);
     return count;
-  }
-
-  Future _addGerman(db, String fileName) async {
   }
 
   Future _addNewDictionary(Database db, String name, Language l_o,

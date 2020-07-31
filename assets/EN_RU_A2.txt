@@ -1,0 +1,505 @@
+able	способный
+about	примерно
+accident	происшествие
+across	за
+act	действовать
+adult	взрослый
+adventure	приключение
+advice	совет (неисчисл!)
+afraid	напуганный
+age	возраст
+agree	соглашаться
+air	вид
+almost	почти
+alone	в одиночестве
+ambulance	скорая помощь
+angry	злой
+anymore	больше не
+anyway	в любом случае
+anywhere	где угодно
+apartment	квартира
+area	область
+arm	рука
+arrive	прибывать
+article	вещь
+as well	также
+as well as	так же как и
+aunt	тётя
+available	доступный
+awful	ужасный
+backpack	рюкзак
+bag	сумка
+bake	печь (выпекать)
+balloon	воздушный шар
+band	ансамбль
+bandage	повязка
+bank	берег (реки
+bat	летучая мышь
+bath	ванна
+bean	боб
+beard	борода
+below	ниже
+belt	пояс
+beside	рядом
+bicycle	велосипед
+bill	банкнота
+birth	рождение
+blonde	блондинка
+blouse	блузка
+board	борт
+boat	лодка
+boil	кипеть
+book	купить
+boot	сапог
+borrow	брать взаймы
+both	оба
+bother	беспокоить
+bottom	дно
+bowl	миска
+brave	храбрый
+bridge	мост
+bright	яркий
+brilliant	блестящий
+brush	кисть
+busy	занятый
+butter	масло сливочное
+buy	верить
+camp	лагерь
+can	банка
+candy	конфеты
+cap	кепка
+capital	главный
+career	карьера
+carpet	ковер
+carrot	морковь
+carry	носить
+cartoon	мультфильм
+case	ящик
+cash	наличка
+catch	расслышать
+cathedral	собор
+ceiling	потолок
+century	век
+cereal	злак
+chain	цепь
+chair	стул
+change	сдача
+chat	болтать
+check	проверить
+chef	шеф-повар
+chemistry	химия
+chess	шахматы
+cinema	кино
+circle	круг
+circus	цирк
+clear	ясный
+clever	умный
+click	щёлкать
+climb	взбираться
+cloud	облако
+coach	тренер
+coat	пальто
+cold	простуда
+collect	собирать
+comb	расческа
+complete	завершить
+cookie	печенье
+cool	прохладный
+corner	угол
+correct	правильный
+countryside	сельская местность
+cover	накрывать
+cream	крем
+cross	пересекать
+crowd	толпа
+cup	чашка
+cupboard	шкаф
+curtain	занавеска
+customer	клиент
+daily	ежедневно
+date	свидание
+decide	решить
+deep	глубокий
+degree	градус
+delay	задерживать(ся)
+department	отдел
+describe	описать
+desert	бросать
+desk	письменный стол
+diary	дневник
+dictionary	словарь
+different	разный
+discount	скидка
+discuss	обсуждать
+dish	блюдо
+doll	кукла
+dot	точка
+double	удваивать
+drawer	выдвижной ящик
+dream	сон (видение)
+dress	одеваться
+drum	барабан
+dry	сухой
+during	во время
+early	рано
+earn	зарабатывать
+earring	серьга
+east	восток
+empty	пустой
+engine	двигатель или машина
+enter	войти
+envelope	конверт
+even	ровный
+ever	когда-либо
+example	пример
+excellent	превосходный
+except	кроме
+excuse	оправдание
+exercise	упражнение
+exit	выход
+explain	объяснять
+explore	изучать
+extra	дополнительный
+face	столкнуться (перен)
+factory	фабрика
+fail	потерпеть неудачу
+fair	справедливый
+fall	осень (амер.)
+famous	знаменитый
+fan	вентилятор
+farm	ферма
+fashion	стиль
+fat	жир
+field	поле
+fill in	заполнить
+film	снимать кино
+find out	выяснить
+find out	выяснить
+fine	хороший
+fine	хороший
+fishing	рыбалка
+fit	приступ
+flat	квартира
+flight	бегство
+floor	этаж
+fly	муха
+fog	туман
+follow	следовать
+foreign	иностранный
+fork	развилка
+free	свободный или бесплатный
+friendly	дружелюбный
+front	перед
+furniture	мебель
+further	дальнейший
+future	будущий
+garden	сад
+garlic	чеснок
+gas	бензин
+get	становиться
+get off	выходить (из транспорта)
+get on	быть
+gift	подарок
+glass	стекло или стакан
+glasses	очки
+glove	перчатка
+go out	погаснуть
+goal	цель
+grade	класс
+grape	виноград (ягода)
+grow up	вырастать
+guess	угадывать
+guest	гость
+guide	вести
+gym	спортзал
+hall	зал
+happen	случиться
+hat	шляпа
+health	здоровье
+helicopter	вертолёт
+hill	холм
+honey	мёд
+horrible	ужасный
+housewife	домохозяйка
+however	однако
+hurry	спешить
+ID	удостоверение личности
+ill	дурной
+improve	улучшить
+include	включать
+insect	насекомое
+inside	внутри
+instead	вместо
+invite	приглашать
+island	остров
+jacket	куртка
+join	присоединить (ся)
+journey	путешествие
+jumper	джемпер
+just	справедливый
+kick	пинать
+kind	тип
+kit	комплект
+kite	коршун или воздушный змей
+laptop	ноутбук
+large	большой
+last	длиться
+late	покойный
+laugh	смеяться
+lazy	ленивый
+leather	кожаный
+leg	нога
+letter	письмо
+level	уровень
+library	библиотека
+lift	поднимать
+like	как
+line	линия
+list	список
+look	выглядеть
+look after	присматривать
+look at	рассмотреть
+look for	искать
+look out	смотреть (опасность!)
+loud	громкий
+lovely	чудесный
+luggage	багаж
+magazine	журнал
+mark	метка
+match	спичка
+matter	иметь значение
+may	пусть
+meal	еда
+mean	неважный
+medicine	лекарство
+melon	дыня
+member	член
+memory	память
+middle	середина
+midnight	полночь
+might	мощь
+mind	возражать
+mine	шахта
+miss	пропускать
+missing	пропавший
+mistake	ошибка
+mountain	гора
+move	переезжать
+mug	кружка
+mushroom	гриб
+neck	шея
+necklace	ожерелье
+neighbour	сосед
+net	чистый
+never	так и не
+newspaper	газета
+noise	шум
+noon	полдень
+north	север
+note	заметка
+notice	заметить
+nurse	медсестра
+occupation	профессия
+offer	предлагать
+oil	нефть
+once	однажды
+onion	лук
+opposite	противоположный
+order	приказ
+over	заново
+own	владеть
+pack	упаковывать
+pain	боль
+pair	пара
+pale	бледный
+paper	бумага
+pardon	извинять
+part	часть
+pass	пройти
+passenger	пассажир
+past	прошлый
+path	путь
+pear	груша
+pepper	перец
+per	(кол-во) на (единицу)
+perfect	совершенный
+perhaps	возможно
+pet	домашний питомец
+pick up	подобрать
+piece	предмет
+pillow	подушка
+pity	жалость
+plane	самолёт
+plant	завод
+plate	плита
+playground	детская площадка
+please	радовать
+pocket	карман
+point	пункт
+polite	вежливый
+pool	бассейн
+poor	бедный
+possible	возможный
+post	почта
+potato	картофель
+prefer	предпочитать
+prepare	приготовить
+present	присутствующий
+pretty	приятный
+pupil	зрачок
+purple	пурпурный
+purse	кошелек
+put on	провести (мероприятие)
+puzzle	озадачить
+quarter	четверть
+question	подвергать сомнению
+quiet	тихий
+quite	вполне или более-менее
+quiz	викторина
+rabbit	кролик
+race	гонка
+railway	железная дорога
+reason	причина
+receipt	получение
+receive	получить
+record	запись
+refrigerator	холодильник
+rent	аренда
+repair	ремонт
+rest	покоиться
+return	возвращаться
+rice	рис
+rich	богатый
+ride	ездить
+roast	жарить
+rock	качать
+roof	крыша
+room	место
+round	круг
+rubber	резина
+ruler	линейка
+run	управлять
+safe	надёжный
+sail	парус
+sale	продажа
+salt	соль
+sausage	колбаса
+scarf	шарф
+science	наука
+scissors	ножницы
+seat	место
+sentence	приговор
+serve	подавать (блюдо)
+set	набор
+several	несколько
+shame	стыд
+share	разделять (напр. мнение)
+sheet	лист
+ship	доставлять
+shirt	рубашка
+shoe	туфля
+shout	кричать
+shower	душ
+sick	больной
+sign	подпись
+simple	простой
+since	с (какого-то времени)
+single	один
+sink	раковина
+site	местоположение
+skate	конёк
+ski	ездить на лыжах
+skirt	юбка
+slice	ломтик
+slim	стройный
+snack	лёгкая закуска
+soap	мыло
+soccer	футбол
+sock	носок
+software	программое обеспечение
+soon	скоро или рано
+sound	здоровый
+south	юг
+space	космос
+spare	выделить
+special	особенный
+spell	произносить (писать) по буквам
+square	площадь
+staff	персонал
+stage	стадия
+stairs	ступеньки
+stamp	печать
+stand	терпеть
+stay	остановиться пожить
+still	спокойный
+stomach	желудок
+store	магазин
+straight	прямой
+subject	подверженный
+suit	подходить
+suitcase	чемодан
+suppose	полагать
+sure	уверенный
+surf	прибой
+surprise	удивлять
+table	таблица
+take	воспринимать
+take off	взлететь
+tall	высокий (чел)
+team	команда
+tent	палатка
+term	термин
+terrible	ужасный
+text	писать (сообщение)
+thin	тонкий
+ticket	билет
+tidy	опрятный
+tie	связывать
+timetable	расписание
+tired	усталый
+toe	палец (ноги)
+total	полный
+towel	полотенце
+traffic light	светофор
+train	тренировать
+tram	трамвай
+trip	поездка
+trousers	брюки
+try on	примерить
+turn	очередь
+turn off	свернуть (с дороги)
+turn on	заводить
+type	печатать
+umbrella	зонтик
+uncle	дядя
+underground	подземный
+upset	расстраивать
+useful	полезный
+variety	разнообразие
+various	разнообразный
+vegetable	овощ
+view	вид
+village	деревня
+violin	скрипка
+visit	посетить
+vocabulary	словарный запас
+waiter	официант
+wallet	бумажник
+wash up	помыть посуду
+watch	часы (наручные)
+way	способ
+wear	надевать
+welcome	желанный
+well	колодец
+west	запад
+wet	мокрый
+wheel	колесо
+whole	весь
+wide	широкий
+will	воля
+wood	древесина
+wool	шерсть
+worry	волновать (ся)
+wrong	не тот
+yet	всё же
+zoo	зоопарк
