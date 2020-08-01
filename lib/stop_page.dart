@@ -1,4 +1,3 @@
-
 import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -53,10 +52,12 @@ class _StopPage extends State<StopPage> {
       }
       int _speed = prefs.getInt(ConstVariables.speed_id);
       List<String> languages = [
-        lOriginal.supportedLanguage, lTranslate.supportedLanguage,
+        lOriginal.supportedLanguage,
+        lTranslate.supportedLanguage,
       ];
       List<String> locales = [
-        lOriginal.supportedLocale, lTranslate.supportedLocale
+        lOriginal.supportedLocale,
+        lTranslate.supportedLocale
       ];
       print(locales);
       print(languages);
@@ -172,7 +173,15 @@ class _StopPage extends State<StopPage> {
                   ]),
             ));
           } else {
-            return CircularProgressIndicator();
+            return Container(
+              color: Colors.white,
+              child: Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                  strokeWidth: 4,
+                ),
+              ),
+            );
           }
         });
   }
