@@ -35,7 +35,12 @@ class _SettingsPageState extends State<SettingsPage> {
                   SettingsTile(
                     title: 'Send Feedback',
                     leading: Icon(Icons.feedback),
-                    onTap: _launchURL,
+                    onTap: (){_launchURL(ConstVariables.FeedbackURL);},
+                  ),
+                  SettingsTile(
+                    title: 'FAQ',
+                    leading: Icon(Icons.help),
+                    onTap: (){_launchURL(ConstVariables.FAQURL);},
                   ),
                   SettingsTile(
                     title: 'Speed',
@@ -74,8 +79,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _launchURL() async {
-    String url = ConstVariables.FeedbackURL;
+  _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
