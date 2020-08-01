@@ -26,7 +26,7 @@ class _SpeedPageState extends State<SpeedPage> {
                 children: <Widget>[
                   Padding(
                     padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 24.0),
-                    child: Text("Pronounce speed", style: TextStyle(fontSize: 35), ),
+                    child: Text("Pronunciation speed", style: TextStyle(fontSize: 35), ),
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(

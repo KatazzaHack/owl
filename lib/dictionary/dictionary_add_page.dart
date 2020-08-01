@@ -5,14 +5,14 @@ import 'package:owl/database/dictionary_helper.dart';
 import 'package:owl/database/common_helper.dart';
 import 'package:owl/dictionary/load_dictionary_widget.dart';
 import 'package:owl/dictionary/download_dictionary_widget.dart';
-import 'package:owl/information_page.dart';
-
+import 'package:owl/utils.dart';
 import 'dictionary_selection_page.dart';
 
 class DictionaryAddPage extends StatefulWidget {
   final AddDictionaryMethod addDictionaryMethod;
 
-  const DictionaryAddPage({Key key, this.addDictionaryMethod}) : super(key: key);
+  const DictionaryAddPage({Key key, this.addDictionaryMethod})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() => new _DictionaryAddPageState();
@@ -35,9 +35,13 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
 
   void _nameListen() {
     if (_nameFilter.text.isEmpty) {
-      setState(() { _name = ""; });
+      setState(() {
+        _name = "";
+      });
     } else {
-      setState(() { _name = _nameFilter.text; });
+      setState(() {
+        _name = _nameFilter.text;
+      });
     }
   }
 
@@ -78,13 +82,12 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
                   });
                 },
                 items: ConstVariables.all_languages
-                    .map<DropdownMenuItem<Language>>(
-                        (Language value) {
-                      return DropdownMenuItem<Language>(
-                        value: value,
-                        child: Text(value.humanLanguage),
-                      );
-                    }).toList(),
+                    .map<DropdownMenuItem<Language>>((Language value) {
+                  return DropdownMenuItem<Language>(
+                    value: value,
+                    child: Text(value.humanLanguage),
+                  );
+                }).toList(),
               )),
           ListTile(
               title: Text("Translation Language"),
@@ -97,13 +100,12 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
                   });
                 },
                 items: ConstVariables.all_languages
-                    .map<DropdownMenuItem<Language>>(
-                        (Language value) {
-                      return DropdownMenuItem<Language>(
-                        value: value,
-                        child: Text(value.humanLanguage),
-                      );
-                    }).toList(),
+                    .map<DropdownMenuItem<Language>>((Language value) {
+                  return DropdownMenuItem<Language>(
+                    value: value,
+                    child: Text(value.humanLanguage),
+                  );
+                }).toList(),
               )),
         ],
       ),
@@ -120,21 +122,14 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
   }
 
   Widget _buildAddDictionaryWidgets() {
-    return Container(
-      child: (() {
-        if (widget.addDictionaryMethod ==
-            AddDictionaryMethod.load_from_file) {
-          return LoadDictionaryWidget(
-              name: _name,
-              originalLang: _originalLang,
-              targetLang: _targetLang);
-        }
-        return DownloadDictionaryWidget(
-            name: _name,
-            originalLang: _originalLang,
-            targetLang: _targetLang);
-      })()
-    );
+    return Container(child: (() {
+      if (widget.addDictionaryMethod == AddDictionaryMethod.load_from_file) {
+        return LoadDictionaryWidget(
+            name: _name, originalLang: _originalLang, targetLang: _targetLang);
+      }
+      return DownloadDictionaryWidget(
+          name: _name, originalLang: _originalLang, targetLang: _targetLang);
+    })());
   }
 
   Widget _buildInfo() {
@@ -143,41 +138,35 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
         children: <Widget>[
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("How to add a deck?",
+            child: Text(
+              "How to add a deck?",
               style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                  fontSize: 32,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+                fontSize: 32,
               ),
               textAlign: TextAlign.center,
             ),
           ),
           RichText(
-            text: TextSpan(
-              children: [
-                TextSpan(
-                  text: "To add a deck please create a text file. This file "
+              text: TextSpan(children: [
+            TextSpan(
+              text: "To add a deck please create a text file. This file "
                   "should consist of lines, where each line is a text splitted "
                   "by a tab symbol. For example, if you are creating a deck "
                   "for learning languages, then put the word you would like to "
                   "learn before tab and its translation after tab. ",
-                  style: TextStyle(color: Colors.black38, fontSize: 16),
-                ),
-                TextSpan(
-                  text: "Learn more...",
-                  style: TextStyle(color: Colors.blue, fontSize: 16),
-                  recognizer: new TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => InformationPage()),
-                      );
-                    },
-                ),
-              ]
-            )
-          )
+              style: TextStyle(color: Colors.black38, fontSize: 16),
+            ),
+            TextSpan(
+              text: "Learn more...",
+              style: TextStyle(color: Colors.blue, fontSize: 16),
+              recognizer: new TapGestureRecognizer()
+                ..onTap = () {
+                  launchURL(ConstVariables.FAQURL);
+                },
+            ),
+          ]))
         ],
       ),
     );

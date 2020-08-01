@@ -1,4 +1,5 @@
 import 'package:f_logs/f_logs.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 int timeToInt(DateTime dateTime) {
   return (dateTime.millisecondsSinceEpoch / (1000 * 60 * 60 * 24)).round();
@@ -20,4 +21,12 @@ LogsConfig getLogConfig() {
     ]
     ..customOpeningDivider = "|"
     ..customClosingDivider = "|";
+}
+
+launchURL(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
 }
