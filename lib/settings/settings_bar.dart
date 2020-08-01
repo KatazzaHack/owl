@@ -43,7 +43,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     onTap: (){_launchURL(ConstVariables.FAQURL);},
                   ),
                   SettingsTile(
-                    title: 'Speed',
+                    title: 'Speed Settings',
                     leading: Icon(Icons.timer),
                     onTap: () {
                       _onItemTapped();
@@ -53,7 +53,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   SettingsTile(
-                    title: 'Logs',
+                    title: 'Save Logs',
                     leading: Icon(Icons.description),
                     onTap: () async {
                       PermissionStatus status =
@@ -62,7 +62,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         downloadLogs();
                         DictionaryValidator dv = DictionaryValidator(context);
                         dv.showAlertDialog("Success",
-                            "Saved to Downloads as owl_logs.txt", "Ok");
+                            "Saved to Downloads folder as owl_logs.txt", "Ok");
                       } else {
                         if (status.isPermanentlyDenied) {
                           openAppSettings();
