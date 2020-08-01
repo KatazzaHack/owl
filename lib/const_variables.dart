@@ -21,6 +21,9 @@ class ConstVariables {
   static String original_language = "OriginalLanguage";
   static String translate_language = "TranslateLanguage";
   static String speed_id = "CurrentPronounceSpeed";
+  static String FAQURL =
+      "https://docs.google.com/document/d/1chXW1PM0peFjNzufWAux6JwBpnqrRy6YIQaFYtnQcro";
+  static String BugReportURL = "https://forms.gle/ym8MCgfVKW13DNLd6";
 
   static Map<String, Language> reverse_human_languages = {
     "English": Language(SupportedLanguage.English, "en_US", "en-US", "English"),
@@ -31,11 +34,16 @@ class ConstVariables {
   };
 
   static Map<SupportedLanguage, Language> reverse_languages = {
-    SupportedLanguage.English: Language(SupportedLanguage.English, "en_US", "en-US", "English"),
-    SupportedLanguage.Russian: Language(SupportedLanguage.Russian, "ru_RU", "ru-RU", "Russian"),
-    SupportedLanguage.German: Language(SupportedLanguage.German, "de_DE", "de-DE", "German"),
-    SupportedLanguage.French: Language(SupportedLanguage.French, "fr_FR", "fr-FR", "French"),
-    SupportedLanguage.Hebrew: Language(SupportedLanguage.Hebrew, "he_IL", "he-IL", "Hebrew"),
+    SupportedLanguage.English:
+        Language(SupportedLanguage.English, "en_US", "en-US", "English"),
+    SupportedLanguage.Russian:
+        Language(SupportedLanguage.Russian, "ru_RU", "ru-RU", "Russian"),
+    SupportedLanguage.German:
+        Language(SupportedLanguage.German, "de_DE", "de-DE", "German"),
+    SupportedLanguage.French:
+        Language(SupportedLanguage.French, "fr_FR", "fr-FR", "French"),
+    SupportedLanguage.Hebrew:
+        Language(SupportedLanguage.Hebrew, "he_IL", "he-IL", "Hebrew"),
   };
 
   static List<Language> all_languages = reverse_human_languages.values.toList();

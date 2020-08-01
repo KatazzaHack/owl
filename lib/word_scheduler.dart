@@ -45,20 +45,14 @@ class WordScheduler {
 
   void _updateCurrentIndex() {
     FLog.logThis(
-      className: "WordScheduler",
-      methodName: "_updateCurrentIndex",
       text: "practiceMod mode is " + isPracticeMode.toString(),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
     if (!isPracticeMode) {
       FLog.logThis(
-        className: "WordScheduler",
-        methodName: "_updateCurrentIndex",
         text: "current index in batch in listen mode: "
             + currentIndexInBatch.toString(),
         type: LogLevel.INFO,
-        dataLogType: DataLogType.DEVICE.toString(),
       );
       if (_listenModeSchedule == null) {
         _regenerateScheduleInListenMode();
@@ -77,12 +71,9 @@ class WordScheduler {
       currentIndex = (currentIndex + 1) % _words.length;
     }
     FLog.logThis(
-      className: "WordScheduler",
-      methodName: "_updateCurrentIndex",
       text: "updated current index: " + currentIndex.toString()
           + " word: " + _words[currentIndex].toString(),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
   }
 
@@ -107,13 +98,10 @@ class WordScheduler {
     currentIndexInBatch = 0;
 
     FLog.logThis(
-      className: "WordScheduler",
-      methodName: "_regenerateScheduleInListenMode",
       text: "New schedule: " + (reachedEndInListenMode
           ? "Reached the end"
           :_listenModeSchedule.toString()),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
   }
 
@@ -158,15 +146,12 @@ class WordScheduler {
             min(currentIndex + insertWrongAnsweredDistance, _words.length),
             newRecord);
         FLog.logThis(
-          className: "WordScheduler",
-          methodName: "updateWithAnswer",
           text: "The words was said wrong for the "
               + newRecord["repetitions_today"].toString() + " time "
               + "and was inserted at the position "
               + min(currentIndex + insertWrongAnsweredDistance,
                   _words.length).toString(),
           type: LogLevel.INFO,
-          dataLogType: DataLogType.DEVICE.toString(),
         );
       }
     }
@@ -176,8 +161,6 @@ class WordScheduler {
         _words[currentIndex]["ef"]);
     newRecord["next_date"] = nextDate;
     FLog.logThis(
-      className: "WordScheduler",
-      methodName: "updateWithAnswer",
       text: "Said word: " + saidWord.toString()
           + "\nTrue word: " + _words[currentIndex]["translation"].toString()
           + "\nDistance: " + responseDistance.toString()
@@ -186,7 +169,6 @@ class WordScheduler {
           + "\nrepetitions: " + repetitions.toString()
           + "\nnext date: " + nextDate.toString(),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
     await wordsHelper.updateOneRecord(newRecord);
     return quality;
@@ -211,16 +193,11 @@ class WordScheduler {
       }
     }
     FLog.logThis(
-      className: "WordScheduler",
-      methodName: "_fillWords",
       text: "We got the word list, length = " + _words.length.toString(),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
     if (_words.length == 0) {
       FLog.logThis(
-        className: "WordScheduler",
-        methodName: "_fillWords",
         text: "You have learned everything, but let's just repeat a bit :)",
         type: LogLevel.INFO,
         dataLogType: DataLogType.DEVICE.toString(),

@@ -6,6 +6,8 @@ import 'package:owl/settings/setting_model.dart';
 import 'package:owl/settings/log_page.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:owl/settings/speed_page.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:owl/dictionary/dictionary_validator.dart';
 
 class SettingsPage extends StatefulWidget {
   SettingsPage({Key key}) : super(key: key);
@@ -15,7 +17,6 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-
   void _onItemTapped() {
     Provider.of<SettingsModel>(context, listen: false).perhapsInit();
   }
@@ -34,10 +35,15 @@ class _SettingsPageState extends State<SettingsPage> {
                   SettingsTile(
                     title: 'Send Feedback',
                     leading: Icon(Icons.feedback),
-                    onTap: _launchURL,
+                    onTap: (){_launchURL(ConstVariables.FeedbackURL);},
                   ),
                   SettingsTile(
-                    title: 'Speed',
+                    title: 'FAQ',
+                    leading: Icon(Icons.help),
+                    onTap: (){_launchURL(ConstVariables.FAQURL);},
+                  ),
+                  SettingsTile(
+                    title: 'Speed Settings',
                     leading: Icon(Icons.timer),
                     onTap: () {
                       _onItemTapped();
@@ -47,13 +53,27 @@ class _SettingsPageState extends State<SettingsPage> {
                     },
                   ),
                   SettingsTile(
-                    title: 'Logs',
+                    title: 'Save Logs',
                     leading: Icon(Icons.description),
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return LogPage();
-                      }));
+                    onTap: () async {
+                      PermissionStatus status =
+                          await Permission.storage.request();
+                      if (status.isGranted) {
+                        downloadLogs();
+                        DictionaryValidator dv = DictionaryValidator(context);
+                        dv.showAlertDialog("Success",
+                            "Saved to Downloads folder as owl_logs.txt", "Ok");
+                      } else {
+                        if (status.isPermanentlyDenied) {
+                          openAppSettings();
+                        }
+                      }
                     },
+                  ),
+                  SettingsTile(
+                    title: 'Report Bug',
+                    leading: Icon(Icons.bug_report),
+                    onTap: (){_launchURL(ConstVariables.BugReportURL);},
                   ),
                 ],
               ),
@@ -64,8 +84,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  _launchURL() async {
-    String url = ConstVariables.FeedbackURL;
+  _launchURL(String url) async {
     if (await canLaunch(url)) {
       await launch(url);
     } else {
