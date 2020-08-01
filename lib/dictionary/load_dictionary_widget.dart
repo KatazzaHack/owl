@@ -40,7 +40,7 @@ class _LoadDictionaryWidgetState extends State<LoadDictionaryWidget> {
                     style: TextStyle(fontSize: 16))),
             RaisedButton(
               onPressed: _pickFile,
-              child: new Text("Load File"),
+              child: new Text("Choose File"),
             )
           ],
         ),
