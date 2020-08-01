@@ -26,7 +26,7 @@ die Angabe, -n	сведения
 ankreuzen	отметить крестиком
 die Anmeldung, -en	регистрация
 der Anruf, -e	оклик
-anrufen	окликатъ
+anrufen	окликать
 die Ansage, -n	объявление
 ansehen	(по)смотреть
 die Antwort, -en	ответ
@@ -47,8 +47,8 @@ auch	тоже
 auf Deutsch	по-немецки
 auf Wiederhören	До свидания (говорят по телефону)
 auf Wiedersehen	До свидания
-aufräumen	убиратъ
-aufstehen	вставатъ
+aufräumen	убирать
+aufstehen	вставать
 ausfüllen	заполнять
 die Aussage, -n	высказывание
 abfahren	отъезжать
@@ -75,7 +75,7 @@ ankommen	прибывать
 die Ankunft (Sing.)	прибытие
 anmachen	включать
 anmelden	регистировать/заявлять
-anprobieren	(по)меритъ
+anprobieren	(по)мерить
 die Anrede (Sing.)	обращение
 der Anrufbeantworter,	тел.автоответчик
 der Anrufer,	звонящий
@@ -87,7 +87,7 @@ der Antwortbogen,	лист для ответа
 die Anweisung, -en	указание
 anziehen	надевать
 die Apotheke, -n	аптека
-der April	апрелъ
+der April	апрель
 die Arbeit, -en	работа
 der Arbeiter,	работник
 der Arbeitgeber,	работодатель
@@ -103,7 +103,7 @@ auffüllen	наполнить доверху
 die Aufgabe, -n	задание
 aufmachen	открыть
 aufpassen	быть внимателъным
-aufschreiben	прописатъ
+aufschreiben	прописать
 das Auge, -n	глаз
 die Augenfarbe	цвет глаз
 der August	август
@@ -111,14 +111,14 @@ der Ausgang, -..e	выход
 die Auskunft, -..e	справка/инфо
 der Ausländer,	иностранец
 die Ausleihe, -n	выдача
-ausmachen	выключатъ
-aussehen	выглядитъ
+ausmachen	выключать
+aussehen	выглядить
 außerdem	кроме того
-aussteigen	выходитъ
+aussteigen	выходить
 auswählen	выбирать
 der Ausweis, -e	удостоверение
 das Auto, -s	автомобиль
-die Autobahn, -en	скоростная автонагистралъ
+die Autobahn, -en	скоростная автонагистраль
 das Autofahren	автовождение
 der Automechaniker,	автомеханик
 die Autovermietung, -en	прокат машин
@@ -138,11 +138,11 @@ das Befinden (nur Sing,)	самочувствие
 die Begrüßung, -en	приветствие
 das Beispiel, -e	пример
 bequem	удобный
-beschreiben	описыватъ
+beschreiben	описывать
 besondere	особенные
 besser	лучше
 bestimmt	определенно
-das Bett, -en	кроватъ
+das Bett, -en	кровать
 bewölkt	облачно
 bezahlen	платить
 das Bier, -e	пиво
@@ -150,7 +150,7 @@ das Bild, -er	картина
 bilden	составлять
 billig	дешевый
 bitte	пожалуйста
-bitten	проситъ
+bitten	просить
 boxen	заниматься боксом
 brauchen	нуждатъся в...
 braun	коричневый
@@ -167,7 +167,7 @@ buchstabieren	говоритъ по буквам
 der Bus, -se	автобус
 die Butter (nur Sing)	масло
 die Baby-Wäsche (Sing.)	детское белье
-baden	купатъ
+baden	купать
 der Bahnsteig, -e	платформа
 bald	скоро
 das Band, -..er	том
@@ -177,25 +177,25 @@ der Bauarbeiter,	строитель
 der Bauch, -..e	живот
 der Baum, -..e	дерево
 der Beamte, -n	чиновник
-bearbeiten	обработатъ
+bearbeiten	обработать
 der Beginn (Sing.)	начало
-beginnen	начинатъ
+beginnen	начинать
 begrenzt	ограниченный
 die Behörde, -n	учреждение
 das Bein, -e	нога
-bekommen	получатъ
+bekommen	получать
 die Bemerkung, -en	примечание
-benutzen	использоватъ
+benutzen	использовать
 der Berg, -e	гора
 der Beruf, -e	профессия
 berufstätig	работающий
 die Beschwerde, -n	жалоба
 besetzt	занятый
 besonders	особенно
-bestellen	заказыватъ
-bestimmen	определятъ
+bestellen	заказывать
+bestimmen	определять
 der Besuch, -e	визит
-besuchen	посещатъ
+besuchen	посещать
 die Betonung, -en	ударение
 bewegen	двигать (ся)
 die Bitte, -n	просьба
@@ -205,7 +205,7 @@ das Bleigießen	гадание на растопленом свинце
 die Blume, -n	цветок
 der Blumenstrauß, -..e	букетов цветов
 die Bluse, -n	блузка
-brechen	ломатъ
+brechen	ломать
 die Briefmarke, -n	почтовая марка
 die Brille, -n	очки
 die Brücke, -n	мост
@@ -232,7 +232,7 @@ dabeihaben	иметь с собой
 die Dame, -en	дама
 danach	после
 danke	спасибо
-danken	благодаритъ
+danken	благодарить
 denn	тогда
 das Datum, die Daten	дата
 der Deutschkurs	курс немецкого
@@ -251,11 +251,11 @@ die Dusche, -n	душ
 der Dativ, -e	дательный падеж
 das Datum (Sing)	дата
 dauern	длиться
-denken	думатъ
+denken	думать
 deshalb	поэтому
 die Detailansicht, -en	подробное описание
 der Deutschtest, -s	тест по немецкому
-der Dezember	декабръ
+der Dezember	декабрь
 dick	толстый
 das Diplom	диплом
 direkt	прямой
@@ -273,7 +273,7 @@ das Ei, -er	яйцо
 einige	несколько
 der Einkauf, -..e	покупка
 der Einkaufswagen,..en	тележка для покупок
-einkaufen	покупатъ
+einkaufen	покупать
 die Einladung, -en	приглашение
 einmal	один раз
 das Elektrogerät, -e	электроприбор
@@ -303,8 +303,8 @@ eilig	спешный
 einfach	простой
 der Eingang, -..e	вход
 einladen	приглашать
-einordnen	подобратъ
-einsteigen	вставлятъ
+einordnen	подобрать
+einsteigen	вставлять
 einsetzen	садитъся (в транспорт)
 eintragen	вносить
 einzeln	отдельный
@@ -313,7 +313,7 @@ das Einzugsdatum (Sing)	дата възда (в квартиру)
 der Empfänger,	получатель
 eng	узкий
 das Englisch	английский язык
-entschuldigen	извинятъ
+entschuldigen	извинять
 das Erdgeschoss, -e	нижний этаж
 erforderlich	необходимо
 erhalten	получать
@@ -321,12 +321,12 @@ die Erklärung, -en	объяснение
 erlaubt	разрешенный
 das Erlebnis, -se	переживание
 erledigen	сделать
-ersetzen	заменитъ
+ersetzen	заменить
 erst	только
 die/der Erwachsene, -n (ein Erwachsener)	взрослый (ая)
 das Essen (Sing)	еда
 exquisit	превосходный
-fahren	ехатъ
+fahren	ехать
 das Fahrrad, -er	велосипед
 falsch	неправильный
 die Familie, -n	семья
@@ -383,7 +383,7 @@ fast	почти
 das Fax, -e	факс
 das Faxgerät, -e	факс (прибор)
 der Februar	февраль
-fehlen	недоставатъ
+fehlen	недоставать
 fehlend	недостающий
 die Feier, -n	праздник
 das Fenster,	окно
@@ -399,7 +399,7 @@ fliegen	лететь
 der Flug, -..e	полет
 die Flugdaten (Plural)	даты полета
 das Flugzeug, -e	самолет
-folgen	следоватъ
+folgen	следовать
 die Forelle, -n	форель
 formell	формально
 fragen	спрашивать
@@ -417,7 +417,7 @@ gar nicht	совсем не
 gar nichts	совсем ничего
 die Garage, -n	гараж
 der Garten	сад
-geben	даватъ
+geben	давать
 geboren	рожденный
 gebraucht	подержанный
 der Geburtsort, -e	место рождения
@@ -454,7 +454,7 @@ gut	хороший
 Gute Besserung!	Скорейшего выздоровления!
 die Garantie, -n	гарантия
 der Gärtner,	садовник
-der Gast, -..e	гостъ
+der Gast, -..e	гость
 die Gebäudereinigung (Sing)	уборка помещения
 die Gebrauchsanweisung, -en	руководтство по эксплуатации
 das Geburtsdatum (Sing)	дата рождения
@@ -476,7 +476,7 @@ geschlossen	закрыто
 gesund	здоровый
 die Gesundheit (Sing)	здоровье
 das Gewitter,	гроза
-gießen	литъ
+gießen	лить
 das Glas, -..er	стакан
 das Gleis, -e	путь (ж/д)
 das Glück (Sing)	удача
@@ -485,7 +485,7 @@ die Größe, -n	размер
 der Grund, -..e	причина
 die Gruppe, -n	группа
 günstig	недорогой
-der Gürtel,	ременъ
+der Gürtel,	ремень
 haben	иметь
 halb	половина
 das Handy, -s	мобильный телефон
@@ -499,21 +499,21 @@ die Hausaufgabe, -n	домашнее задание
 nach Hause	домой
 die Hausnummer, -n	домашний телефон
 das Heimatland, -..er	родина
-heißen	называтъ
+heißen	называть
 hell	яркий
-helfen	помогатъ
+helfen	помогать
 der Herbst, -e	осень
 der Herd, -e	плита
 die Herkunft, -e	происхождение
 heute	сегодня
-hier	здесъ
+hier	здесь
 die Himmelsrichtung, -en	сторона света
 das Hobby, -s	хобби
 die Heizung, -en	отопление
 der Hof, -..e	двор
 hoffen	надеяться
 hoffentlich	надеюсь
-hören	слушатъ
+hören	слушать
 die Höhe, -n	высота
 der Hunger (nur Sing.)	голод
 das Haar, -e	волос
@@ -538,10 +538,10 @@ das Herz, -n	сердце
 herhören	слушать
 die Hilfe, -n	помощь
 hinfahren	отвозить
-hinfallen	падатъ
+hinfallen	падать
 die Hochzeit, -en	свадьба
 höflich	вежливый
-holen	забиратъ
+holen	забирать
 die Hose, -n	штаны
 das Hotel, -s	отель
 der Hund, -e	собака
@@ -589,22 +589,22 @@ das Käsebrot, -e	бутерброд с сыром
 die Kasse, -n	касса
 kaufen	купить
 die Kaution, -en	залог
-kennen	знатъ
+kennen	знать
 das Kilo, -s	килограмм
 das Kind, -er	ребенок
 das Kino, -s	кино
 die Klasse, -n	класс
 der Kleiderschrank, -..e	платяной шкаф
 die Kleinanzeige, -n	маленькое объявление
-kochen	готовитъ
-die Kohle (nur Sing.)	уголъ
-kommen	приходитъ
+kochen	готовить
+die Kohle (nur Sing.)	уголь
+kommen	приходить
 die Kommunikation (nur Sing.)	коммуникация
 komplett	полный
 die Konjugation, -en	спряжение
 der Korb, -..e	коробка
 korrigieren	исправлять
-kosten	стоитъ
+kosten	стоить
 krank	больной
 der Kriminalfilm, -e	детектив
 kroatisch	хорватский
@@ -618,7 +618,7 @@ der Kurs, -e	курс
 der Kursleiter,	руководитель курса
 die Kursleiterin,	руководительница курса
 kurz	короткий
-der Kalender,	календаръ
+der Kalender,	календарь
 der Karneval (Sing)	карнавал
 der Kasten, -..	ящик
 die Katze, -n	кошка
@@ -633,7 +633,7 @@ der Kiosk, -s	киоск
 klar	ясный
 das Kleid, -er	платье
 die Kleidung (Sing)	одежда
-der Knochen,	костъ
+der Knochen,	кость
 der Koch, -..e	повар
 das Kochbuch, -..er	поварная книга
 der Koffer,	чемодан
@@ -657,7 +657,7 @@ die Lampe, -n	лампа
 das Land, -..er	страна
 die Landkarte, -n	географическая карта
 langsam	медленный
-leben	житъ
+leben	жить
 lebend	живой
 das Leder,	кожа (материал)
 ledig	холостой/незамужняя
@@ -674,25 +674,25 @@ die Liste, -n	список
 der Liter,	литр
 lachen	смеятъся
 das Ladegerät, -e	прибор для подзарядки
-laden	заряжатъ
+laden	заряжать
 der Lagerverkauf, -..e	продажа со склада
 laufen	бегать
 das Leben (Sing)	жизнь
 die Lebensgeschichte, -n	история жизни
 das Lebensjahr, -e	год жизни
 das Lebensmittel,	продовольственные товары
-legen	кластъ
+legen	класть
 leicht	легкий
-die Leidenschaft, -en	страстъ
-leihen	одалживатъ
+die Leidenschaft, -en	страсть
+leihen	одалживать
 der Lesetext, -e	текст для чтения
 die Leute (Plural)	люди
 das Licht, -er	свет
-lieben	любитъ
+lieben	любить
 das Lied, -er	песня
 liefern	доставлять
 der LKW, -s	грузовая машина
-lösen	решатъ
+lösen	решать
 die Lösung, -en	решение
 die Lust (Sing)	настроение
 lustig	смешной
@@ -702,7 +702,7 @@ der Mai (nur Sing.)	май
 (die) Mama, -s	мама
 der Mann, -..er	мужчина
 die Marke, -n	марка
-markieren	отмечатъ
+markieren	отмечать
 der März, -e	март
 die Maschine, -n	машина
 maskulin v	мужской род
@@ -726,7 +726,7 @@ minus	минус
 das Missfallen (nur Sing.)	недоволъство
 mitbringen	приносить с собой
 mitkommen	пойти вместе
-mitmachen	учавствоватъ
+mitmachen	учавствовать
 mitnehmen	братъ с собой
 der Mittag, -e	полдень
 das Mittagessen,	полдник
@@ -752,10 +752,10 @@ das Meer, -e	море
 die Meinung, -en	мнение
 der Meister,	мастер
 das Meldeformular, -e	формуляр заявления
-melden	заявлятъ
+melden	заявлять
 der Mensch, -en	человек
 die Minute, -n	минута
-mischen	мешатъ
+mischen	мешать
 der Mist (Sing)	навоз
 das Mistwetter (Sing)	ужасная погода
 mitfahren	ехать вместе с кем-то
@@ -776,7 +776,7 @@ der Musiker,	музыкант
 nachfragen	справляться
 der Nachmittag, -e	послеобеденное время
 die Nachrichten (nur Plural)	сообщения
-nachsprechen	повторитъ
+nachsprechen	повторить
 die Nacht, -e	ночь
 der Name, -n	имя
 nämlich	а именно
@@ -793,13 +793,13 @@ null	нуль
 die Nummer, -n	номер
 die Nachbarin, -nen	сосед
 nachmachen	подражать
-nachsehen	посмотретъ
+nachsehen	посмотреть
 die Nachsilbe, -n	суффикс
-die Nähe (Sing)	близостъ
+die Nähe (Sing)	близость
 nämlich а	именно
 die Nase, -n	нос
-die Nationalität, -en	национальностъ
-nehmen	братъ
+die Nationalität, -en	национальность
+nehmen	брать
 nennen	называть
 nett	приятный
 nie	никогда
@@ -836,7 +836,7 @@ der Park, -s	парк
 der Partner,	партнер
 die Partnerin, -nen	партнерша
 die Party, -s	вечеринка
-passen	подходитъ
+passen	подходить
 das Perfekt (Sing.)	перфект
 die Person, -en	особа
 das Personalpronomen,	личное местоимение
@@ -934,10 +934,10 @@ der Satz, -..e	предложение
 die Satzmelodie, -n	интонация предложения
 das Satzzeichen,	знак препинания
 schade	жаль
-schauen	смотретъ
-scheinen	сиятъ
+schauen	смотреть
+scheinen	сиять
 das Schild, -e	вывеска
-schlafen	спатъ
+schlafen	спать
 schlecht	плохой
 schmal	узкий
 schmecken	пробовать
@@ -1074,7 +1074,7 @@ die Tafel, -n	доска
 der Tag, -e	день
 der Tagesablauf, -..e	протекание дня
 die Tageszeit, -en	время суток
-tanzen gehen	идти танцеватъ
+tanzen gehen	идти танцевать
 der Tanzkurs, -e	курс танцев
 die Tasse, -n	чашка
 der Tee, -s	чай
@@ -1238,7 +1238,7 @@ der Wohnraum, -..e	жилплощадь
 die Wohnung, -en	квартира
 die Wohnungsanzeige, -n	объявление о жил.площади
 das Wohnzimmer,	жилая комната
-wollen	хотетъ
+wollen	хотеть
 das Wort, -e	слово
 die Worbildung, -en	словообразование
 das Wörterbuch, -..er	словарь
@@ -1267,7 +1267,7 @@ wöchentlich	еженедельно
 der Wohnanlage, -n	жилое строение
 wünschen	желать
 die Zahl, -en	число
-zeichnen	черитъ
+zeichnen	черить
 zeigen	показывать
 die Zeit, -en	время
 die Zeitung, -en	газета
