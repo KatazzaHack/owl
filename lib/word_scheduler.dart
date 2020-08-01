@@ -45,7 +45,7 @@ class WordScheduler {
 
   void _updateCurrentIndex() {
     FLog.logThis(
-      text: "practiceMod mode is " + practiceMod.toString(),
+      text: "practiceMod mode is " + isPracticeMode.toString(),
       type: LogLevel.INFO,
     );
     if (!isPracticeMode) {
