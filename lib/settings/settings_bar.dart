@@ -70,6 +70,11 @@ class _SettingsPageState extends State<SettingsPage> {
                       }
                     },
                   ),
+                  SettingsTile(
+                    title: 'Report Bug',
+                    leading: Icon(Icons.bug_report),
+                    onTap: (){_launchURL(ConstVariables.BugReportURL);},
+                  ),
                 ],
               ),
             ],

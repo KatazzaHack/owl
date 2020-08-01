@@ -23,6 +23,7 @@ class ConstVariables {
   static String speed_id = "CurrentPronounceSpeed";
   static String FAQURL =
       "https://docs.google.com/document/d/1chXW1PM0peFjNzufWAux6JwBpnqrRy6YIQaFYtnQcro";
+  static String BugReportURL = "url";
 
   static Map<String, Language> reverse_human_languages = {
     "English": Language(SupportedLanguage.English, "en_US", "en-US", "English"),
