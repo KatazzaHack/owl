@@ -22,15 +22,15 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
   final TextEditingController _nameFilter = new TextEditingController();
 
   String _name = "";
-  SupportedLanguage _originalLang;
-  SupportedLanguage _targetLang;
+  Language _originalLang;
+  Language _targetLang;
   DictionariesHelper dh = DictionariesHelper();
   CommonHelper ch = CommonHelper();
 
   _DictionaryAddPageState() {
     _nameFilter.addListener(_nameListen);
-    _originalLang = SupportedLanguage.German;
-    _targetLang = SupportedLanguage.Russian;
+    _originalLang = ConstVariables.reverse_human_languages["German"];
+    _targetLang = ConstVariables.reverse_human_languages["Russian"];
   }
 
   void _nameListen() {
@@ -69,39 +69,39 @@ class _DictionaryAddPageState extends State<DictionaryAddPage> {
         children: <Widget>[
           ListTile(
               title: Text("Original language"),
-              trailing: DropdownButton<SupportedLanguage>(
+              trailing: DropdownButton<Language>(
                 value: _originalLang,
-                onChanged: (SupportedLanguage newValue) {
+                onChanged: (Language newValue) {
                   setState(() {
                     print(newValue);
                     _originalLang = newValue;
                   });
                 },
                 items: ConstVariables.all_languages
-                    .map<DropdownMenuItem<SupportedLanguage>>(
-                        (SupportedLanguage value) {
-                      return DropdownMenuItem<SupportedLanguage>(
+                    .map<DropdownMenuItem<Language>>(
+                        (Language value) {
+                      return DropdownMenuItem<Language>(
                         value: value,
-                        child: Text(ConstVariables.human_languages[value]),
+                        child: Text(value.humanLanguage),
                       );
                     }).toList(),
               )),
           ListTile(
               title: Text("Translation Language"),
-              trailing: DropdownButton<SupportedLanguage>(
+              trailing: DropdownButton<Language>(
                 value: _targetLang,
-                onChanged: (SupportedLanguage newValue) {
+                onChanged: (Language newValue) {
                   setState(() {
                     print(newValue);
                     _targetLang = newValue;
                   });
                 },
                 items: ConstVariables.all_languages
-                    .map<DropdownMenuItem<SupportedLanguage>>(
-                        (SupportedLanguage value) {
-                      return DropdownMenuItem<SupportedLanguage>(
+                    .map<DropdownMenuItem<Language>>(
+                        (Language value) {
+                      return DropdownMenuItem<Language>(
                         value: value,
-                        child: Text(ConstVariables.human_languages[value]),
+                        child: Text(value.humanLanguage),
                       );
                     }).toList(),
               )),

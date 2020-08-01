@@ -15,15 +15,17 @@ class WordScheduler {
   static final listenModeBatchSize = 5;
   static final repetitionTimesPerBatch = 3;
   static List<int> _listenModeSchedule;
+  static final insertWrongAnsweredDistance = 10;
+  static final  maxRepetitionsOfWrongWord = 4;
+  static final  sessionMaxListenMode = 150;
   static List<dynamic> _words;
   int currentIndex = -1;
   int currentBatchStart = 0;
   int currentBatchRepetitions = 0;
   int currentIndexInBatch = 0;
-  int insertWrongAnsweredDistance = 10;
-  int maxRepetitionsOfWrongWord = 4;
   bool reachedEndInListenMode = false;
   int myDid = -1;
+  bool isPracticeMode = false;
   Levenshtein d = new Levenshtein();
   var rng = new Random(new DateTime.now().millisecondsSinceEpoch);
   WordsHelper wordsHelper = WordsHelper();
@@ -31,8 +33,10 @@ class WordScheduler {
   Future<String> getNextWord() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if ((_words == null)
-        || (myDid != prefs.getInt(ConstVariables.current_dictionary_id))) {
+        || (myDid != prefs.getInt(ConstVariables.current_dictionary_id))
+        || (isPracticeMode != Settings().practiceMod)) {
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
+      isPracticeMode = Settings().practiceMod;
       await _fillWords();
     }
     _updateCurrentIndex();
@@ -40,13 +44,11 @@ class WordScheduler {
   }
 
   void _updateCurrentIndex() {
-    bool practiceMod = Settings().practiceMod;
     FLog.logThis(
       text: "practiceMod mode is " + practiceMod.toString(),
       type: LogLevel.INFO,
-      dataLogType: DataLogType.DEVICE.toString(),
     );
-    if (!practiceMod) {
+    if (!isPracticeMode) {
       FLog.logThis(
         text: "current index in batch in listen mode: "
             + currentIndexInBatch.toString(),
@@ -118,9 +120,8 @@ class WordScheduler {
     // EF < 1.3 => EF==1.3;
     // quality < 3 => repetitions := 0;
     // never called in listenMode
-    bool practiceMod = Settings().practiceMod;
     assert(currentIndex != -1);
-    assert(practiceMod);
+    assert(isPracticeMode);
     Map<String, dynamic> newRecord = new Map.from(_words[currentIndex]);
     int responseDistance = d.distance(
         saidWord, _words[currentIndex]["translation"]);
@@ -206,6 +207,9 @@ class WordScheduler {
       }
     }
     _words.shuffle(rng);
+    if (isPracticeMode) {
+      _words = _words.sublist(0, sessionMaxListenMode);
+    }
   }
 
   static int _getInterval(int repetitions, double ef) {

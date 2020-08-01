@@ -1,5 +1,0 @@
-sour	кислый
-bitter	горький
-sweet	сладкий
-sun	солнце
-love	любовь

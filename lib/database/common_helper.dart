@@ -7,8 +7,8 @@ import 'package:owl/utils.dart';
 class CommonHelper {
   static final _instance = DatabaseHelper.instance;
 
-  Future addNewDictionary(String name, String data, SupportedLanguage l_o,
-      SupportedLanguage l_t) async {
+  Future addNewDictionary(
+      String name, String data, Language l_o, Language l_t) async {
     Database db = await _instance.database;
     int count = Sqflite.firstIntValue(await db
         .rawQuery('SELECT COUNT(*) FROM Dictionaries where name=?', [name]));
@@ -24,8 +24,8 @@ class CommonHelper {
     batch.insert("Dictionaries", {
       "name": name,
       "did": did,
-      "l_original": ConstVariables.human_languages[l_o],
-      "l_translation": ConstVariables.human_languages[l_t]
+      "l_original": l_o.humanLanguage,
+      "l_translation": l_t.humanLanguage,
     });
     wordsList.forEach((word) {
       List wordTranslation = word.split("\t");
