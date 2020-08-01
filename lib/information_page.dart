@@ -9,9 +9,29 @@ class InformationPage extends StatelessWidget {
           child: Text("Information"),
         ),
       ),
-      body: Container(
-          child: Text("TODO: Put info here")
+      body: ListView(
+        children: <Widget>[
+          ExpansionTile(
+            title: Text("1"),
+            children: <Widget>[
+              Text("lol1")
+            ],
+          ),
+          ExpansionTile(
+            title: Text("1"),
+            children: <Widget>[
+              Text("lol1")
+            ],
+          )
+        ],
       )
     );
   }
+
+  List<Map<String, String>> question_to_answer = [
+    {"q": "1", "a": "2"},
+    {"q": "3", "a": "4"},
+  ];
 }
+
+
