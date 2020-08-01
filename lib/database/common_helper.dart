@@ -7,6 +7,10 @@ import 'package:owl/utils.dart';
 class CommonHelper {
   static final _instance = DatabaseHelper.instance;
 
+  CommonHelper() {
+    _foo();
+  }
+
   Future addNewDictionary(
       String name, String data, Language l_o, Language l_t) async {
     Database db = await _instance.database;
@@ -44,5 +48,9 @@ class CommonHelper {
     await batch.commit(noResult: true);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setInt(ConstVariables.current_dictionary_id, did);
+  }
+
+  Future _foo() async {
+    Database db = await _instance.database;
   }
 }

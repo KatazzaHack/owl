@@ -7,10 +7,9 @@ import 'package:owl/database/common_helper.dart';
 import 'package:owl/start_page/training_mod_bar.dart';
 
 class StartPage extends StatelessWidget {
-  CommonHelper ch = CommonHelper();
-
   @override
   Widget build(BuildContext context) {
+    CommonHelper ch = CommonHelper();
     return Scaffold(
       appBar: AppBar(
         actions: <Widget>[
