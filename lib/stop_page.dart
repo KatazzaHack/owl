@@ -1,18 +1,25 @@
+
+import 'package:audioplayer/audioplayer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:soundpool/soundpool.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:owl/database/words_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
+import 'package:flutter/services.dart';
+import 'package:f_logs/f_logs.dart';
+import 'package:assets_audio_player/assets_audio_player.dart';
 
+import 'dart:io';
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:owl/word_scheduler.dart';
 import 'package:owl/tts/tts_helper.dart';
 import 'package:owl/stt/stt_helper.dart';
 import 'package:owl/start_page/settings.dart';
-import 'package:f_logs/f_logs.dart';
 
 class StopPage extends StatefulWidget {
   @override
@@ -22,6 +29,7 @@ class StopPage extends StatefulWidget {
 class _StopPage extends State<StopPage> {
   WordScheduler wl = WordScheduler.instance;
   Soundpool pool = Soundpool(streamType: StreamType.notification);
+  final assetsAudioPlayer = AssetsAudioPlayer();
 
   final StreamController<WordWithResult> _streamController =
       StreamController<WordWithResult>();
@@ -55,6 +63,10 @@ class _StopPage extends State<StopPage> {
       int currentLanguageIndex = 0;
       int targetLanguageIndex = 1 - currentLanguageIndex;
       int quality = -1;
+      ByteData okByteData = await rootBundle.load('assets/sounds/ok.mp3');
+      ByteData badByteData = await rootBundle.load('assets/sounds/bad.mp3');
+      int okSoundId = await pool.load(okByteData);
+      int badSoundId = await pool.load(badByteData);
       for (var i = 0;; i++) {
         String word = await wl.getNextWord();
         await new Future.delayed(Duration(seconds: 1));
@@ -82,18 +94,10 @@ class _StopPage extends State<StopPage> {
             );
           }
           quality = await wl.updateWithAnswer(parsedWords);
-//          var asset = await rootBundle.load("sounds/ok.m4a");
-//          int soundId = await pool.load(asset);
-          // String churl = "https://raw.githubusercontent.com/ukasz123/soundpool/feature/web_support/example/web/c-c-1.mp3";
-          // int _cheeringId  = await pool.loadUri(churl);
-
-          // print(_cheeringId);
-          // pool.play(soundId);
-
           if (quality == 5 || quality == 4) {
-            await TtsHelper().say("ok", "en-US");
+            pool.play(okSoundId);
           } else {
-            await TtsHelper().say("bad", "en-US");
+            pool.play(badSoundId);
           }
         } else {
           await new Future.delayed(Duration(seconds: _speed));
