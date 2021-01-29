@@ -3,9 +3,12 @@ import 'package:owl/database/database_helper.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:owl/const_variables.dart';
 import 'package:owl/utils.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CommonHelper {
   static final _instance = DatabaseHelper.instance;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
 
   CommonHelper() {
     _foo();
@@ -52,5 +55,9 @@ class CommonHelper {
 
   Future _foo() async {
     Database db = await _instance.database;
+    users
+        .add({'timestamp': DateTime.now().toString()})
+        .then((value) => print("User Added"))
+        .catchError((error) => print("Failed to add user: $error"));
   }
 }
