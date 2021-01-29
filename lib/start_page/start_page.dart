@@ -5,6 +5,9 @@ import 'package:owl/dictionary/dictionary_selection_page.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:owl/database/common_helper.dart';
 import 'package:owl/start_page/training_mod_bar.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -22,7 +25,8 @@ class StartPage extends StatelessWidget {
               })
         ],
       ),
-      body: Container(
+      body: Column(
+          children: [Container(
           alignment: Alignment.center,
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.5,
@@ -43,6 +47,13 @@ class StartPage extends StatelessWidget {
               child: Text("START", style: TextStyle(fontSize: 40)),
             ),
           )),
+            IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  signInWithGoogle();
+
+                })
+          ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(
@@ -56,4 +67,21 @@ class StartPage extends StatelessWidget {
       bottomNavigationBar: TrainingModBar(),
     );
   }
+}
+
+Future<UserCredential> signInWithGoogle() async {
+  // Trigger the authentication flow
+  final GoogleSignInAccount googleUser = await GoogleSignIn().signIn();
+
+  // Obtain the auth details from the request
+  final GoogleSignInAuthentication googleAuth = await googleUser.authentication;
+
+  // Create a new credential
+  final GoogleAuthCredential credential = GoogleAuthProvider.credential(
+    accessToken: googleAuth.accessToken,
+    idToken: googleAuth.idToken,
+  );
+
+  // Once signed in, return the UserCredential
+  return await FirebaseAuth.instance.signInWithCredential(credential);
 }
