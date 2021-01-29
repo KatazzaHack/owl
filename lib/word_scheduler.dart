@@ -34,9 +34,9 @@ class WordScheduler {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if ((_words == null)
         || (myDid != prefs.getInt(ConstVariables.current_dictionary_id))
-        || (isPracticeMode != Settings().practiceMod)) {
+        || (isPracticeMode != SettingsOWL().practiceMod)) {
       myDid = prefs.getInt(ConstVariables.current_dictionary_id);
-      isPracticeMode = Settings().practiceMod;
+      isPracticeMode = SettingsOWL().practiceMod;
       await _fillWords();
     }
     _updateCurrentIndex();

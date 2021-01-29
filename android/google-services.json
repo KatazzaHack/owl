@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "967586356026-obed40i285mo5e1tdae1vf235vjomj69.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.KatazzaHack.owl",
+            "certificate_hash": "142afb39b7ff783ffc90e8efebbb337f45d28759"
+          }
+        },
+        {
           "client_id": "967586356026-p5f50752qeg26kggq6edvdpt5sj4i8r5.apps.googleusercontent.com",
           "client_type": 3
         }

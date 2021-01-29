@@ -10,7 +10,8 @@ import 'package:owl/const_variables.dart';
 import 'package:flutter/services.dart';
 import 'package:f_logs/f_logs.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
-
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:io';
 import 'dart:async';
 import 'dart:typed_data';
@@ -37,6 +38,15 @@ class _StopPage extends State<StopPage> {
   void initState() {
     super.initState();
     initStream();
+    logToFirebase();
+  }
+
+  Future logToFirebase() async {
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+      users
+          .add({'timestamp': DateTime.now().toString()})
+          .then((value) => print("User Added"))
+          .catchError((error) => print("Failed to add user: $error"));
   }
 
   void initStream() {
@@ -78,7 +88,7 @@ class _StopPage extends State<StopPage> {
 
         await TtsHelper().say(word, languages[currentLanguageIndex]);
         print("Saying future completed");
-        if (Settings().practiceMod) {
+        if (SettingsOWL().practiceMod) {
           print("Waiting for user input...");
           String parsedWords =
               await SttHelper().listen(locales[targetLanguageIndex], _speed);
