@@ -1,12 +1,12 @@
-class Settings {
-  static final Settings _settings = Settings._internal();
+class SettingsOWL {
+  static final SettingsOWL _settings = SettingsOWL._internal();
 
   // Setting fields are public.
   bool practiceMod = false;
 
-  factory Settings() {
+  factory SettingsOWL() {
     return _settings;
   }
 
-  Settings._internal();
+  SettingsOWL._internal();
 }
