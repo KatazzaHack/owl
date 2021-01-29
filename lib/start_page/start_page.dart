@@ -8,6 +8,7 @@ import 'package:owl/start_page/training_mod_bar.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class StartPage extends StatelessWidget {
   @override
@@ -47,12 +48,11 @@ class StartPage extends StatelessWidget {
               child: Text("START", style: TextStyle(fontSize: 40)),
             ),
           )),
-            IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  signInWithGoogle();
-
-                })
+            SignInButton(
+              Buttons.Google,
+              text: "Sign up with Google",
+              onPressed: () {signInWithGoogle();},
+            )
           ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -82,6 +82,7 @@ Future<UserCredential> signInWithGoogle() async {
     idToken: googleAuth.idToken,
   );
 
+  await Firebase.initializeApp();
   // Once signed in, return the UserCredential
   return await FirebaseAuth.instance.signInWithCredential(credential);
 }
